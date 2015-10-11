@@ -4,7 +4,7 @@
             <div class="col-lg-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>Sales Update</h5>
+                        <h5>Products</h5>
                         <div class="ibox-tools">
                             <a href="#" class="btn btn-primary">NEW</a>
                         </div>
@@ -15,10 +15,8 @@
                                 <thead>
                                     <tr>
                                         <th></th>
+                                        <th>Name </th>
                                         <th>Business Unit </th>
-                                        <th>Product </th>
-                                        <th>Year & Month</th>
-                                        <th>% Complete</th>
                                         <th>Updated</th>
                                     </tr>
                                 </thead>
@@ -27,10 +25,8 @@
                                         total-items="totalItems" 
                                         current-page="pagination.current">
                                         <td></td>
-                                        <td>{{item.businessUnit}}</td>
-                                        <td>{{item.product}}</td>
-                                        <td>{{item.monthYear}}</td>
-                                        <td>{{item.percentComplete}}</td>
+                                        <td>{{item.name}}</td>
+                                        <td>{{getBusinessUnitById(item.businessUnitId)}}</td>
                                         <td>{{item.lastUpdated}}</td>
                                     </tr>
                                 </tbody>

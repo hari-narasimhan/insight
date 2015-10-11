@@ -1,0 +1,37 @@
+{ "data": [
+    {
+        "id" : "1",
+        "name" : "Health Care",
+        "description" : "",
+        "keyParameters": [],
+        "lastUpdated" : "one month ago"
+    },
+    {
+        "id" : "2",
+        "name" : "Media",
+        "description" : "",
+        "keyParameters": [],
+        "lastUpdated" : "one month ago"
+    },
+    {
+        "id" : "3",
+        "name" : "Education",
+        "description" : "",
+        "keyParameters": [],
+        "lastUpdated" : "one month ago"
+    },
+    {
+        "id" : "4",
+        "name" : "Services",
+        "description" : "QBLITZ",
+        "keyParameters": [],
+        "lastUpdated" : "one month ago"
+    }
+], 
+"cursor" : {
+    "currentPage" : 1,
+    "perPage" : 10,
+    "totalRecords" : 4,
+    "totalPages" : 1
+    }
+}
