@@ -14,12 +14,6 @@
         controller: 'MainController',
         controllerAs: 'main'
       })
-      .state('sales', {
-        url: '/sales',
-        templateUrl: 'app/sales/sales.html',
-        controller: 'SalesController',
-        controllerAs: 'sales'
-      })
       .state('products', {
         url: '/products',
         templateUrl: 'app/products/products.html',
