@@ -10,7 +10,7 @@
     
     var _this = this;
 
-    _this.focusArea = {salesPerson: undefined, updateHtml: undefined, tags: []};
+    _this.focusArea = {salesPerson: undefined, activity: undefined, areas: []};
     
     _this.ok = function () {
       $modalInstance.close(_this.focusArea);

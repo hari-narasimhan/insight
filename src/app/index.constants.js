@@ -11,6 +11,7 @@
     .constant('moment', moment)
     .constant('chance', chance)
     .constant('_', window._)
+    .constant('PROSPECT_STATUS', ['HOT', 'WARM', 'COLD'])
     .constant('DEFAULT_ENVIRONMENTS',    {
         DEV: 'DEV',
         PRODUCTION: 'PRODUCTION',

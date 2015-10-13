@@ -50,17 +50,45 @@
         animation: $scope.animationsEnabled,
         templateUrl: 'app/sales/focusarea.update.modal.html',
         controller : 'FocusAreaController',
-        size: 'lg'
+        size: size
       });
-
+      
       modalInstance.result.then(function (focusArea) {
         $scope.salesUpdate.focusAreas.push(focusArea);
-        console.log(focusArea);
       }, function () {
           // DO NOTHING
       });
     };
 
+    _this.openNewOpportunityModal = function (size) {
+      var modalInstance = $modal.open({
+        animation: $scope.animationsEnabled,
+        templateUrl: 'app/sales/newOpportunity.modal.html',
+        controller : 'NewOpportunityController',
+        size: size
+      });
+      
+      modalInstance.result.then(function (newOpportunity) {
+        $scope.salesUpdate.newOpportunities.push(newOpportunity);
+      }, function () {
+          // DO NOTHING
+      });
+    };
+    
+    _this.openOpportunityModal = function (size) {
+      var modalInstance = $modal.open({
+        animation: $scope.animationsEnabled,
+        templateUrl: 'app/sales/opportunity.modal.html',
+        controller : 'OpportunityController',
+        size: size
+      });
+      
+      modalInstance.result.then(function (opportunity) {
+        $scope.salesUpdate.opportunityUpdates.push(opportunity);
+      }, function () {
+          // DO NOTHING
+      });
+    };
     
     // Seed a new record
 
@@ -93,6 +121,10 @@
 
     $scope.cancel = _this.cancel;
 
+    // Wire modal open methods to scope
     $scope.openFocusAreaModal = _this.openFocusAreaModal;
+    $scope.openNewOpportunityModal = _this.openNewOpportunityModal;
+    $scope.openOpportunityModal = _this.openOpportunityModal;
+    
   }
 })();

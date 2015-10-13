@@ -1,5 +1,5 @@
 <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button>
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">x</button>
     <h4 class="modal-title">Add Focus Area</h4>
 </div>
 <div class="modal-body">
@@ -21,15 +21,15 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-lg-2 control-label">Update</label>
+        <label class="col-lg-2 control-label">Activity</label>
         <div class="col-lg-10">
-            <div text-angular ng-model="focusArea.updateHtml"></div>
+            <div text-angular ng-model="focusArea.activityHtml"></div>
         </div>
     </div>
     <div class="form-group">
-        <label class="col-lg-2 control-label">Tags</label>
+        <label class="col-lg-2 control-label">Areas</label>
         <div class="col-lg-10">
-            <tags-input ng-model="focusArea.tags">
+            <tags-input ng-model="focusArea.areas">
                 <!--<auto-complete source="loadTags($query)"></auto-complete>-->
             </tags-input>
         </div>

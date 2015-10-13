@@ -79,7 +79,12 @@
     <!-- run `gulp inject` to automatically populate bower script dependencies -->
     <!-- endbower -->
     <!-- endbuild -->
-
+    
+    <!-- ugly hack to get around a strange wire-dep problem -->
+    <!-- WARNING DO NOT COMMIT THIS PIECE OF CODE -->
+    <script src="../bower_components/a0-angular-storage/angular-storage-0.0.12/dist/angular-storage.js"> </script>
+    <!-- end hack -->
+    
     <!-- build:js({.tmp/serve,.tmp/partials,src}) scripts/app.js -->
     <!-- inject:js -->
     <!-- js files will be automatically insert here -->
