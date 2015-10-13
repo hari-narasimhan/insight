@@ -10,7 +10,9 @@
                         'ui.router', 
                         'ui.bootstrap', 
                         'angular-storage',
-                        'angularUtils.directives.dirPagination']
+                        'angularUtils.directives.dirPagination',
+                        'textAngular',
+                        'ngTagsInput']
             );
 
 })();

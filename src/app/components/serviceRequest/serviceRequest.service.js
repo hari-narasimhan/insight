@@ -117,7 +117,7 @@
         }
         
         return retCriteria.join('&');
-      };
+      }
 
     }
 

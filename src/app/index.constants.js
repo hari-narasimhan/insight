@@ -24,7 +24,8 @@
             EngineeringUpdates: 'EngineeringUpdates',
             KeyMetricsUpdates: 'KeyMetricsUpdates',
             BusinessUnits: 'BusinessUnits',
-            Products: 'Products'
+            Products: 'Products',
+            Users: 'Users'
         },
         APP_CACHE: 'q4.insight.app.cache',
         JWT_TOKEN_KEY: 'q4.insight.app.auth.token',

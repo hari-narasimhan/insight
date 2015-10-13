@@ -1,0 +1,57 @@
+{ "data": [
+  {
+    "id": "561c83dd1305c0c91128827e",
+    "name": "Shepherd Lynch",
+    "gender": "male",
+    "company": "OPPORTECH",
+    "email": "shepherdlynch@opportech.com",
+    "phone": "+1 (848) 488-3209"
+  },
+  {
+    "id": "561c83dd5b21ede9846e2ca8",
+    "name": "Carla Burks",
+    "gender": "female",
+    "company": "REMOTION",
+    "email": "carlaburks@remotion.com",
+    "phone": "+1 (900) 504-2451"
+  },
+  {
+    "id": "561c83dd41312f9a6ab3a753",
+    "name": "Maggie Austin",
+    "gender": "female",
+    "company": "KINETICA",
+    "email": "maggieaustin@kinetica.com",
+    "phone": "+1 (981) 585-2756"
+  },
+  {
+    "id": "561c83ddc650e95ad162faae",
+    "name": "Tami Deleon",
+    "gender": "female",
+    "company": "HAWKSTER",
+    "email": "tamideleon@hawkster.com",
+    "phone": "+1 (956) 567-3233"
+  },
+  {
+    "id": "561c83dd7234c2eb6e43111b",
+    "name": "Dawn Hinton",
+    "gender": "female",
+    "company": "CEMENTION",
+    "email": "dawnhinton@cemention.com",
+    "phone": "+1 (942) 462-2546"
+  },
+  {
+    "id": "561c83dd857bef98fdf3dd18",
+    "name": "Ginger Ramirez",
+    "gender": "female",
+    "company": "HALAP",
+    "email": "gingerramirez@halap.com",
+    "phone": "+1 (989) 522-2665"
+  }
+], 
+"cursor" : {
+    "currentPage" : 1,
+    "perPage" : 10,
+    "totalRecords" : 6,
+    "totalPages" : 1
+    }
+}
