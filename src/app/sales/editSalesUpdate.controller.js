@@ -3,7 +3,7 @@
 
   angular
     .module('insight')
-    .controller('EditSalesUpdateController', EditSalesUpdateController);
+    .controller('EditSalesUpdateControllerOLD', EditSalesUpdateController);
 
   /** @ngInject */
   function EditSalesUpdateController ( $scope, $stateParams, Users) {

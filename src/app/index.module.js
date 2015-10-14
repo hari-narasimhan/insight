@@ -6,13 +6,15 @@
                         'ngCookies', 
                         'ngTouch', 
                         'ngSanitize', 
-                        'ngResource', 
+                        'ngResource',
+                        'ngMessages',
                         'ui.router', 
                         'ui.bootstrap', 
                         'angular-storage',
                         'angularUtils.directives.dirPagination',
                         'textAngular',
-                        'ngTagsInput']
+                        'ngTagsInput',
+                        'pascalprecht.translate']
             );
 
 })();
