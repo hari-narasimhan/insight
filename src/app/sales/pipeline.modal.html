@@ -1,20 +1,15 @@
+<div class="modal-content">
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">x</button>
-    <h4 class="modal-title">New Opportunities</h4>
+    <h4 class="modal-title">Pipeline</h4>
 </div>
 <div class="modal-body">
     <form class="form-horizontal">
     <div class="form-group">
-        <label class="col-lg-2 control-label">Prospect</label>
-        <div class="col-lg-10">
-            <input type="text" class="form-control" ng-model="newOpportunity.prospect" placeholder="Prospect">
-        </div>
-    </div>
-    <div class="form-group">
         <label class="col-lg-2 control-label">Sales Person</label>
         <div class="col-lg-10">
             <input type="text" 
-            ng-model="newOpportunity.salesPerson" 
+            ng-model="pipeline.salesPerson" 
             placeholder="Select Sales Person" 
             typeahead="salesPerson.name for salesPerson in refreshSalesPerson($viewValue)" 
             typeahead-loading="loadingSalesPerson" 
@@ -31,7 +26,7 @@
         <label class="col-lg-2 control-label">Product</label>
         <div class="col-lg-10">
             <input type="text" 
-            ng-model="newOpportunity.product" 
+            ng-model="pipeline.product" 
             placeholder="Select Product" 
             typeahead="product.name for product in refreshProduct($viewValue)" 
             typeahead-loading="loadingProducts" 
@@ -45,34 +40,36 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-lg-2 control-label">Status</label>
+        <label class="col-lg-2 control-label">Expected Revenue $</label>
         <div class="col-lg-10">
-            <select class="form-control" placeholder="Status" ng-model="newOpportunity.status" ng-options="s for s in status">
-              <option value="" disabled selected>Status</option>
-            </select>
+            <input type="text" class="form-control" ng-model="pipeline.expectedRevenue" placeholder="Expected revenue in USD">
         </div>
-    </div>
+    </div> 
     <div class="form-group">
-        <label class="col-lg-2 control-label">Potential $</label>
+        <label for="textArea" class="col-lg-2 control-label">Remarks</label>
         <div class="col-lg-10">
-            <input type="text" class="form-control" ng-model="newOpportunity.potential" placeholder="Potential in USD">
-        </div>
-    </div>    
+            <textarea class="form-control" ng-model="pipeline.remarks" rows="3" id="textArea"></textarea>
+            <span class="help-block">Please enter remarks related to current status here.</span>
+        </div>    
+    </div>
     <div class="form-group">
         <label class="col-lg-2 control-label">Target Closure Date</label>
         <div class="col-lg-10">
             <p class="input-group">
-              <input type="text" ng-model="newOpportunity.targetDate" placeholder="Target Date" class="form-control" datepicker-popup ng-model="newOpportunity.targetDate" is-open="status.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
-              <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-              </span>
+                <input type="text" ng-model="pipeline.targetDate" placeholder="Target Date" class="form-control" datepicker-popup ng-model="pipeline.targetDate" is-open="status.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="open($event)">
+                        <i class="glyphicon glyphicon-calendar"></i>
+                    </button>
+                </span>
             </p>
         </div>
     </div>
-</form>
+    </form>  
 </div>
 <br>
 <div class="modal-footer">
-    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancel()">Cancel</button>
+    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancel()">Close</button>
     <button type="button" class="btn btn-primary" ng-click="ok()">Add</button>
+</div>
 </div>

@@ -4,47 +4,9 @@
       <div class="col-lg-12">
         <div class="ibox float-e-margins">
           <div class="ibox-title">
-            <h5>New Sales Update</h5>
+            <h5>Sales Update {{businessUnit}} - {{month}}, {[year}}</h5>
           </div>
           <div class="ibox-content">
-            <form class="form-horizontal">
-              <div class="row">
-                <div class="col-lg-3">
-                  <label for="period" class="col-lg-2 control-label">Year</label>
-                  <div class="col-lg-10">
-                    <select class="form-control" ng-model="salesUpdate.year" ng-options="y for y in years">
-                      <option></option>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-lg-3">
-                  <label for="period" class="col-lg-2 control-label">Month</label>
-                  <div class="col-lg-10">
-                    <select class="form-control" ng-model="salesUpdate.month" ng-options="m for m in months">
-                      <option></option>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-lg-6">  
-                  <label for="businessUnit" class="col-lg-2 control-label">Business Unit</label>
-                  <div class="col-lg-10">
-                    <input type="text" 
-                    ng-model="salesUpdate.businessUnit" 
-                    placeholder="Select Business Unit" 
-                    typeahead="businessUnit.name for businessUnit in refreshBusinessUnits($viewValue)" 
-                    typeahead-loading="loadingBusinessUnits" 
-                    typeahead-no-results="noResults"
-                    typeahead-on-select="setSelectedBusinessUnit($item)"
-                    class="form-control">
-                    <i ng-show="loadingBusinessUnits" class="glyphicon glyphicon-refresh">
-                    </i>
-                    <div ng-show="noResults">
-                      <i class="glyphicon glyphicon-remove"></i> No Results Found
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </form>
             <tabset>
               <tab heading="Focus Area">
                 <div class="panel panel-default">
@@ -142,16 +104,77 @@
                                         <td>{{opportunity.targetDate | appDate}}</td>
                                         <td>{{opportunity.currentStatus}}</td>
                                         <td>{{opportunity.remarks}}</td>
-                                        
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
-                </div>              
+                </div>
               </tab>
-              <tab heading="Pipeline Status">Pipeline Status</tab>
-              <tab heading="Engineering Activities">Engineering Activities</tab>
+              <tab heading="Pipeline Status">
+                <div class="panel panel-default">
+                      <div class="panel-body">
+                          <div class="row">
+                              <div class="pull-right">
+                                  <button class="btn btn-link" ng-click="openPipelineModal('lg')">
+                                      Add
+                                  </button>
+                              </div>    
+                          </div>
+                          <div class="row">
+                              <table class="table table-hover">
+                                  <thead>
+                                      <tr>
+                                          <th>Sales Person</th>
+                                          <th>Product</th>
+                                          <th>Target Closure Date</th>
+                                          <th>Expeted Revenue</th>
+                                          <th>Remarks</th>
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                      <tr ng-repeat="pipeline in salesUpdate.pipeline">
+                                          <td>{{pipeline.salesPerson}}</td>
+                                          <td>{{pipeline.product}}</td>
+                                          <td>{{pipeline.targetDate | appDate}}</td>
+                                          <td>{{pipeline.expectedRevenue}}</td>
+                                          <td>{{pipeline.remarks}}</td>
+                                      </tr>
+                                  </tbody>
+                              </table>
+                          </div>
+                      </div>
+                  </div>
+              </tab>
+              <tab heading="Engineering Activities">
+                <div class="panel panel-default">
+                      <div class="panel-body">
+                          <div class="row">
+                              <div class="pull-right">
+                                  <button class="btn btn-link" ng-click="openEngineeringActivityModal('lg')">
+                                      Add
+                                  </button>
+                              </div>    
+                          </div>
+                          <div class="row">
+                              <table class="table table-hover">
+                                  <thead>
+                                      <tr>
+                                          <th>Sales Person</th>
+                                          <th>Activity</th>
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                      <tr ng-repeat="activity in salesUpdate.engineeringActivities">
+                                          <td>{{activity.salesPerson}}</td>
+                                          <td>{{activity.activity}}</td>
+                                      </tr>
+                                  </tbody>
+                              </table>
+                          </div>
+                      </div>
+                  </div>
+              </tab>
             </tabset>
             <div class="row">
               <div class="col text-right">

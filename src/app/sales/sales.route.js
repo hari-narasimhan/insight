@@ -19,6 +19,12 @@
           templateUrl: 'app/sales/new.html',
           controller: 'NewSalesController',
           controllerAs: 'newSales'
+      })
+      .state('editSalesUpdate', {
+          url: '/editSalesUpdate/:id',
+          templateUrl: 'app/sales/editSalesUpdate.html',
+          controller: 'EditSalesUpdateController',
+          controllerAs: 'editSalesUpdate'
       });
   }
 

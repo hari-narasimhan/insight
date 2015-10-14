@@ -6,7 +6,7 @@
                     <div class="ibox-title">
                         <h5>Sales Update</h5>
                         <div class="ibox-tools">
-                            <a ui-sref="newSales" class="btn btn-primary">NEW</a>
+                            <a class="btn btn-primary" ng-click="openNewSalesUpdateModal('lg')">NEW</a>
                         </div>
                     </div>
                     <div class="ibox-content">
@@ -24,7 +24,8 @@
                             <tbody>
                                 <tr dir-paginate="item in items | itemsPerPage: itemsPerPage" 
                                     total-items="totalItems" 
-                                    current-page="pagination.current">
+                                    current-page="pagination.current"
+                                    ng-click="editSalesUpdate(item.id)">
                                     <td></td>
                                     <td>{{item.businessUnit}}</td>
                                     <td>{{item.product}}</td>

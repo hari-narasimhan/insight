@@ -1,6 +1,7 @@
+<div class="modal-content">
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">x</button>
-    <h4 class="modal-title">Add Focus Area</h4>
+    <h4 class="modal-title">Engineering Activity</h4>
 </div>
 <div class="modal-body">
     <form class="form-horizontal">
@@ -8,8 +9,8 @@
         <label class="col-lg-2 control-label">Sales Person</label>
         <div class="col-lg-10">
             <input type="text" 
-            ng-model="focusArea.salesPerson" 
-            placeholder="Select SalesPerson" 
+            ng-model="engineeringActivity.salesPerson" 
+            placeholder="Select Sales Person" 
             typeahead="salesPerson.name for salesPerson in refreshSalesPerson($viewValue)" 
             typeahead-loading="loadingSalesPerson" 
             typeahead-no-results="noResults"
@@ -22,23 +23,17 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-lg-2 control-label">Activity</label>
+        <label for="textArea" class="col-lg-2 control-label">Activity</label>
         <div class="col-lg-10">
-            <div text-angular ng-model="focusArea.activityHtml"></div>
-        </div>
+            <textarea class="form-control" ng-model="engineeringActivity.activity" rows="3" id="textArea"></textarea>
+            <span class="help-block">Please enter activity details here.</span>
+        </div>    
     </div>
-    <div class="form-group">
-        <label class="col-lg-2 control-label">Areas</label>
-        <div class="col-lg-10">
-            <tags-input ng-model="focusArea.areas">
-                <!--<auto-complete source="loadTags($query)"></auto-complete>-->
-            </tags-input>
-        </div>
-    </div>
-</form>
+    </form>  
 </div>
 <br>
 <div class="modal-footer">
     <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancel()">Close</button>
     <button type="button" class="btn btn-primary" ng-click="ok()">Add</button>
+</div>
 </div>

@@ -32,7 +32,7 @@
           focusAreas: [],
           newOpportunities: [],
           opportunityUpdates: [],
-          pipelineStatus: [],
+          pipeline: [],
           engineeringActivities: []
         };
     };
@@ -90,6 +90,37 @@
       });
     };
     
+
+    _this.openPipelineModal = function (size) {
+      var modalInstance = $modal.open({
+        animation: $scope.animationsEnabled,
+        templateUrl: 'app/sales/pipeline.modal.html',
+        controller : 'PipelineController',
+        size: size
+      });
+      
+      modalInstance.result.then(function (pipeline) {
+        $scope.salesUpdate.pipeline.push(pipeline);
+      }, function () {
+          // DO NOTHING
+      });
+    };
+
+
+    _this.openEngineeringActivityModal = function (size) {
+      var modalInstance = $modal.open({
+        animation: $scope.animationsEnabled,
+        templateUrl: 'app/sales/engineeringActivity.modal.html',
+        controller : 'EngineeringActivityController',
+        size: size
+      });
+      
+      modalInstance.result.then(function (engineeringActivity) {
+        $scope.salesUpdate.engineeringActivities.push(engineeringActivity);
+      }, function () {
+          // DO NOTHING
+      });
+    };
     // Seed a new record
 
     $scope.salesUpdate = _this.createNewRecord();
@@ -104,27 +135,15 @@
     // Month
     $scope.months = moment.monthsShort();    
 
-    // Business Unit picker
-    $scope.selectedBusinessUnit = undefined;  
-    $scope.refreshBusinessUnits = function ( businessUnit ) {
-      return BusinessUnits.query({q:{name:businessUnit}})
-        .then(function (response) {
-          return response.data.map(function(item){
-            return item;
-          });
-        });
-    };
-    // Handle typeahead selection
-    $scope.setSelectedBusinessUnit = function (businessUnit) {
-      $scope.salesUpdate.bueinessUnitId = businessUnit.id;
-    }
 
     $scope.cancel = _this.cancel;
 
     // Wire modal open methods to scope
-    $scope.openFocusAreaModal = _this.openFocusAreaModal;
-    $scope.openNewOpportunityModal = _this.openNewOpportunityModal;
-    $scope.openOpportunityModal = _this.openOpportunityModal;
+    $scope.openFocusAreaModal           = _this.openFocusAreaModal;
+    $scope.openNewOpportunityModal      = _this.openNewOpportunityModal;
+    $scope.openOpportunityModal         = _this.openOpportunityModal;
+    $scope.openPipelineModal            = _this.openPipelineModal;
+    $scope.openEngineeringActivityModal = _this.openEngineeringActivityModal;
     
   }
 })();
