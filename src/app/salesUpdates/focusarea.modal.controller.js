@@ -3,10 +3,10 @@
 
   angular
     .module('insight')
-    .controller('FocusAreaController', FocusAreaController);
+    .controller('FocusAreaModalController', FocusAreaModalController);
 
   /** @ngInject */
-  function FocusAreaController ( $scope, $modalInstance, Users) {
+  function FocusAreaModalController ( $scope, $modalInstance, Users) {
     
     var _this = this;
 

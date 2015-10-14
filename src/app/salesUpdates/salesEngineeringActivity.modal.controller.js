@@ -3,10 +3,10 @@
 
   angular
     .module('insight')
-    .controller('EngineeringActivityController', EngineeringActivityController);
+    .controller('SalesEngineeringActivityController', SalesEngineeringActivityController);
 
   /** @ngInject */
-  function EngineeringActivityController ( $scope, $modalInstance, Users ) {
+  function SalesEngineeringActivityController ( $scope, $modalInstance, Users ) {
     
     var _this = this;
     

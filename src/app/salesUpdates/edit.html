@@ -1,178 +1,75 @@
 <div class="container">
-    <div class="panel panel-default">
+  <div class="panel panel-default">
       <div class="panel-heading">
-        <h5>{{'SALES_UPDATES' | translate}}  {{salesUpdate.businessUnit}} - {{salesUpdate.month}}, {{salesUpdate.year}}
+        <h5>{{'SALES_UPDATES' | translate}} - {{salesUpdate.businessUnit}} - {{salesUpdate.month}}, {{salesUpdate.year}}
       </div>
       <div class="panel-body">
-            <tabset>
-              <tab heading="Focus Area">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="pull-right">
-                                <button class="btn btn-link" ng-click="openFocusAreaModal('lg')">
-                                    Add
-                                </button>
-                            </div>
-                        </div>
-                        <div class="row">
-                          <div class="list-group">
-                            <a ng-repeat="focusArea in salesUpdate.focusAreas" class="list-group-item">
-                              <h4 class="list-group-item-heading">{{focusArea.salesPerson}}</h4>
-                              <p class="list-group-item-text" ng-bind-html="focusArea.activityHtml"></p>
-                              <p class="list-group-item-test">
-                                <span ng-repeat="area in focusArea.areas" class="label label-default">{{area.text}}
-                                </span>
-                              </p>
-                            </a>
-                          </div>
-                        </div> 
-                    </div>  
-                </div>
-              </tab>
-              <tab heading="New Opportunities">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="pull-right">
-                                <button class="btn btn-link" ng-click="openNewOpportunityModal('lg')">
-                                    Add
-                                </button>
-                            </div>    
-                        </div>
-                        <div class="row">
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Sales Person</th>
-                                        <th>Prospect</th>
-                                        <th>Product</th>
-                                        <th>Status</th>
-                                        <th>Potential</th>
-                                        <th>Target Closure Date</th>                                        
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr ng-repeat="newOpportunity in salesUpdate.newOpportunities">
-                                        <td>{{newOpportunity.salesPerson}}</td>
-                                        <td>{{newOpportunity.prospect}}</td>
-                                        <td>{{newOpportunity.product}}</td>
-                                        <td>{{newOpportunity.status}}</td>
-                                        <td>{{newOpportunity.potential}}</td>
-                                        <td>{{newOpportunity.targetDate | appDate }}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-              </tab>
-              <tab heading="Opportunity Status">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="pull-right">
-                                <button class="btn btn-link" ng-click="openOpportunityModal('lg')">
-                                    Add
-                                </button>
-                            </div>    
-                        </div>
-                        <div class="row">
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Sales Person</th>
-                                        <th>Prospect</th>
-                                        <th>Product</th>
-                                        <th>Status</th>
-                                        <th>Potential</th>
-                                        <th>Target Closure Date</th>
-                                        <th>Current Status</th>
-                                        <th>Remarks</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr ng-repeat="opportunity in salesUpdate.opportunityUpdates">
-                                        <td>{{opportunity.salesPerson}}</td>
-                                        <td>{{opportunity.prospect}}</td>
-                                        <td>{{opportunity.product}}</td>
-                                        <td>{{opportunity.status}}</td>
-                                        <td>{{opportunity.potential}}</td>
-                                        <td>{{opportunity.targetDate | appDate}}</td>
-                                        <td>{{opportunity.currentStatus}}</td>
-                                        <td>{{opportunity.remarks}}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-              </tab>
-              <tab heading="Pipeline Status">
-                <div class="panel panel-default">
-                      <div class="panel-body">
-                          <div class="row">
-                              <div class="pull-right">
-                                  <button class="btn btn-link" ng-click="openPipelineModal('lg')">
-                                      Add
-                                  </button>
-                              </div>    
-                          </div>
-                          <div class="row">
-                              <table class="table table-hover">
-                                  <thead>
-                                      <tr>
-                                          <th>Sales Person</th>
-                                          <th>Product</th>
-                                          <th>Target Closure Date</th>
-                                          <th>Expeted Revenue</th>
-                                          <th>Remarks</th>
-                                      </tr>
-                                  </thead>
-                                  <tbody>
-                                      <tr ng-repeat="pipeline in salesUpdate.pipeline">
-                                          <td>{{pipeline.salesPerson}}</td>
-                                          <td>{{pipeline.product}}</td>
-                                          <td>{{pipeline.targetDate | appDate}}</td>
-                                          <td>{{pipeline.expectedRevenue}}</td>
-                                          <td>{{pipeline.remarks}}</td>
-                                      </tr>
-                                  </tbody>
-                              </table>
-                          </div>
-                      </div>
+        <tabset>
+          <tab heading="{{'FOCUS_AREA' | translate}}">
+            <div class="panel panel-default extra-padding">
+              <div class="panel-body">
+                <div class="row">
+                  <div class="pull-right">
+                    <button class="btn btn-link" ng-click="openFocusAreaModal('lg')">
+                      {{'ADD' | translate}}
+                    </button>
                   </div>
-              </tab>
-              <tab heading="Engineering Activities">
-                <div class="panel panel-default">
-                      <div class="panel-body">
-                          <div class="row">
-                              <div class="pull-right">
-                                  <button class="btn btn-link" ng-click="openEngineeringActivityModal('lg')">
-                                      Add
-                                  </button>
-                              </div>    
-                          </div>
-                          <div class="row">
-                              <table class="table table-hover">
-                                  <thead>
-                                      <tr>
-                                          <th>Sales Person</th>
-                                          <th>Activity</th>
-                                      </tr>
-                                  </thead>
-                                  <tbody>
-                                      <tr ng-repeat="activity in salesUpdate.engineeringActivities">
-                                          <td>{{activity.salesPerson}}</td>
-                                          <td>{{activity.activity}}</td>
-                                      </tr>
-                                  </tbody>
-                              </table>
-                          </div>
-                      </div>
+                </div>
+                <div class="row">
+                  <div class="list-group">
+                    <a ng-repeat="focusArea in salesUpdate.focusAreas" class="list-group-item">
+                      <h4 class="list-group-item-heading">{{focusArea.salesPerson}}</h4>
+                      <p class="list-group-item-text" ng-bind-html="focusArea.activityHtml"></p>
+                      <p class="list-group-item-test">
+                        <span ng-repeat="area in focusArea.areas" class="label label-success">{{area.text}}
+                        </span>
+                      </p>
+                    </a>
                   </div>
-              </tab>
-            </tabset>      
+                </div> 
+              </div>  
+            </div>
+          </tab>
+          <tab heading="{{'SALES_ENGINEERING_ACTIVITIES' | translate}}">
+            <div class="panel panel-default extra-padding">
+              <div class="panel-body">
+                <div class="row">
+                  <div class="pull-right">
+                    <button class="btn btn-link" ng-click="openSalesEngineeringActivityModal('lg')">
+                      {{'ADD' | translate}}
+                    </button>
+                  </div>    
+                </div>
+                <div class="row">
+                  <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th>{{'SALES_PERSON' | translate}}</th>
+                        <th>{{'ACTIVITY' | translate}}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat="activity in salesUpdate.salesEngineeringActivities">
+                        <td>{{activity.salesPerson}}</td>
+                        <td>{{activity.activity}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </tab>
+        </tabset>
+        <div class="row">
+          <div class="col text-right">
+            <div class="form-group">
+              <div class="col-lg-10 col-lg-offset-2">
+                <button type="reset" class="btn btn-default" ng-click="cancel()">{{'CANCEL'|translate}}</button>
+                <button type="submit" class="btn btn-primary">{{'SAVE' | translate}}</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-</div>
+  </div>

@@ -1,0 +1,11 @@
+{
+    "id" : 1,
+    "businessUnit": "Health Care",
+    "businessUnitId": 1,
+    "month": "Oct",
+    "year" : 2015,
+    "percentComplete": "15",
+    "lastUpdated": "one month ago",
+    "focusAreas": [{"id":1, "salesPerson": "Rick Johnson", "activityHtml": "<h1>First Update</h1>", "areas": [{"text":"Health Care"}]}],
+    "salesEngineeringActivities": [ { "id": 1, "salesPerson": "Ginger Ramirez", "activity": "My New Activity" } ]
+}

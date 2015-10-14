@@ -18,6 +18,21 @@ body {
     background-color : @default-background-color !important;
 }
 
+.tab-content {
+  padding: 10px;
+  > .tab-pane {
+    display: none;
+  }
+  > .active {
+    display: block;
+  }
+}
+
+.extra-padding {
+    padding-left:10px;
+    padding-right:10px;
+}
+
 /**
  *  Do not remove this comments bellow. It's the markers used by gulp-inject to inject
  *  all your less files automatically

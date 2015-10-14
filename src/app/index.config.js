@@ -35,11 +35,24 @@
        SELECT_BUSINESS_UNIT: 'Select Business Unit',
        SELECT_SALES_PERSON: 'Select Sales Person',
        SELECT_VALID_BUSINESS_UNIT: 'Please select a valid business unit',
-       BUSINESS_UNIT_REQUIRED: 'Business Unit is required'
+       BUSINESS_UNIT_REQUIRED: 'Business Unit is required',
+       FOCUS_AREA: 'Focus Area',
+       SALES_ENGINEERING_ACTIVITIES: 'Sales Engineering Activities',
+       SALES_PERSON: 'Sales Person',
+       ACTIVITY: 'Activity',
+       ADD_FOCUS_AREA: 'Add Focus Area',
+       ENTER_SALES_ACTIVITY_HELP_TEXT: 'Please enter activity details here.',
+       PROSPECT: 'Prospect',
+       POTENTIAL: 'Potential $m',
+       OPPORTUNITIES: 'Opportunities',
+       TARGET_CLOSURE_DATE: 'Target Closure Date'
     });
     
-    // Set the preferred language to en
-     $translateProvider.preferredLanguage('en');
+    // Set the preferred language to enter
+    $translateProvider.preferredLanguage('en');
+
+    // Set sanitize strategy
+    $translateProvider.useSanitizeValueStrategy('sanitize');
   }
 
 })();
