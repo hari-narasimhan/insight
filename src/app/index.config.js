@@ -43,9 +43,18 @@
        ADD_FOCUS_AREA: 'Add Focus Area',
        ENTER_SALES_ACTIVITY_HELP_TEXT: 'Please enter activity details here.',
        PROSPECT: 'Prospect',
+       ENTER_PROSPECT: 'Enter Prospect Name',
        POTENTIAL: 'Potential $m',
        OPPORTUNITIES: 'Opportunities',
-       TARGET_CLOSURE_DATE: 'Target Closure Date'
+       TARGET_CLOSURE_DATE: 'Target Closure Date',
+       SALES_PERSON_REQUIRED: 'Sales Person is required',
+       SELECT_PRODUCT: 'Select Product',
+       PRODUCT_REQUIRED: 'Product is required',
+       ENTER_POTENTIAL: 'Enter Potential in USD millions',
+       PROSPECT_REQUIRED: 'Prospect is required',
+       ENTER_TARGET_DATE: 'Enter Target Closure Date',
+       POTENTIAL_REQUIRED: 'Potential is required',
+       CREATE_NEW_OPPORTUNITY: 'Create New Sales Opportunity'
     });
     
     // Set the preferred language to enter

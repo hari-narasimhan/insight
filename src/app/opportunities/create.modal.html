@@ -1,0 +1,136 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">x</button>
+        <h4 class="modal-title">{{'CREATE_NEW_OPPORTUNITY' | translate }}</h4>
+    </div>
+    <div class="modal-body">
+        {{newOpportunity || json}}
+        <form class="form-horizontal" name="newOpportunityForm" novalidate>        
+            <div class="form-group">
+                <label for="period" class="col-lg-2 control-label">{{'YEAR' | translate}}</label>
+                <div class="col-lg-10">
+                    <select class="form-control" ng-model="newOpportunity.year" ng-options="y for y in years">
+                        <option></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="period" class="col-lg-2 control-label">{{'MONTH' | translate}}</label>
+                <div class="col-lg-10">
+                    <select class="form-control" ng-model="newOpportunity.month" ng-options="m for m in months">
+                        <option></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group has-feedback" ng-class="{ 'has-error': newOpportunityForm.salesPerson.$invalid && newOpportunityForm.salesPerson.$dirty }">
+                <label class="col-lg-2 control-label">{{'SALES_PERSON' | translate}}</label>
+                <div class="col-lg-10">
+                    <input type="text" 
+                    name="salesPerson"
+                    ng-model="newOpportunity.salesPerson" 
+                    placeholder="{{'SELECT_SALES_PERSON' | translate}}" 
+                    typeahead="salesPerson.name for salesPerson in refreshSalesPerson($viewValue)" 
+                    typeahead-loading="loadingSalesPerson" 
+                    typeahead-no-results="noResults"
+                    class="form-control"
+                    required>
+                    <i ng-show="loadingSalesPersons" class="glyphicon glyphicon-refresh">
+                    </i>
+                    <div ng-show="noResults">
+                        <i class="glyphicon glyphicon-remove"></i> {{'NO_RESULTS_FOUND' | translate}}
+                    </div>
+                    <div class="help-block" 
+                        ng-messages="newOpportunityForm.salesPerson.$error">
+                        <div ng-message="required">{{'SALES_PERSON_REQUIRED' | translate}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group has-feedback" 
+                 ng-class="{ 'has-error': newOpportunityForm.businessUnit.$invalid && newOpportunityForm.businessUnit.$dirty }">
+                <label for="businessUnit" class="col-lg-2 control-label">{{'BUSINESS_UNIT' | translate}}</label>
+                <div class="col-lg-10">
+                    <input type="text"
+                    name="businessUnit"
+                    ng-model="newOpportunity.businessUnit" 
+                    placeholder="{{'SELECT_BUSINESS_UNIT' | translate}}" 
+                    typeahead="businessUnit.name for businessUnit in refreshBusinessUnits($viewValue)" 
+                    typeahead-loading="loadingBusinessUnits" 
+                    typeahead-no-results="noResults"
+                    typeahead-on-select="setSelectedBusinessUnit($item)"
+                    typeahead-editable=false
+                    class="form-control"
+                    required>
+                    <i ng-show="loadingBusinessUnits" class="glyphicon glyphicon-refresh">
+                    </i>
+                    <div ng-show="noResults">
+                        <i class="glyphicon glyphicon-remove"></i> {{'NO_RESULTS_FOUND' | translate}}
+                    </div>
+                    <div class="help-block" 
+                        ng-messages="newOpportunityForm.businessUnit.$error">
+                        <div ng-message="required">{{'BUSINESS_UNIT_REQUIRED' | translate}}</div>
+                        <div ng-message="validity">{{'SELECT_VALID_BUSINESS_UNIT' | translate}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group has-feedback" ng-class="{ 'has-error': newOpportunityForm.product.$invalid && newOpportunityForm.product.$dirty }">
+                <label class="col-lg-2 control-label">{{'PRODUCT' | translate}}</label>
+                <div class="col-lg-10">
+                    <input type="text" 
+                    name="product"
+                    ng-model="newOpportunity.product" 
+                    placeholder="{{'SELECT_PRODUCT' | translate}}" 
+                    typeahead="product.name for product in refreshProduct($viewValue)" 
+                    typeahead-loading="loadingProducts" 
+                    typeahead-no-results="noResults"
+                    class="form-control"
+                    required>
+                    <i ng-show="loadingProducts" class="glyphicon glyphicon-refresh">
+                    </i>
+                    <div ng-show="noResults">
+                        <i class="glyphicon glyphiconremove"></i> {{'NO_RESULTS_FOUND' | translate}}
+                    </div>
+                    <div class="help-block" 
+                        ng-messages="newOpportunityForm.product.$error">
+                        <div ng-message="required">{{'PRODUCT_REQUIRED' | translate}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="period" class="col-lg-2 control-label">{{'PROSPECT' | translate}}</label>
+                <div class="col-lg-10">
+                    <input type="text" name="prospect" placeholder="{{'ENTER_PROSPECT' | translate}}" class="form-control" ng-model="newOpportunity.prospect" required>
+                    <div class="help-block" 
+                        ng-messages="newOpportunityForm.prospect.$error">
+                        <div ng-message="required">{{'PROSPECT_REQUIRED' | translate}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="period" class="col-lg-2 control-label">{{'POTENTIAL' | translate}}</label>
+                <div class="col-lg-10">
+                    <input type="number" placeholder="{{'ENTER_POTENTIAL' | translate}}" name="potential" class="form-control" ng-model="newOpportunity.potential" required>
+                    <div class="help-block" 
+                        ng-messages="newOpportunityForm.potential.$error">
+                        <div ng-message="required">{{'POTENTIAL_REQUIRED' | translate}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+        <label class="col-lg-2 control-label">{{'TARGET_CLOSURE_DATE' | translate}}</label>
+        <div class="col-lg-10">
+            <p class="input-group">
+              <input type="text" name="targetDate" ng-model="newOpportunity.targetDate" placeholder="{{'ENTER_TARGET_DATE' | translate}}" class="form-control" datepicker-popup="{{format}}" ng-model="newOpportunity.targetDate" is-open="targetDateCtrl.status.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="{{'CLOSE' | translate}}" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="targetDateOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </p>
+        </div>
+    </div> 
+        </form>        
+    </div>
+    <br>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancel()">{{'CLOSE' | translate}}</button>
+        <button type="button" class="btn btn-primary" ng-click="ok()">{{'CREATE' | translate}}</button>
+    </div>
+</div>

@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col col-sm-8"><h5>{{'OPPORTUNITIES' | translate}}</h5></div>
             <div class="col col-sm-4 text-right">
-            <a class="btn btn-link" ng-click="openCreateModal('')"> {{'ADD_NEW' | translate}} </a>
+            <a class="btn btn-link" ng-click="openCreateModal('lg')"> {{'ADD_NEW' | translate}} </a>
             </div>
         </div>
       </div>
@@ -13,6 +13,7 @@
             <thead>
                 <tr>
                     <th></th>
+                    <th>{{'SALES_PERSON' | translate}}</th>
                     <th>{{'BUSINESS_UNIT' | translate}}</th>
                     <th>{{'YEAR' | translate}}</th>
                     <th>{{'MONTH' | translate}}</th>
@@ -20,7 +21,6 @@
                     <th>{{'PRODUCT' | translate}}</th>
                     <th>{{'POTENTIAL' | translate}}</th>
                     <th>{{'TARGET_CLOSURE_DATE' | translate}}</th>
-                    <th>{{'SALES_PERSON' | translate}}</th>
                     <th>{{'LAST_UPDATED' | translate}}</th>
                 </tr>
             </thead>
@@ -30,14 +30,14 @@
                     current-page="pagination.current"
                     ng-click="editOpportunity(item.id)">
                     <td></td>
+                    <td>{{item.salesPerson}}</td>
                     <td>{{item.businessUnit}}</td>
                     <td>{{item.year}}</td>
                     <td>{{item.month}}</td>
                     <td>{{item.prospect}}</td>
                     <td>{{item.product}}</td>
                     <td>{{item.potential}}</td>
-                    <td>{{item.targetDate}}</td>
-                    <td>{{item.salesPerson}}</td>
+                    <td>{{item.targetDate | appDate}}</td>
                     <td>{{item.lastUpdated}}</td>
                 </tr>
             </tbody>
