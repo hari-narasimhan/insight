@@ -2,7 +2,7 @@
     <div class="panel panel-default">
       <div class="panel-heading">
         <div class="row">
-            <div class="col col-sm-8"><h5>{{'OPPORTUNITIES' | translate}}</h5></div>
+            <div class="col col-sm-8"><h5>{{'INITIATIVES' | translate}}</h5></div>
             <div class="col col-sm-4 text-right">
             <a class="btn btn-link" ng-click="openCreateModal('lg')"> {{'ADD_NEW' | translate}} </a>
             </div>
@@ -13,15 +13,9 @@
             <thead>
                 <tr>
                     <th></th>
-                    <th>{{'SALES_PERSON' | translate}}</th>
                     <th>{{'BUSINESS_UNIT' | translate}}</th>
                     <th>{{'YEAR' | translate}}</th>
                     <th>{{'MONTH' | translate}}</th>
-                    <th>{{'PROSPECT' | translate}}</th>
-                    <th>{{'PRODUCT' | translate}}</th>
-                    <th>{{'POTENTIAL' | translate}}</th>
-                    <th>{{'STATUS' | translate}}</th>
-                    <th>{{'TARGET_CLOSURE_DATE' | translate}}</th>
                     <th>{{'LAST_UPDATED' | translate}}</th>
                     <th>{{'ACTION' | translate}}</th>
                 </tr>
@@ -32,15 +26,9 @@
                     current-page="pagination.current"
                     ng-click="editOpportunity(item.id)">
                     <td></td>
-                    <td>{{item.salesPerson}}</td>
                     <td>{{item.businessUnit}}</td>
                     <td>{{item.year}}</td>
                     <td>{{item.month}}</td>
-                    <td>{{item.prospect}}</td>
-                    <td>{{item.product}}</td>
-                    <td>{{item.potential}}</td>
-                    <td>{{item.status}}</td>
-                    <td>{{item.targetDate | appDate}}</td>
                     <td>{{item.lastUpdated | appDate}}</td>
                     <td><a class="btn btn-link" ng-click="edit(item.id)">{{'EDIT' | translate}}</a></td>
                 </tr>

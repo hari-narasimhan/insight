@@ -33,6 +33,6 @@
     // Set product look up function
     $scope.getBusinessUnitById = function ( buId ) {
       return _.result(_.find($scope.businessUnits, {id: buId}), 'name');
-    }
+    };
   }
 })();

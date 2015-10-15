@@ -4,10 +4,9 @@
         <h4 class="modal-title">{{'CREATE_NEW_OPPORTUNITY' | translate }}</h4>
     </div>
     <div class="modal-body">
-        {{newOpportunity || json}}
         <form class="form-horizontal" name="newOpportunityForm" novalidate>        
             <div class="form-group">
-                <label for="period" class="col-lg-2 control-label">{{'YEAR' | translate}}</label>
+                <label class="col-lg-2 control-label">{{'YEAR' | translate}}</label>
                 <div class="col-lg-10">
                     <select class="form-control" ng-model="newOpportunity.year" ng-options="y for y in years">
                         <option></option>
@@ -15,7 +14,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="period" class="col-lg-2 control-label">{{'MONTH' | translate}}</label>
+                <label class="col-lg-2 control-label">{{'MONTH' | translate}}</label>
                 <div class="col-lg-10">
                     <select class="form-control" ng-model="newOpportunity.month" ng-options="m for m in months">
                         <option></option>
@@ -47,7 +46,7 @@
             </div>
             <div class="form-group has-feedback" 
                  ng-class="{ 'has-error': newOpportunityForm.businessUnit.$invalid && newOpportunityForm.businessUnit.$dirty }">
-                <label for="businessUnit" class="col-lg-2 control-label">{{'BUSINESS_UNIT' | translate}}</label>
+                <label class="col-lg-2 control-label">{{'BUSINESS_UNIT' | translate}}</label>
                 <div class="col-lg-10">
                     <input type="text"
                     name="businessUnit"
@@ -96,7 +95,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="period" class="col-lg-2 control-label">{{'PROSPECT' | translate}}</label>
+                <label  class="col-lg-2 control-label">{{'PROSPECT' | translate}}</label>
                 <div class="col-lg-10">
                     <input type="text" name="prospect" placeholder="{{'ENTER_PROSPECT' | translate}}" class="form-control" ng-model="newOpportunity.prospect" required>
                     <div class="help-block" 
@@ -106,7 +105,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="period" class="col-lg-2 control-label">{{'POTENTIAL' | translate}}</label>
+                <label class="col-lg-2 control-label">{{'POTENTIAL' | translate}}</label>
                 <div class="col-lg-10">
                     <input type="number" placeholder="{{'ENTER_POTENTIAL' | translate}}" name="potential" class="form-control" ng-model="newOpportunity.potential" required>
                     <div class="help-block" 
@@ -116,16 +115,23 @@
                 </div>
             </div>
             <div class="form-group">
-        <label class="col-lg-2 control-label">{{'TARGET_CLOSURE_DATE' | translate}}</label>
-        <div class="col-lg-10">
-            <p class="input-group">
-              <input type="text" name="targetDate" ng-model="newOpportunity.targetDate" placeholder="{{'ENTER_TARGET_DATE' | translate}}" class="form-control" datepicker-popup="{{format}}" ng-model="newOpportunity.targetDate" is-open="targetDateCtrl.status.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="{{'CLOSE' | translate}}" />
-              <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="targetDateOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-              </span>
-            </p>
-        </div>
-    </div> 
+                <label class="col-lg-2 control-label">{{'STATUS' | translate}}</label>
+                <div class="col-lg-10">
+                    <select class="form-control" placeholder="{{'SELECT_STATUS' | translate}}" ng-model="newOpportunity.status" ng-options="s for s in statuses">
+                    </select>
+                </div>
+            </div>   
+         <div class="form-group">
+                <label class="col-lg-2 control-label">{{'TARGET_CLOSURE_DATE' | translate}}</label>
+                <div class="col-lg-10">
+                    <p class="input-group">
+                      <input type="text" name="targetDate" ng-model="newOpportunity.targetDate" placeholder="{{'ENTER_TARGET_DATE' | translate}}" class="form-control" datepicker-popup="{{format}}" ng-model="newOpportunity.targetDate" is-open="targetDateCtrl.status.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="{{'CLOSE' | translate}}" />
+                      <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="targetDateOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                      </span>
+                    </p>
+                </div>
+            </div> 
         </form>        
     </div>
     <br>

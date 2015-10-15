@@ -1,0 +1,131 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">x</button>
+        <h4 class="modal-title">{{'CREATE_NEW_INITIATIVE' | translate }}</h4>
+    </div>
+    <div class="modal-body">
+     <div class="row">
+        <div class="col-lg-6">
+            <div class="bs-component">
+                <form class="form-horizontal" name="newInitiativeForm" novalidate>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">{{'YEAR' | translate}}</label>
+                        <div class="col-lg-10">
+                            <select class="form-control" ng-model="newInitiative.year" ng-options="y for y in years">
+                                <option></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">{{'MONTH' | translate}}</label>
+                        <div class="col-lg-10">
+                            <select class="form-control" ng-model="newInitiative.month" ng-options="m for m in months">
+                                <option></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback" 
+                         ng-class="{ 'has-error': newInitiativeForm.businessUnit.$invalid && newInitiativeForm.businessUnit.$dirty }">
+                        <label class="col-lg-2 control-label">{{'BUSINESS_UNIT' | translate}}</label>
+                        <div class="col-lg-10">
+                            <input type="text"
+                            name="businessUnit"
+                            ng-model="newInitiative.businessUnit" 
+                            placeholder="{{'SELECT_BUSINESS_UNIT' | translate}}" 
+                            typeahead="businessUnit.name for businessUnit in refreshBusinessUnits($viewValue)" 
+                            typeahead-loading="loadingBusinessUnits" 
+                            typeahead-no-results="noResults"
+                            typeahead-on-select="setSelectedBusinessUnit($item)"
+                            typeahead-editable=false
+                            class="form-control"
+                            required>
+                            <i ng-show="loadingBusinessUnits" class="glyphicon glyphicon-refresh">
+                            </i>
+                            <div ng-show="noResults">
+                                <i class="glyphicon glyphicon-remove"></i> {{'NO_RESULTS_FOUND' | translate}}
+                            </div>
+                            <div class="help-block" 
+                                ng-messages="newInitiativeForm.businessUnit.$error">
+                                <div ng-message="required">{{'BUSINESS_UNIT_REQUIRED' | translate}}</div>
+                                <div ng-message="validity">{{'SELECT_VALID_BUSINESS_UNIT' | translate}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="bs-component">
+                <form class="form-horizontal well bs-component">
+                    <fieldset>
+                        <legend>{{'INITIATIVES' | translate}}</legend>
+                    </fieldset>
+                    <div class="form-group">
+                      <label  class="col-lg-2 control-label">{{'01' | translate}}</label>
+                      <div class="col-lg-10">
+                        <input type="text" ng-model="newInitiative.initiative_01" class="form-control">
+                      </div>
+                    </div>
+                                        <div class="form-group">
+                      <label  class="col-lg-2 control-label">{{'02' | translate}}</label>
+                      <div class="col-lg-10">
+                        <input type="text" ng-model="newInitiative.initiative_02" class="form-control">
+                      </div>
+                    </div>
+                                        <div class="form-group">
+                      <label  class="col-lg-2 control-label">{{'03' | translate}}</label>
+                      <div class="col-lg-10">
+                        <input type="text" ng-model="newInitiative.initiative_03" class="form-control">
+                      </div>
+                    </div>
+                                        <div class="form-group">
+                      <label  class="col-lg-2 control-label">{{'04' | translate}}</label>
+                      <div class="col-lg-10">
+                        <input type="text" ng-model="newInitiative.initiative_04" class="form-control">
+                      </div>
+                    </div>
+                                        <div class="form-group">
+                      <label  class="col-lg-2 control-label">{{'05' | translate}}</label>
+                      <div class="col-lg-10">
+                        <input type="text" ng-model="newInitiative.initiative_05" class="form-control">
+                      </div>
+                    </div>
+                                        <div class="form-group">
+                      <label  class="col-lg-2 control-label">{{'06' | translate}}</label>
+                      <div class="col-lg-10">
+                        <input type="text" ng-model="newInitiative.initiative_06" class="form-control">
+                      </div>
+                    </div>
+                                        <div class="form-group">
+                      <label  class="col-lg-2 control-label">{{'07' | translate}}</label>
+                      <div class="col-lg-10">
+                        <input type="text" ng-model="newInitiative.initiative_07" class="form-control">
+                      </div>
+                    </div>
+                                        <div class="form-group">
+                      <label  class="col-lg-2 control-label">{{'08' | translate}}</label>
+                      <div class="col-lg-10">
+                        <input type="text" ng-model="newInitiative.initiative_08" class="form-control">
+                      </div>
+                    </div>
+                                        <div class="form-group">
+                      <label  class="col-lg-2 control-label">{{'09' | translate}}</label>
+                      <div class="col-lg-10">
+                        <input type="text" ng-model="newInitiative.initiative_09" class="form-control">
+                      </div>
+                    </div>
+                                        <div class="form-group">
+                      <label  class="col-lg-2 control-label">{{'10' | translate}}</label>
+                      <div class="col-lg-10">
+                        <input type="text" ng-model="newInitiative.initiative_10" class="form-control">
+                      </div>
+                </form>
+            </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancel()">{{'CLOSE' | translate}}</button>
+        <button type="button" class="btn btn-primary" ng-click="ok()">{{'CREATE' | translate}}</button>
+    </div>
+</div>

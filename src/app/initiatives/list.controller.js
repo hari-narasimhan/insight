@@ -3,19 +3,19 @@
 
   angular
     .module('insight')
-    .controller('OpportunitiesController', OpportunitiesController);
+    .controller('InitiativesController', InitiativesController);
 
   /** @ngInject */
-  function OpportunitiesController ( $scope, $state, $controller, $modal, Opportunities) {
+  function InitiativesController ( $scope, $state, $controller, $modal, Initiatives) {
     
     var _this = this;
-    var baseCtrl = $controller('BaseController', {$scope:$scope, service: Opportunities});
+    var baseCtrl = $controller('BaseController', {$scope:$scope, service: Initiatives});
 
     _this.openCreateModal = function (size) {
       var modalInstance = $modal.open({
         animation: $scope.animationsEnabled,
-        templateUrl: 'app/opportunities/create.modal.html',
-        controller : 'NewOpportunityModalController',
+        templateUrl: 'app/initiatives/create.modal.html',
+        controller : 'NewInitiativeModalController',
         size: size
       });
       
@@ -27,7 +27,7 @@
     };
     
     _this.edit = function (id) {
-      $state.go('editOpportunity', {id:id});
+      $state.go('editInitiative', {id:id});
     };
 
     // Mixin BaseController

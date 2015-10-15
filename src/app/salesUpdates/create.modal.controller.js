@@ -81,7 +81,7 @@
     $scope.setSelectedBusinessUnit = function (businessUnit) {
       $scope.newSalesUpdate.businessUnitId = businessUnit.id;
       $scope.newSalesUpdate.businessUnit = businessUnit.name;
-    }
+    };
 
     $scope.ok = _this.ok;
     $scope.cancel = _this.cancel;

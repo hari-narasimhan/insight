@@ -25,7 +25,6 @@
        UPCOMING_INITIATIVES: 'Upcoming Initiatives',
        BUSINESS_UNIT : 'Business Unit',
        PRODUCT: 'Product',
-       YEAR_MONTH: 'Year & Month',
        PERCENT_COMPLETE: '% Complete',
        LAST_UPDATED: 'Last Updated',
        ADD_NEW: 'Add New',
@@ -54,7 +53,22 @@
        PROSPECT_REQUIRED: 'Prospect is required',
        ENTER_TARGET_DATE: 'Enter Target Closure Date',
        POTENTIAL_REQUIRED: 'Potential is required',
-       CREATE_NEW_OPPORTUNITY: 'Create New Sales Opportunity'
+       CREATE_NEW_OPPORTUNITY: 'Create New Sales Opportunity',
+       STATUS: 'Status',
+       ACTION: 'Action',
+       UPDATE_OPPORTUNITY: 'Update Opportunity',
+       UPDATE: 'Update',
+       OPPORTUNITY_UPDATED_SUCCESSFULLY: 'Opportunity updated successfully',
+       ERROR_UPDATING_OPPORTUNITY: 'Error updating opportunity, if the problem persists please contact administrator',
+       UPDATE_OPPORTUNITY_STATUS: 'Update Opportunity Status',
+       REMARKS: 'Remarks',
+       NEW_STATUS: 'New Status',
+       ADD_REMARKS: 'Remarks for opportunity status change',
+       INITIATIVES: 'Key Initiatives',
+       UPDATE_INITIATIVE: 'Update Initiative',
+       CREATE_NEW_INITIATIVE: "Create New Initiative",
+       INITIATIVE_UPDATED_SUCCESSFULLY: 'Initiative updated successfully',
+       ERROR_UPDATING_INITIATIVE: 'Error updating initiative, if the problem persists please contact administrator',       
     });
     
     // Set the preferred language to enter

@@ -14,7 +14,7 @@
             }
             
             return $filter('date')(input, "dd MMM, yyyy");
-        }
+        };
     }
 
 })();

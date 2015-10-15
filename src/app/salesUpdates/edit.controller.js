@@ -10,7 +10,7 @@
 
     $scope.salesUpdate = undefined;
     
-    var id = $stateParams.id
+    var id = $stateParams.id;
 
     $scope.openFocusAreaModal = function (size) {
       var modalInstance = $modal.open({
@@ -48,7 +48,7 @@
 
     $scope.cancel = function() {
       $state.go('salesUpdates');
-    }
+    };
 
     SalesUpdates.get(id)
         .then(

@@ -3,10 +3,10 @@
 
   angular
     .module('insight')
-    .controller('NewOpportunityModalController', NewOpportunityModalController);
+    .controller('NewInitiativeModalController', NewInitiativeModalController);
 
   /** @ngInject */
-  function NewOpportunityModalController ( $scope, $modalInstance, PROSPECT_STATUS, BusinessUnits, Products, Opportunities, Users) {
+  function NewInitiativeModalController ( $scope, $modalInstance, BusinessUnits, Initiatives, Users) {
     
     var _this = this;
     _this.createdId = undefined;
@@ -23,7 +23,6 @@
       return moment.monthsShort(_this.getCurrentMonth());
     };
 
-    
     _this.hasValidBusinessId = function (newSalesUpdate) {
         
         // We need a business id to continue
@@ -35,12 +34,12 @@
     
     _this.ok = function () {
         // Check if we have a valid business id
-        if(!_this.hasValidBusinessId($scope.newOpportunity)) {
-            $scope.newOpportunityForm.businessUnit.$setValidity('validity', false);
+        if(!_this.hasValidBusinessId($scope.newInitiative)) {
+            $scope.newInitiativeForm.businessUnit.$setValidity('validity', false);
             return;
         }
 
-        Opportunities.create($scope.newOpportunity).then(
+        Initiatives.create($scope.newInitiative).then(
             function(response) {
                 $modalInstance.close(response.id);
             },
@@ -66,33 +65,6 @@
     // Month
     $scope.months = moment.monthsShort();    
 
-    // DATE CONTROL RELATED
-    $scope.targetDateCtrl = {
-        status: {opened:false}
-    };
-
-    $scope.dateOptions = {
-        formatYear: 'yy',
-        startingDay: 1
-    };
-
-    $scope.toggleMin = function() {
-        $scope.minDate = $scope.minDate ? null : new Date();
-    };
-  
-    $scope.toggleMin();
-    $scope.maxDate = new Date(2020, 31, 12);
-
-    $scope.targetDateOpen = function($event) {
-        $scope.targetDateCtrl.status.opened = true;
-    };
-
-    $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-    $scope.format = $scope.formats[1];
-
-  
-    // END DATE CONTROL RELATED
-
     // Business Unit picker
     $scope.selectedBusinessUnit = undefined;  
     $scope.refreshBusinessUnits = function ( businessUnit ) {
@@ -104,40 +76,30 @@
         });
     };
 
-    $scope.refreshSalesPerson = function ( salesPerson ) {
-      return Users.query({q:{name:salesPerson}})
-        .then(function (response) {
-          return response.data.map(function(item){
-            return item;
-          });
-        });
-    };
-
-    $scope.refreshProduct = function ( product ) {
-       return Products.query({q:{name:product}})
-         .then(function (response) {
-           return response.data.map(function(item){
-             return item;
-           });
-         });
-     };
-
     // Handle typeahead selection
     $scope.setSelectedBusinessUnit = function (businessUnit) {
-      $scope.newOpportunity.businessUnitId = businessUnit.id;
-      $scope.newOpportunity.businessUnit = businessUnit.name;
+      $scope.newInitiative.businessUnitId = businessUnit.id;
+      $scope.newInitiative.businessUnit = businessUnit.name;
     };
 
     $scope.ok = _this.ok;
     $scope.cancel = _this.cancel;
-    $scope.statuses = PROSPECT_STATUS;
     
-    $scope.newOpportunity = {
+    $scope.newInitiative = {
         businessUnit: undefined,
         businessUnitId: undefined,
         year: _this.getCurrentYear(),
         month : _this.getCurrentMonthName(),
-        status : $scope.statuses[0]
+        initiative_01 : undefined,
+        initiative_02 : undefined,
+        initiative_03 : undefined,
+        initiative_04 : undefined,
+        initiative_05 : undefined,
+        initiative_06 : undefined,
+        initiative_07 : undefined,
+        initiative_08 : undefined,
+        initiative_09 : undefined,
+        initiative_10 : undefined
     };
   }
 })();

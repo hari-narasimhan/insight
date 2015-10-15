@@ -6,7 +6,7 @@
     .config(routeConfig);
 
   /** @ngInject */
-  function routeConfig($stateProvider, $urlRouterProvider) {
+  function routeConfig($stateProvider) {
     $stateProvider
       .state('opportunities', {
         url: '/opportunities',
@@ -14,12 +14,11 @@
         controller: 'OpportunitiesController',
         controllerAs: 'opportunities'
       })
-      /*.state('editSalesUpdate', {
-          url: '/editSalesUpdate/:id',
-          templateUrl: 'app/salesUpdates/edit.html',
-          controller: 'EditSalesUpdateController',
-          controllerAs: 'editSalesUpdate'
-      })*/;
+      .state('editOpportunity', {
+          url: '/editOpportunity/:id',
+          templateUrl: 'app/opportunities/edit.html',
+          controller: 'EditOpportunityController',
+          controllerAs: 'editOpportunity'
+      });
   }
-
 })();

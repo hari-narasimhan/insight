@@ -35,7 +35,7 @@
 
     $scope.pageChanged = function (newPage) {
       _this.query({page:newPage});
-    }
+    };
 
     // query instance method
     this.query = function ( options ) {
