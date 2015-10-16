@@ -1,7 +1,7 @@
 <div class="container">
   <div class="panel panel-default">
       <div class="panel-heading">
-        <h5>{{'SALES_UPDATES' | translate}} - {{salesUpdate.businessUnit}} - {{salesUpdate.month}}, {{salesUpdate.year}}
+        <h5>{{'MARKETING_UPDATES' | translate}} - {{marketingUpdate.businessUnit}} - {{marketingUpdate.month}}, {{marketingUpdate.year}}
       </div>
       <div class="panel-body">
         <tabset>
@@ -17,7 +17,7 @@
                 </div>
                 <div class="row">
                   <div class="list-group">
-                    <a ng-repeat="focusArea in salesUpdate.focusAreas" class="list-group-item">
+                    <a ng-repeat="focusArea in marketingUpdate.focusAreas" class="list-group-item">
                       <h4 class="list-group-item-heading">{{focusArea.staff}}</h4>
                       <p class="list-group-item-text" ng-bind-html="focusArea.activityHtml"></p>
                       <p class="list-group-item-test">
@@ -30,7 +30,7 @@
               </div>  
             </div>
           </tab>
-          <tab heading="{{'SALES_ENGINEERING_ACTIVITIES' | translate}}">
+          <tab heading="{{'KEY_INITIATIVES' | translate}}">
             <div class="panel panel-default extra-padding">
               <div class="panel-body">
                 <div class="row">
@@ -44,12 +44,12 @@
                   <table class="table table-hover">
                     <thead>
                       <tr>
-                        <th>{{'SALES_PERSON' | translate}}</th>
+                        <th>{{'MARKETING_PERSON' | translate}}</th>
                         <th>{{'ACTIVITY' | translate}}</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr ng-repeat="activity in salesUpdate.activities">
+                      <tr ng-repeat="activity in marketingUpdate.activities">
                         <td>{{activity.staff}}</td>
                         <td>{{activity.activity}}</td>
                       </tr>

@@ -10,7 +10,7 @@
     
     var _this = this;
 
-    _this.focusArea = {salesPerson: undefined, activity: undefined, areas: []};
+    _this.focusArea = {staff: undefined, activity: undefined, areas: []};
     
     _this.ok = function () {
       $modalInstance.close(_this.focusArea);
@@ -20,8 +20,8 @@
       $modalInstance.dismiss('cancel');
     };
 
-    _this.refreshSalesPerson = function ( salesPerson ) {
-      return Users.query({q:{name:salesPerson}})
+    _this.refreshSalesPerson = function ( staff ) {
+      return Users.query({q:{name:staff}})
         .then(function (response) {
           return response.data.map(function(item){
             return item;

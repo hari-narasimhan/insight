@@ -3,27 +3,27 @@
 
   angular
     .module('insight')
-    .controller('SalesEngineeringActivityController', SalesEngineeringActivityController);
+    .controller('ActivityModalController', ActivityModalController);
 
   /** @ngInject */
-  function SalesEngineeringActivityController ( $scope, $modalInstance, Users ) {
+  function ActivityModalController ( $scope, $modalInstance, Users ) {
     
     var _this = this;
     
-    _this.engineeringActivity = { salesPerson: undefined, 
+    _this.activity = { staff: undefined, 
                        activity: undefined
                      };
     
     _this.ok = function () {
-      $modalInstance.close(_this.engineeringActivity);
+      $modalInstance.close(_this.activity);
     };
 
     _this.cancel = function () {
       $modalInstance.dismiss('cancel');
     };
     
-    _this.refreshSalesPerson = function ( salesPerson ) {
-      return Users.query({q:{name:salesPerson}})
+    _this.refreshSalesPerson = function ( staff ) {
+      return Users.query({q:{name:staff}})
         .then(function (response) {
           return response.data.map(function(item){
             return item;
@@ -31,7 +31,7 @@
         });
     };
 
-    $scope.engineeringActivity  = _this.engineeringActivity;
+    $scope.activity  = _this.activity;
     $scope.refreshSalesPerson   = _this.refreshSalesPerson;
     $scope.ok                   = _this.ok;
     $scope.cancel               = _this.cancel;

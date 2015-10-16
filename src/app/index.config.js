@@ -68,7 +68,12 @@
        UPDATE_INITIATIVE: 'Update Initiative',
        CREATE_NEW_INITIATIVE: "Create New Initiative",
        INITIATIVE_UPDATED_SUCCESSFULLY: 'Initiative updated successfully',
-       ERROR_UPDATING_INITIATIVE: 'Error updating initiative, if the problem persists please contact administrator',       
+       ERROR_UPDATING_INITIATIVE: 'Error updating initiative, if the problem persists please contact administrator',
+       KEY_METRICS: "Key Metrics",
+       PARAMETER: "Parameter",
+       KEY_INITIATIVES: "Key Initiatives",
+       SELECT_STAFF: "Select Staff",
+       MARKETING_PERSON: "Marketing Persin"
     });
     
     // Set the preferred language to enter

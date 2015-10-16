@@ -7,5 +7,7 @@
     "percentComplete": "15",
     "lastUpdated": "one month ago",
     "focusAreas": [{"id":1, "staff": "Rick Johnson", "activityHtml": "<h1>First Update</h1>", "areas": [{"text":"Health Care"}]}],
-    "activities": [ { "id": 1, "staff": "Ginger Ramirez", "activity": "My New Activity" } ]
+    "activities": [ { "id": 1, "staff": "Ginger Ramirez", "activity": "My New Activity" } ],
+    "releases":[],
+    "completionReports":[]
 }

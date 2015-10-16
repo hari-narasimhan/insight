@@ -3,20 +3,20 @@
 
   angular
     .module('insight')
-    .controller('SalesUpdatesController', SalesUpdatesController);
+    .controller('MarketingUpdatesController', MarketingUpdatesController);
 
   /** @ngInject */
-  function SalesUpdatesController ( $scope, $state, $controller, $modal, SalesUpdates ) {
+  function MarketingUpdatesController ( $scope, $state, $controller, $modal, MarketingUpdates ) {
     
     var _this = this;
-    var baseCtrl = $controller('BaseController', {$scope:$scope, service: SalesUpdates});
+    var baseCtrl = $controller('BaseController', {$scope:$scope, service: MarketingUpdates});
     
 
     _this.openCreateModal = function (size) {
       var modalInstance = $modal.open({
         animation: $scope.animationsEnabled,
-        templateUrl: 'app/salesUpdates/create.modal.html',
-        controller : 'NewSalesUpdateModalController',
+        templateUrl: 'app/marketingUpdates/create.modal.html',
+        controller : 'NewMarketingUpdateModalController',
         size: size
       });
       
@@ -28,14 +28,14 @@
     };
     
     _this.edit = function (id) {
-      $state.go('editSalesUpdate', {id:id});
+      $state.go('editMarketingUpdate', {id:id});
     };
 
     // Mixin BaseController
     angular.extend(this, baseCtrl);
 
-    $scope.openCreateModal  = _this.openCreateModal;
-    $scope.edit          = _this.edit;
+    $scope.openCreateModal          = _this.openCreateModal;
+    $scope.edit    = _this.edit;
     
     // query the service for records
     _this.query({page:1});

@@ -4,14 +4,14 @@
             <h5>{{'KEY_METRICS' | translate}}</h5>
       </div>
       <div class="panel-body">
-        <form>
+        <form novalidate>
             <div class="form-group has-feedback" 
-                 ng-class="{ 'has-error': newOpportunityForm.businessUnit.$invalid && newOpportunityForm.businessUnit.$dirty }">
+                 ng-class="{ 'has-error': keyMetricsForm.businessUnit.$invalid && newOpportunityForm.businessUnit.$dirty }">
                 <label class="col-lg-2 control-label">{{'BUSINESS_UNIT' | translate}}</label>
                 <div class="col-lg-10">
                     <input type="text"
                     name="businessUnit"
-                    ng-model="newOpportunity.businessUnit" 
+                    ng-model="keyMetrics.businessUnit" 
                     placeholder="{{'SELECT_BUSINESS_UNIT' | translate}}" 
                     typeahead="businessUnit.name for businessUnit in refreshBusinessUnits($viewValue)" 
                     typeahead-loading="loadingBusinessUnits" 
@@ -26,13 +26,35 @@
                         <i class="glyphicon glyphicon-remove"></i> {{'NO_RESULTS_FOUND' | translate}}
                     </div>
                     <div class="help-block" 
-                        ng-messages="newOpportunityForm.businessUnit.$error">
+                        ng-messages="keyMetricsForm.businessUnit.$error">
                         <div ng-message="required">{{'BUSINESS_UNIT_REQUIRED' | translate}}</div>
                         <div ng-message="validity">{{'SELECT_VALID_BUSINESS_UNIT' | translate}}</div>
                     </div>
                 </div>
             </div>            
         </form>
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>{{'PARAMETER' | translate}}</th>
+                    <th class="center" ng-repeat="item in range"
+                   ng-class="{true:'text-primary', false: 'text-muted'}[canEdit(item.year, item.month)]"
+                    >{{monthName(item.month)}}-{{item.year}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="param in keyMetrics.kpps">
+                    <td> {{param.name}}</td>
+                    
+                    <td class="center" ng-repeat="value in param.values">
+                        <span class="text-muted" ng-if="!canEdit(value.year, value.month)">{{value.value || '-'}}</span>
+                        <span class="text-primary" ng-if="canEdit(value.year, value.month)">
+                            {{value.value || '-'}}
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
       </div>
     </div>
 </div>

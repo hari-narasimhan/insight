@@ -12,12 +12,15 @@
     .constant('chance', chance)
     .constant('_', window._)
     .constant('PROSPECT_STATUS', ['HOT', 'WARM', 'COLD'])
+    .constant('ENGINEERING_STATUS', ['IN-PROGRESS', 'COMPLETED', 'DELAYED', 'ON-HOLD'])
     .constant('DEFAULT_ENVIRONMENTS',    {
         DEV: 'DEV',
         PRODUCTION: 'PRODUCTION',
         STAGING: 'STAGING'
     })
     .constant('APP_CONSTANTS', {
+        EDIT_MONTHS_BEFORE : 2,
+        KEY_PARAM_MONTHS_RANGE: 6,
         SERVICES: {
             Auth: 'Auth',
             SalesUpdates: 'SalesUpdates',
@@ -29,7 +32,8 @@
             Users: 'Users',
             Opportunities: 'Opportunities',
             Initiatives: 'Initiatives',
-            KeyMetrics: 'KeyMetrics'
+            KeyMetrics: 'KeyMetrics',
+            Dashboard: 'Dashboard'
         },
         APP_CACHE: 'q4.insight.app.cache',
         JWT_TOKEN_KEY: 'q4.insight.app.auth.token',

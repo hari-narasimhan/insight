@@ -3,12 +3,12 @@
 
   angular
     .module('insight')
-    .controller('EditSalesUpdateController', EditSalesUpdateController);
+    .controller('EditMarketingUpdateController', EditMarketingUpdateController);
 
   /** @ngInject */
-  function EditSalesUpdateController ( $scope, $state, $stateParams, $modal, SalesUpdates ) {
+  function EditMarketingUpdateController ( $scope, $state, $stateParams, $modal, MarketingUpdates ) {
 
-    $scope.salesUpdate = undefined;
+    $scope.marketingUpdate = undefined;
     
     var id = $stateParams.id;
 
@@ -21,7 +21,7 @@
       });
       
       modalInstance.result.then(function (focusArea) {
-        $scope.salesUpdate.focusAreas.push(focusArea);
+        $scope.marketingUpdate.focusAreas.push(focusArea);
       }, function () {
           // DO NOTHING
       });
@@ -35,25 +35,25 @@
         size: size
       });
       
-      modalInstance.result.then(function (engineeringActivity) {
-        $scope.salesUpdate.activities.push(engineeringActivity);
+      modalInstance.result.then(function (marketingActivity) {
+        $scope.marketingUpdate.activities.push(marketingActivity);
       }, function () {
           // DO NOTHING
       });
     };
     
     $scope.save = function() {
-      // TODO Save the sales update here
+      // TODO Save the marketing update here
     };
 
     $scope.cancel = function() {
-      $state.go('salesUpdates');
+      $state.go('marketingUpdates');
     };
 
-    SalesUpdates.get(id)
+    MarketingUpdates.get(id)
         .then(
             function(response){
-                $scope.salesUpdate = response;
+                $scope.marketingUpdate = response;
             },
             function(error){
                 // TODO handle error

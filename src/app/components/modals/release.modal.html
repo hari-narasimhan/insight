@@ -1,0 +1,72 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">x</button>
+        <h4 class="modal-title">{{'CREATE_NEW_RELEASE_UPDATE' | translate }}</h4>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal" name="releaseForm" novalidate>        
+            <div class="form-group has-feedback" ng-class="{ 'has-error': releaseForm.product.$invalid && releaseForm.product.$dirty }">
+                <label class="col-lg-2 control-label">{{'PRODUCT' | translate}}</label>
+                <div class="col-lg-10">
+                    <input type="text" 
+                    name="product"
+                    ng-model="release.product" 
+                    placeholder="{{'SELECT_PRODUCT' | translate}}" 
+                    typeahead="product.name for product in refreshProduct($viewValue)" 
+                    typeahead-loading="loadingProducts" 
+                    typeahead-no-results="noResults"
+                    class="form-control"
+                    required>
+                    <i ng-show="loadingProducts" class="glyphicon glyphicon-refresh">
+                    </i>
+                    <div ng-show="noResults">
+                        <i class="glyphicon glyphiconremove"></i> {{'NO_RESULTS_FOUND' | translate}}
+                    </div>
+                    <div class="help-block" 
+                        ng-messages="releaseForm.product.$error">
+                        <div ng-message="required">{{'PRODUCT_REQUIRED' | translate}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label  class="col-lg-2 control-label">{{'MILESTONE_TASK' | translate}}</label>
+                <div class="col-lg-10">
+                    <textarea rows=3 name="milestoneTask" placeholder="{{'ENTER_MILESTONE_TASK' | translate}}" class="form-control" ng-model="release.milestoneTask" required></textarea>
+                    <div class="help-block" 
+                        ng-messages="releaseForm.milestoneTask.$error">
+                        <div ng-message="required">{{'MILESTONE_TASK_REQUIRED' | translate}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label">{{'STATUS' | translate}}</label>
+                <div class="col-lg-10">
+                    <select class="form-control" placeholder="{{'SELECT_STATUS' | translate}}" ng-model="release.status" ng-options="s for s in statuses">
+                    </select>
+                </div>
+            </div>   
+         <div class="form-group">
+                <label class="col-lg-2 control-label">{{'TARGET_DATE' | translate}}</label>
+                <div class="col-lg-10">
+                    <p class="input-group">
+                      <input type="text" name="targetDate" ng-model="release.targetDate" placeholder="{{'ENTER_TARGET_DATE' | translate}}" class="form-control" datepicker-popup="{{format}}" ng-model="release.targetDate" is-open="targetDateCtrl.status.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="{{'CLOSE' | translate}}" />
+                      <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="targetDateOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                      </span>
+                    </p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label  class="col-lg-2 control-label">{{'REMARKS' | translate}}</label>
+                <div class="col-lg-10">
+                    <textarea rows=3 name="remarks" placeholder="{{'ENTER_REMARKS' | translate}}" class="form-control" ng-model="release.remarks"></textarea>
+                </div>
+            </div>            
+        </form>        
+    </div>
+    <br>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancel()">{{'CLOSE' | translate}}</button>
+        <button type="button" class="btn btn-primary" ng-click="ok()">{{'CREATE' | translate}}</button>
+    </div>
+</div>
