@@ -28,7 +28,8 @@
             Products: 'Products',
             Users: 'Users',
             Opportunities: 'Opportunities',
-            Initiatives: 'Initiatives'
+            Initiatives: 'Initiatives',
+            KeyMetrics: 'KeyMetrics'
         },
         APP_CACHE: 'q4.insight.app.cache',
         JWT_TOKEN_KEY: 'q4.insight.app.auth.token',

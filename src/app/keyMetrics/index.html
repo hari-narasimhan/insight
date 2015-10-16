@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+            <h5>{{'KEY_METRICS' | translate}}</h5>
+      </div>
+      <div class="panel-body">
+        <form>
+            <div class="form-group has-feedback" 
+                 ng-class="{ 'has-error': newOpportunityForm.businessUnit.$invalid && newOpportunityForm.businessUnit.$dirty }">
+                <label class="col-lg-2 control-label">{{'BUSINESS_UNIT' | translate}}</label>
+                <div class="col-lg-10">
+                    <input type="text"
+                    name="businessUnit"
+                    ng-model="newOpportunity.businessUnit" 
+                    placeholder="{{'SELECT_BUSINESS_UNIT' | translate}}" 
+                    typeahead="businessUnit.name for businessUnit in refreshBusinessUnits($viewValue)" 
+                    typeahead-loading="loadingBusinessUnits" 
+                    typeahead-no-results="noResults"
+                    typeahead-on-select="setSelectedBusinessUnit($item)"
+                    typeahead-editable=false
+                    class="form-control"
+                    required>
+                    <i ng-show="loadingBusinessUnits" class="glyphicon glyphicon-refresh">
+                    </i>
+                    <div ng-show="noResults">
+                        <i class="glyphicon glyphicon-remove"></i> {{'NO_RESULTS_FOUND' | translate}}
+                    </div>
+                    <div class="help-block" 
+                        ng-messages="newOpportunityForm.businessUnit.$error">
+                        <div ng-message="required">{{'BUSINESS_UNIT_REQUIRED' | translate}}</div>
+                        <div ng-message="validity">{{'SELECT_VALID_BUSINESS_UNIT' | translate}}</div>
+                    </div>
+                </div>
+            </div>            
+        </form>
+      </div>
+    </div>
+</div>
