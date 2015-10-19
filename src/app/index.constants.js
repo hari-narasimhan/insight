@@ -49,8 +49,8 @@
         LOGIN_SUCCESS: 'login-success'
     })
     // Configure the environment to cater here.
-    .constant('ENVIRONMENT', 'DEV')
-    .constant('BASE_DEV_URL', "http://localhost:3000")
+    .constant('ENVIRONMENT', 'PRODUCTION')
+    .constant('BASE_DEV_URL', "http://localhost:3030")
     // Set BASE_URL value for production
     .constant('BASE_URL', ''); 
 

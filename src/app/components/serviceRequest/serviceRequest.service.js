@@ -83,12 +83,12 @@
     /** @ngInject */
     function RequestUtils () {
       var service = {
-        createQueryString : createQueryString
+        createQueryCriteria : createQueryCriteria
       };
 
       return service;
 
-      function createQueryString ( queryCriteria ) {
+      function createQueryCriteria ( queryCriteria ) {
         
         var retCriteria = [];
         

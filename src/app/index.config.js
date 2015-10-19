@@ -6,7 +6,7 @@
     .config(config);
 
   /** @ngInject */
-  function config($logProvider, $translateProvider, toastr) {
+  function config($logProvider, $translateProvider, $authProvider, toastr) {
     // Enable log
     $logProvider.debugEnabled(true);
 
@@ -73,7 +73,10 @@
        PARAMETER: "Parameter",
        KEY_INITIATIVES: "Key Initiatives",
        SELECT_STAFF: "Select Staff",
-       MARKETING_PERSON: "Marketing Persin"
+       MARKETING_PERSON: "Marketing Person",
+       NO_ACCOUNT_YET: "Don't have an account yet?",
+       ENTER_EMAIL: "Please enter your email",
+       ENTER_PASSWORD: "Please enter your password"
     });
     
     // Set the preferred language to enter
@@ -81,6 +84,10 @@
 
     // Set sanitize strategy
     $translateProvider.useSanitizeValueStrategy('sanitize');
+
+    // Configure auth provider
+    $authProvider.loginUrl = 'http://localhost:3030/auth/login';
+    $authProvider.signupUrl = 'http://localhost:3030/auth/signup';
   }
 
 })();

@@ -14,7 +14,8 @@
                         'angularUtils.directives.dirPagination',
                         'textAngular',
                         'ngTagsInput',
-                        'pascalprecht.translate']
+                        'pascalprecht.translate',
+                        'satellizer']
             );
 
 })();
