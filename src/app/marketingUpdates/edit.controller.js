@@ -6,7 +6,7 @@
     .controller('EditMarketingUpdateController', EditMarketingUpdateController);
 
   /** @ngInject */
-  function EditMarketingUpdateController ( $scope, $state, $stateParams, $modal, MarketingUpdates ) {
+  function EditMarketingUpdateController ( $scope, $state, $stateParams, $modal, $translate, MarketingUpdates ) {
 
     $scope.marketingUpdate = undefined;
     
@@ -42,8 +42,26 @@
       });
     };
     
+    $translate('MARKETING_UPDATE_UPDATED_SUCCESSFULLY').then(function(val){
+      $scope.successMessage = val || 'SUCCESS';
+    });
+      
+    $translate('ERROR_UPDATING_MARKETING_UPDATE').then(function(val){
+        $scope.errorMessage = val || 'ERROR';
+    });
+
     $scope.save = function() {
-      // TODO Save the marketing update here
+      MarketingUpdates.update(id, $scope.marketingUpdate)
+        .then (
+          function(response) {
+              toastr.info($scope.successMessage);
+              $state.go('marketingUpdates');
+          }, function (error) {
+              //TODO handle error
+              toastr.error($scope.errorMessage);
+          }        
+        );
+
     };
 
     $scope.cancel = function() {

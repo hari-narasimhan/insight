@@ -19,7 +19,8 @@
                     <div class="form-group">
                         <label class="col-lg-2 control-label">{{'MONTH' | translate}}</label>
                         <div class="col-lg-10">
-                            <select class="form-control" ng-model="newInitiative.month" ng-options="m for m in months">
+                            <select class="form-control" ng-model="newInitiative.month" 
+                            ng-options="month.value as month.name for month in months">
                                 <option></option>
                             </select>
                         </div>
@@ -60,65 +61,12 @@
                     <fieldset>
                         <legend>{{'INITIATIVES' | translate}}</legend>
                     </fieldset>
-                    <div class="form-group">
-                      <label  class="col-lg-2 control-label">{{'01' | translate}}</label>
+                    <div class="form-group" ng-repeat="i in newInitiative.initiatives track by $index">
+                      <label  class="col-lg-2 control-label">{{$index + 1}}</label>
                       <div class="col-lg-10">
-                        <input type="text" ng-model="newInitiative.initiative_01" class="form-control">
+                        <input type="text" ng-model="newInitiative.initiatives[$index]" class="form-control">
                       </div>
                     </div>
-                                        <div class="form-group">
-                      <label  class="col-lg-2 control-label">{{'02' | translate}}</label>
-                      <div class="col-lg-10">
-                        <input type="text" ng-model="newInitiative.initiative_02" class="form-control">
-                      </div>
-                    </div>
-                                        <div class="form-group">
-                      <label  class="col-lg-2 control-label">{{'03' | translate}}</label>
-                      <div class="col-lg-10">
-                        <input type="text" ng-model="newInitiative.initiative_03" class="form-control">
-                      </div>
-                    </div>
-                                        <div class="form-group">
-                      <label  class="col-lg-2 control-label">{{'04' | translate}}</label>
-                      <div class="col-lg-10">
-                        <input type="text" ng-model="newInitiative.initiative_04" class="form-control">
-                      </div>
-                    </div>
-                                        <div class="form-group">
-                      <label  class="col-lg-2 control-label">{{'05' | translate}}</label>
-                      <div class="col-lg-10">
-                        <input type="text" ng-model="newInitiative.initiative_05" class="form-control">
-                      </div>
-                    </div>
-                                        <div class="form-group">
-                      <label  class="col-lg-2 control-label">{{'06' | translate}}</label>
-                      <div class="col-lg-10">
-                        <input type="text" ng-model="newInitiative.initiative_06" class="form-control">
-                      </div>
-                    </div>
-                                        <div class="form-group">
-                      <label  class="col-lg-2 control-label">{{'07' | translate}}</label>
-                      <div class="col-lg-10">
-                        <input type="text" ng-model="newInitiative.initiative_07" class="form-control">
-                      </div>
-                    </div>
-                                        <div class="form-group">
-                      <label  class="col-lg-2 control-label">{{'08' | translate}}</label>
-                      <div class="col-lg-10">
-                        <input type="text" ng-model="newInitiative.initiative_08" class="form-control">
-                      </div>
-                    </div>
-                                        <div class="form-group">
-                      <label  class="col-lg-2 control-label">{{'09' | translate}}</label>
-                      <div class="col-lg-10">
-                        <input type="text" ng-model="newInitiative.initiative_09" class="form-control">
-                      </div>
-                    </div>
-                                        <div class="form-group">
-                      <label  class="col-lg-2 control-label">{{'10' | translate}}</label>
-                      <div class="col-lg-10">
-                        <input type="text" ng-model="newInitiative.initiative_10" class="form-control">
-                      </div>
                 </form>
             </div>
             </div>

@@ -88,12 +88,12 @@
 
       return service;
 
-      function createQueryCriteria ( queryCriteria ) {
+      function createQueryCriteria   ( queryCriteria ) {
         
         var retCriteria = [];
         
-        if(queryCriteria.q) {
-          retCriteria.push('q=' + queryCriteria.q);
+        if(queryCriteria.query) {
+          retCriteria.push('query=' + JSON.stringify(queryCriteria.query));
         }
         
         if(queryCriteria.limit) {

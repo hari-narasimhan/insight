@@ -16,31 +16,32 @@
             <div class="form-group">
                 <label class="col-lg-2 control-label">{{'MONTH' | translate}}</label>
                 <div class="col-lg-10">
-                    <select class="form-control" ng-model="newOpportunity.month" ng-options="m for m in months">
+                    <select class="form-control" ng-model="newOpportunity.month" 
+                     ng-options="month.value as month.name for month in months">
                         <option></option>
                     </select>
                 </div>
             </div>
-            <div class="form-group has-feedback" ng-class="{ 'has-error': newOpportunityForm.salesPerson.$invalid && newOpportunityForm.salesPerson.$dirty }">
+            <div class="form-group has-feedback" ng-class="{ 'has-error': newOpportunityForm.staff.$invalid && newOpportunityForm.staff.$dirty }">
                 <label class="col-lg-2 control-label">{{'SALES_PERSON' | translate}}</label>
                 <div class="col-lg-10">
                     <input type="text" 
-                    name="salesPerson"
-                    ng-model="newOpportunity.salesPerson" 
-                    placeholder="{{'SELECT_SALES_PERSON' | translate}}" 
-                    typeahead="salesPerson.name for salesPerson in refreshSalesPerson($viewValue)" 
-                    typeahead-loading="loadingSalesPerson" 
+                    name="staff"
+                    ng-model="newOpportunity.staff" 
+                    placeholder="{{'SELECT_STAFF' | translate}}" 
+                    typeahead="staff.fullname for staff in refreshStaff($viewValue)" 
+                    typeahead-loading="loadingStaff" 
                     typeahead-no-results="noResults"
                     class="form-control"
                     required>
-                    <i ng-show="loadingSalesPersons" class="glyphicon glyphicon-refresh">
+                    <i ng-show="loadingStaffs" class="glyphicon glyphicon-refresh">
                     </i>
                     <div ng-show="noResults">
                         <i class="glyphicon glyphicon-remove"></i> {{'NO_RESULTS_FOUND' | translate}}
                     </div>
                     <div class="help-block" 
-                        ng-messages="newOpportunityForm.salesPerson.$error">
-                        <div ng-message="required">{{'SALES_PERSON_REQUIRED' | translate}}</div>
+                        ng-messages="newOpportunityForm.staff.$error">
+                        <div ng-message="required">{{'STAFF_REQUIRED' | translate}}</div>
                     </div>
                 </div>
             </div>

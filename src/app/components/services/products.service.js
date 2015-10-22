@@ -43,7 +43,7 @@
     function update (id, entity) {
       return ServiceRequest.execute({
         method: 'PUT',
-        url: serviceUrl,
+        url: serviceUrl + '/' + id,
         data: entity
       });
     }

@@ -11,10 +11,13 @@
     
     var service = {
       query: query,
-      bulkUpdate: bulkUpdate
+      bulkUpdate: bulkUpdate,
+      create: create,
+      update: update
     };
 
     var serviceUrl = BASE_URL + '/keyMetrics';
+    var bulkServiceUrl = BASE_URL + '/keyMetrices';
     return service;
 
     function query (queryCriteria) {
@@ -23,10 +26,26 @@
       });
     }
 
+    function create (entity) {
+      return ServiceRequest.execute({
+        method: 'POST',
+        url: serviceUrl,
+        data: entity
+      });
+    }
+
+    function update (id, entity) {
+      return ServiceRequest.execute({
+        method: 'PUT',
+        url: serviceUrl + '/' + id,
+        data: entity
+      });
+    }
+
     function bulkUpdate (entities) {
       return ServiceRequest.execute({
         method: 'PUT',
-        url: serviceUrl,
+        url: bulkServiceUrl,
         data: entities
       });
     }

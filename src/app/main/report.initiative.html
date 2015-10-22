@@ -1,0 +1,55 @@
+<div class="container">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="row">
+            <div class="col col-sm-12"><h5> <strong>{{businessUnit.name}}</strong> - {{ currentReport.name | translate}} {{month | monthName}}, {{year}}</h5></div>    
+        </div>
+        <div class="row">
+            <div class="col col-sm-12 ">
+                <ul class="pager">
+                  <li ng-repeat="section in reportSections"
+                  ng-class="{true:'disabled', false: 'text-muted'}[isCurrentReport(section)]">
+                  <a ng-click="transition(section)">{{section.name | translate}}</a></li>
+                </ul>
+            </div>
+        </div>
+      </div>
+      <div class="panel-body">
+        <h4>{{'INITIATIVE' | translate}}</h4>
+         <div class="row">
+          <div class="col-lg-12">
+            <div class="bs-component">
+                    <div class="row">  
+                        <div class="col-sm-4"><strong>{{'BUSINESS_UNIT' | translate}}</strong></div>
+                        <div class="col-sm-8">{{initiative.businessUnit}}</div>
+                    </div>
+                    <div class="row">          
+                        <div class="col-sm-4"><strong>{{'YEAR' | translate}}</strong></div>
+                        <div class="col-sm-8">{{initiative.year}}</div>
+                    </div>
+                    <div class="row">          
+                        <div class="col-sm-4"><strong>{{'MONTH' | translate}}</strong></div>
+                        <div class="col-sm-8">{{initiative.month | monthName}}</div>
+                    </div>
+            </div>
+            <div class="bs-component">
+                <form class="form-horizontal well bs-component">
+                    <fieldset>
+                        <legend>{{'INITIATIVES' | translate}}</legend>
+                    </fieldset>
+                    <div class="form-group" ng-repeat="i in initiative.initiatives track by $index">
+                      <div class="col col-lg-2">
+                            {{$index + 1}}
+                      </div>
+                      <div class="col-lg-10">
+                            {{i}}
+                      </div>
+                    </div>
+                </form>
+            </div>
+            </div>
+          </div>        
+      </div>
+    </div>
+</div>
+

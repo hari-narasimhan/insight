@@ -6,8 +6,11 @@
     .run(runBlock);
 
   /** @ngInject */
-  function runBlock($log) {
+  function runBlock($log, $rootScope, $auth, $window) {
 
+    if ($auth.isAuthenticated()) {
+        $rootScope.currentUser = JSON.parse($window.localStorage.currentUser);
+    }
     $log.debug('runBlock end');
   }
 

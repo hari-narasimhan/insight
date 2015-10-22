@@ -5,11 +5,11 @@
         </div>
         <div class="panel-body">
          <div class="row">
-          <div class="col-lg-4">
+          <div class="col-lg-6">
             <div class="bs-component">
                     <div class="row">
                         <div class="col-sm-4"><strong>{{'SALES_PERSON' | translate}}</strong></div>
-                        <div class="col-sm-8">{{opportunity.salesPerson}}</div>
+                        <div class="col-sm-8">{{opportunity.staff}}</div>
                     </div>
                     <div class="row">  
                         <div class="col-sm-4"><strong>{{'BUSINESS_UNIT' | translate}}</strong></div>
@@ -21,7 +21,7 @@
                     </div>
                     <div class="row">          
                         <div class="col-sm-4"><strong>{{'MONTH' | translate}}</strong></div>
-                        <div class="col-sm-8">{{opportunity.month}}</div>
+                        <div class="col-sm-8">{{opportunity.month | monthName}}</div>
                     </div>
                     <div class="row">          
                         <div class="col-sm-4"><strong>{{'PROSPECT' | translate}}</strong></div>
@@ -42,10 +42,18 @@
                     <div class="row">
                         <div class="col-sm-4"><strong>{{'TARGET_CLOSURE_DATE' | translate}}</strong></div>
                         <div class="col-sm-8">{{opportunity.targetDate | appDate}}</div>
-                    </div>            
+                    </div>
+                    <div class-"row">
+                        <h5>{{'STATUS_UPDATES' | translate}}</h5>
+                        <div ng-repeat="statusUpdate in opportunity.statusUpdates">
+                            <div class="col-sm-4">{{statusUpdate.updatedAt | appDate}}</div>
+                            <div class="col-sm-2">{{statusUpdate.status}}</div>
+                            <div class="col-sm-6">{{statusUpdate.remarks}}</div>
+                        </div>
+                    </div>
            </div>
           </div>
-          <div class="col-lg-8">
+          <div class="col-lg-6">
               <form class="form-horizontal well bs-component">
                 <fieldset>
                   <legend>{{'UPDATE_OPPORTUNITY_STATUS' | translate}}</legend>

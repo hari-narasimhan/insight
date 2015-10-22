@@ -21,6 +21,17 @@
     .constant('APP_CONSTANTS', {
         EDIT_MONTHS_BEFORE : 2,
         KEY_PARAM_MONTHS_RANGE: 6,
+        REPORT_SECTIONS: [{name:'KEY_METRIC', state: 'report.keymetric'}, 
+                            {name: 'MARKETING', state: 'report.marketing'}, 
+                            {name: 'SALES', state:'report.sales'}, 
+                            {name: 'ENGINEERING', state: 'report.engineering'}, 
+                            {name: 'INITIATIVE', state:'report.initiative'}],
+        MONTHS: [
+            {value:0, name:"Jan"},{value:1, name:"Feb"},{value:2, name:"Mar"},
+            {value:3, name:"Apr"},{value:4, name:"May"},{value:5, name:"Jun"},
+            {value:6, name:"Jul"},{value:7, name:"Aug"},{value:8, name:"Sep"},
+            {value:9, name:"Oct"},{value:10, name:"Nov"},{value:11, name:"Dec"}
+        ],
         SERVICES: {
             Auth: 'Auth',
             SalesUpdates: 'SalesUpdates',
@@ -52,6 +63,6 @@
     .constant('ENVIRONMENT', 'PRODUCTION')
     .constant('BASE_DEV_URL', "http://localhost:3030")
     // Set BASE_URL value for production
-    .constant('BASE_URL', ''); 
+    .constant('BASE_URL', 'https://insight-services.herokuapp.com/api/v1'); 
 
 })();

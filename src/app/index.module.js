@@ -15,7 +15,8 @@
                         'textAngular',
                         'ngTagsInput',
                         'pascalprecht.translate',
-                        'satellizer']
+                        'satellizer',
+                        'xeditable']
             );
 
 })();

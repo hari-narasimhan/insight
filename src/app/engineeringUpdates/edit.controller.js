@@ -6,9 +6,9 @@
     .controller('EditEngineeringUpdateController', EditEngineeringUpdateController);
 
   /** @ngInject */
-  function EditEngineeringUpdateController ( $scope, $state, $stateParams, $modal, EngineeringUpdates ) {
+  function EditEngineeringUpdateController ( $scope, $state, $stateParams, $modal, $translate, EngineeringUpdates ) {
 
-    $scope.marketingUpdate = undefined;
+    $scope.engineeringUpdate = undefined;
     
     var id = $stateParams.id;
 
@@ -21,7 +21,7 @@
       });
       
       modalInstance.result.then(function (focusArea) {
-        $scope.marketingUpdate.focusAreas.push(focusArea);
+        $scope.engineeringUpdate.focusAreas.push(focusArea);
       }, function () {
           // DO NOTHING
       });
@@ -72,12 +72,32 @@
       });
     };
     
+  
+
+    $translate('ENGINEERING_UPDATE_UPDATED_SUCCESSFULLY').then(function(val){
+      $scope.successMessage = val || 'SUCCESS';
+    });
+      
+    $translate('ERROR_UPDATING_ENGINEERING_UPDATE').then(function(val){
+        $scope.errorMessage = val || 'ERROR';
+    });
+
     $scope.save = function() {
-      // TODO Save the marketing update here
+      EngineeringUpdates.update(id, $scope.engineeringUpdate)
+        .then (
+          function(response) {
+              toastr.info($scope.successMessage);
+              $state.go('engineeringUpdates');
+          }, function (error) {
+              //TODO handle error
+              toastr.error($scope.errorMessage);
+          }        
+        );
+
     };
 
     $scope.cancel = function() {
-      $state.go('marketingUpdates');
+      $state.go('engineeringUpdates');
     };
 
     EngineeringUpdates.get(id)

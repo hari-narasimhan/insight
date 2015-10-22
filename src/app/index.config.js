@@ -76,7 +76,33 @@
        MARKETING_PERSON: "Marketing Person",
        NO_ACCOUNT_YET: "Don't have an account yet?",
        ENTER_EMAIL: "Please enter your email",
-       ENTER_PASSWORD: "Please enter your password"
+       ENTER_PASSWORD: "Please enter your password",
+       BUSINESS_UNITS: "Business Units",
+       EDIT_BUSINESS_UNIT: "Edit Business Unit",
+       CREATE_NEW_BUSINESS_UNIT: "Create New Business Unit",
+       DESCRIPTION: "Description",
+       CREATE_NEW_PRODUCT: "Create New Product",
+       EDIT_PRODUCT: "Edit Product",
+       STAFF: "Staff",
+       AREAS: "Areas",
+       ENTER_ACTIVITY_HELP_TEXT: "Enter activity details",
+       CREATE_NEW_MARKETING_UPDATE: "Create New Marketing Update",
+       PRODUCT_RELEASES: "Product Releases",
+       COMPLETION_REPORTS: "Completion Reports",
+       MILESTONE_TASK: "Milestone Task",
+       TARGET_DATE: "Target Date",
+       ENTER_REMARKS: "Enter Remarks",
+       STATUS_UPDATES: "Status Updates",
+       KEY_METRIC: "Key Metric",
+       ENGINEERING: "Engineering",
+       SALES: "Sales",
+       MARKETING: "Marketing",
+       INITIATIVE: "Initiative",
+       EMAIL: "Email",
+       PASSWORD: "Password",
+       SIGN_UP: "Sign Up",
+       DASHBOARD: "Dashboard",
+       ADD_KEY_PARAMETER: "Add Key Parameter"
     });
     
     // Set the preferred language to enter
@@ -86,8 +112,8 @@
     $translateProvider.useSanitizeValueStrategy('sanitize');
 
     // Configure auth provider
-    $authProvider.loginUrl = 'http://localhost:3030/auth/login';
-    $authProvider.signupUrl = 'http://localhost:3030/auth/signup';
+    $authProvider.loginUrl = 'https://insight-services.herokuapp.com/auth/login';
+    $authProvider.signupUrl = 'https://insight-services.herokuapp.com/auth/signup';
   }
 
 })();

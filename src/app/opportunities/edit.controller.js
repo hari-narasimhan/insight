@@ -6,7 +6,7 @@
     .controller('EditOpportunityController', EditOpportunityController);
 
   /** @ngInject */
-  function EditOpportunityController ( $scope, $state, $stateParams,PROSPECT_STATUS, $translate, Opportunities ) {
+  function EditOpportunityController ( $scope, $state, $stateParams, toastr, PROSPECT_STATUS, $translate, Opportunities ) {
       var _this = this;
       
       _this.getData = function(id) {
@@ -39,7 +39,13 @@
       });
       
       $scope.save = function() {
-        Opportunities.update($scope.opportunity)
+        
+        if(!$scope.opportunity.statusUpdates) {
+          $scope.opportunity.statusUpdates = [];
+        }
+
+        $scope.opportunity.statusUpdates.push({updatedAt: new Date(), status: $scope.newStatus, remarks: $scope.remarks});
+        Opportunities.update(id, $scope.opportunity)
         .then(
                 function(response) {
                     toastr.info($scope.successMessage);

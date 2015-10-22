@@ -22,19 +22,19 @@
       $modalInstance.dismiss('cancel');
     };
     
-    _this.refreshSalesPerson = function ( staff ) {
-      return Users.query({q:{name:staff}})
+    _this.refreshStaff = function ( staff ) {
+      return Users.query({query:{fullname: "~" + staff}})
         .then(function (response) {
-          return response.data.map(function(item){
+          return response.map(function(item){
             return item;
           });
         });
     };
 
-    $scope.activity  = _this.activity;
-    $scope.refreshSalesPerson   = _this.refreshSalesPerson;
-    $scope.ok                   = _this.ok;
-    $scope.cancel               = _this.cancel;
+    $scope.activity       = _this.activity;
+    $scope.refreshStaff   = _this.refreshStaff;
+    $scope.ok             = _this.ok;
+    $scope.cancel         = _this.cancel;
 
   }
 })();

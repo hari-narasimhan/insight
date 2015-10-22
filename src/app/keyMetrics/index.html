@@ -11,7 +11,7 @@
                 <div class="col-lg-10">
                     <input type="text"
                     name="businessUnit"
-                    ng-model="keyMetrics.businessUnit" 
+                    ng-model="businessUnit" 
                     placeholder="{{'SELECT_BUSINESS_UNIT' | translate}}" 
                     typeahead="businessUnit.name for businessUnit in refreshBusinessUnits($viewValue)" 
                     typeahead-loading="loadingBusinessUnits" 
@@ -43,18 +43,21 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="param in keyMetrics.kpps">
+                <tr ng-repeat="param in keyMetrics">
                     <td> {{param.name}}</td>
                     
                     <td class="center" ng-repeat="value in param.values">
                         <span class="text-muted" ng-if="!canEdit(value.year, value.month)">{{value.value || '-'}}</span>
-                        <span class="text-primary" ng-if="canEdit(value.year, value.month)">
+                        <span class="text-primary" 
+                        editable-text="value.value" 
+                        ng-if="canEdit(value.year, value.month)"
+                        onaftersave="save(businessUnit, param.name, value)">
                             {{value.value || '-'}}
                         </span>
                     </td>
                 </tr>
             </tbody>
         </table>
-      </div>
+      </div>    
     </div>
 </div>

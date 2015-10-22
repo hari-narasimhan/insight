@@ -6,43 +6,20 @@
     .controller('NewOpportunityModalController', NewOpportunityModalController);
 
   /** @ngInject */
-  function NewOpportunityModalController ( $scope, $modalInstance, PROSPECT_STATUS, BusinessUnits, Products, Opportunities, Users) {
+  function NewOpportunityModalController ( $scope, $modalInstance, PROSPECT_STATUS, APP_CONSTANTS, Common, BusinessUnits, Products, Opportunities, Users) {
     
     var _this = this;
-    _this.createdId = undefined;
-
-    _this.getCurrentYear = function() {
-      return moment().year();
-    };
-
-    _this.getCurrentMonth = function() {
-      return moment().month();
-    };
-
-    _this.getCurrentMonthName = function () {
-      return moment.monthsShort(_this.getCurrentMonth());
-    };
-
-    
-    _this.hasValidBusinessId = function (newSalesUpdate) {
-        
-        // We need a business id to continue
-        if(!newSalesUpdate.businessUnitId || !newSalesUpdate.businessUnit) {
-            return false;
-        }
-        return true;
-    };
     
     _this.ok = function () {
         // Check if we have a valid business id
-        if(!_this.hasValidBusinessId($scope.newOpportunity)) {
+        if(!Common.hasValidBusinessUnit($scope.newOpportunity)) {
             $scope.newOpportunityForm.businessUnit.$setValidity('validity', false);
             return;
         }
 
         Opportunities.create($scope.newOpportunity).then(
             function(response) {
-                $modalInstance.close(response.id);
+                $modalInstance.close(response._id);
             },
             function (error) {
                 // TODO Handle the error gracefully
@@ -57,14 +34,14 @@
 
 
     // Get current year and month from moment
-    var year = _this.getCurrentYear();
-    var month = _this.getCurrentMonth();
+    var year = Common.getCurrentYear();
+    var month = Common.getCurrentMonth();
     
     // Select Year
     $scope.years = [year - 1, year, year + 1];
     
     // Month
-    $scope.months = moment.monthsShort();    
+    $scope.months = APP_CONSTANTS.MONTHS;    
 
     // DATE CONTROL RELATED
     $scope.targetDateCtrl = {
@@ -94,37 +71,14 @@
     // END DATE CONTROL RELATED
 
     // Business Unit picker
-    $scope.selectedBusinessUnit = undefined;  
-    $scope.refreshBusinessUnits = function ( businessUnit ) {
-      return BusinessUnits.query({q:{name:businessUnit}})
-        .then(function (response) {
-          return response.data.map(function(item){
-            return item;
-          });
-        });
-    };
-
-    $scope.refreshSalesPerson = function ( salesPerson ) {
-      return Users.query({q:{name:salesPerson}})
-        .then(function (response) {
-          return response.data.map(function(item){
-            return item;
-          });
-        });
-    };
-
-    $scope.refreshProduct = function ( product ) {
-       return Products.query({q:{name:product}})
-         .then(function (response) {
-           return response.data.map(function(item){
-             return item;
-           });
-         });
-     };
+    //$scope.selectedBusinessUnit = undefined;  
+    $scope.refreshBusinessUnits = Common.refreshBusinessUnits;
+    $scope.refreshStaff = Common.refreshStaff;
+    $scope.refreshProduct = Common.refreshProduct;
 
     // Handle typeahead selection
     $scope.setSelectedBusinessUnit = function (businessUnit) {
-      $scope.newOpportunity.businessUnitId = businessUnit.id;
+      $scope.newOpportunity.businessUnitId = businessUnit._id;
       $scope.newOpportunity.businessUnit = businessUnit.name;
     };
 
@@ -135,9 +89,10 @@
     $scope.newOpportunity = {
         businessUnit: undefined,
         businessUnitId: undefined,
-        year: _this.getCurrentYear(),
-        month : _this.getCurrentMonthName(),
-        status : $scope.statuses[0]
+        year: year,
+        month : month,
+        status : $scope.statuses[0],
+        staff: undefined
     };
   }
 })();

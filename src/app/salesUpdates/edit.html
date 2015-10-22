@@ -1,7 +1,7 @@
 <div class="container">
   <div class="panel panel-default">
       <div class="panel-heading">
-        <h5>{{'SALES_UPDATES' | translate}} - {{salesUpdate.businessUnit}} - {{salesUpdate.month}}, {{salesUpdate.year}}
+        <h5>{{'SALES_UPDATES' | translate}} - {{salesUpdate.businessUnit}} - {{salesUpdate.month | monthName}}, {{salesUpdate.year}}
       </div>
       <div class="panel-body">
         <tabset>
@@ -67,7 +67,7 @@
                 <div class="form-group">
                   <div class="col-lg-10 col-lg-offset-2">
                     <button type="reset" class="btn btn-default" ng-click="cancel()">{{'CANCEL'|translate}}</button>
-                    <button type="submit" class="btn btn-primary">{{'SAVE' | translate}}</button>
+                    <button type="submit" class="btn btn-primary" ng-click="save()">{{'SAVE' | translate}}</button>
                   </div>
                 </div>
               </div>

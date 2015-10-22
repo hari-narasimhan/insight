@@ -82,7 +82,7 @@
      $scope.refreshProduct = function ( product ) {
        return Products.query({q:{name:product}})
          .then(function (response) {
-           return response.data.map(function(item){
+           return response.map(function(item){
              return item;
            });
          });

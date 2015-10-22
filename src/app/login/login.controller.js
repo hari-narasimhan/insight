@@ -6,7 +6,7 @@
     .controller('LoginController', LoginController);
 
   /** @ngInject */
-  function LoginController( $scope, $rootScope, $auth, $window, $location ) {
+  function LoginController( $scope, $state, $rootScope, $auth, $window, $location ) {
     var _this = this;
 
     $scope.emailLogin = function() {
@@ -14,6 +14,7 @@
         .then(function(response) {
           $window.localStorage.currentUser = JSON.stringify(response.data.user);
           $rootScope.currentUser = JSON.parse($window.localStorage.currentUser);
+          $state.go('home');
         })
         .catch(function(response) {
           $scope.errorMessage = {};

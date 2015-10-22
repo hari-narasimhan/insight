@@ -20,7 +20,7 @@
       });
       
       modalInstance.result.then(function (id) {
-        _this.editSalesUpdate(id);
+        _this.edit(id);
       }, function () {
           // DO NOTHING
       });

@@ -6,29 +6,15 @@
     .controller('KeyMetricsController', KeyMetricsController);
 
   /** @ngInject */
-  function KeyMetricsController ( $scope, $state, BusinessUnits, KeyMetrics, APP_CONSTANTS) {
+  function KeyMetricsController ( $scope, $state, BusinessUnits, KeyMetrics, Common, toastr, APP_CONSTANTS) {
     var _this = this;
 
     _this.editStart   = moment().subtract(APP_CONSTANTS.EDIT_MONTHS_BEFORE, 'months');
-    _this.startDate   = moment().subtract(APP_CONSTANTS.KEY_PARAM_MONTHS_RANGE, 'months');
-    _this.endDate     = moment().add(APP_CONSTANTS.KEY_PARAM_MONTHS_RANGE,'months');
-
     
-    _this.getRange = function(startDate, endDate) {
-        var range = [];
-        // moment's month is zero based
-        var month       = startDate.month() + 1;
-        var year        = startDate.year();
-        var endMonth    = endDate.month() + 1;
-        var endYear     = endDate.year();
-
-        while ( !(year === endYear && month === endMonth))  {
-            range.push({year:year, month: month});
-            // INCREMENT MONTH and YEAR
-            if(month === 12) { month = 1; year += 1;} else { month += 1;}
-        }
-        return range;
-    };
+    _this.startDate   = moment().subtract(APP_CONSTANTS.KEY_PARAM_MONTHS_RANGE, 'months');
+    _this.startPeriod = parseInt(_this.startDate.format("YYYYMM"));
+    _this.endDate     = moment().add(APP_CONSTANTS.KEY_PARAM_MONTHS_RANGE,'months');
+    _this.endPeriod   = parseInt(_this.endDate.format("YYYYMM"));
 
     _this.monthName = function(month) {
         return moment.monthsShort(month-1);
@@ -38,62 +24,101 @@
         var date = moment([year, month, 1]);
         return date.isAfter(_this.editStart);
     };
-      
-    _this.normalize = function (range, kpps){
+
+
+    _this.getRecords = function (businessUnit, keyMetrics) {
         var ret = [];
-        _.forEach(kpps, function(kpp) {
-            var name = kpp.name;
-            var values = [];
-            console.log(kpp.values);
-            // Go through the range and pull values from KPP in the order of the range
-            _.forEach(range, function(period){
-                values.push({
-                    year: period.year,
-                    month: period.month,
-                    value: _.result(_.find(kpp.values, {year:period.year, month:period.month}), 'value')
-               });
+        _.forEach(keyMetrics, function(param){
+            _.forEach(param.values, function (value){ 
+            console.log(value);  
+                ret.push ({_id: value._id, 
+                            businessUnitId: businessUnit._id, 
+                            businessUnit: businessUnit.name,
+                            period: value.period,
+                            param: param.name,
+                            value: value.value
+                        });
             });
-            console.log(values);
-            ret.push({name:name, values:values});
         });
+        console.log(ret);
         return ret;
     };
     
-    $scope.range        = _this.getRange(_this.startDate, _this.endDate);
+    _this.createQuery = function (businessUnitId, startPeriod, endPeriod) {
+        
+        return {
+                query: {
+                    businessUnitId: businessUnitId, 
+                    period: {"$gt": startPeriod, "$lte": endPeriod}
+                }
+            };
+    };
+
+    $scope.range        = Common.getRange(_this.startDate, _this.endDate);
     $scope.monthName    = _this.monthName;
     $scope.canEdit      = _this.canEdit;
     
     // Business Unit picker
     $scope.selectedBusinessUnit = undefined;
-    $scope.refreshBusinessUnits = function ( businessUnit ) {
-      return BusinessUnits.query({q:{name:businessUnit}})
-        .then(function (response) {
-          return response.data.map(function(item){
-            return item;
-          });
-        });
-    };
+    $scope.refreshBusinessUnits = Common.refreshBusinessUnits;
+
 
     // Handle typeahead selection
     $scope.setSelectedBusinessUnit = function (businessUnit) {
-      $scope.keyMetrics.businessUnitId = businessUnit.id;
-      $scope.keyMetrics.businessUnit = businessUnit.name;
+      $scope.businessUnit = businessUnit;
 
-      // TODO fetch the key metrics
-      KeyMetrics.query({})
+      //fetch the key metrics
+      KeyMetrics.query(_this.createQuery(businessUnit._id, _this.startPeriod, _this.endPeriod))
         .then(function(response){
-            // Pick the first record from the response
-            // we are expecting only one record to be returned
-            $scope.keyMetrics.kpps = _this.normalize($scope.range, response.data[0].kpps);
+            $scope.keyMetrics = Common.normalizeKeyMetrics($scope.businessUnit, $scope.range, response);
+            $scope.setOriginalData($scope.keyMetrics);
             }, function (error) {
             //  TODO Handle Error
         });
     };
     
-    $scope.keyMetrics = {
-        businessUnit: undefined,
-        businessUnitId: undefined,
-        kpps: undefined
+    $scope.keyMetrics = [];
+    
+    $scope.setOriginalData = function(data) {
+        $scope.originalData = JSON.stringify(data);
+    };
+
+    $scope.dataHasChanged = function (data) {
+        return JSON.stringify(data) === $scope.originalData;
+    };
+
+
+    $scope.save = function (businessUnit, param, value) {
+        var record = {
+            businessUnitId: businessUnit._id,
+            businessUnit: businessUnit.name,
+            param: param,
+            value: value.value || '',
+            period: value.period
+        };
+
+
+        if(_.isUndefined(value._id)) {
+            KeyMetrics.create(record)
+                .then(
+                    function(result) {
+                        // Do nothing
+                        value._id = result._id;
+                    }, function (error) {
+                        toastr.error(error.message);
+                    }
+                );
+        } else {
+            KeyMetrics.update(value._id, record)
+                .then(
+                    function(result) {
+                        // Do nothing
+                    }, function (error) {
+                        toastr.error(error.message);
+                    }
+                );
+        }
+
     };
   }
 })();

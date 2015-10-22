@@ -6,34 +6,58 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController($timeout, webDevTec, toastr) {
-    var vm = this;
+  function MainController($scope, $state, $auth, $window, APP_CONSTANTS, BusinessUnits, Common, toastr) {
+    var  _this = this;
 
-    vm.awesomeThings = [];
-    vm.classAnimation = '';
-    vm.creationDate = 1444389366996;
-    vm.showToastr = showToastr;
+    _this.getMonths = function (selectedYear, currentYear, currentMonth, months) {
+        
+      if(selectedYear !== currentYear) {
+        return months;
+      } else {
+        var ret =  _.filter(months, function(m) {
+          return m.value <= currentMonth; 
+        });
+        ret = _.sortByOrder(ret, ['value'], ['desc']);
+        return ret;
+      }
 
-    activate();
+    };
 
-    function activate() {
-      getWebDevTec();
-      $timeout(function() {
-        vm.classAnimation = 'rubberBand';
-      }, 4000);
-    }
+    // Get current year and month from moment
+    var currentYear = Common.getCurrentYear();
+    var currentMonth = Common.getCurrentMonth();
+    
 
-    function showToastr() {
-      toastr.info('Fork <a href="https://github.com/Swiip/generator-gulp-angular" target="_blank"><b>generator-gulp-angular</b></a>');
-      vm.classAnimation = '';
-    }
 
-    function getWebDevTec() {
-      vm.awesomeThings = webDevTec.getTec();
+    // Select Year
+    $scope.years = [currentYear - 1, currentYear, currentYear + 1];
+    $scope.year = currentYear;
 
-      angular.forEach(vm.awesomeThings, function(awesomeThing) {
-        awesomeThing.rank = Math.random();
-      });
-    }
+    $scope.refresh = function () {
+      $scope.months = _this.getMonths($scope.year, currentYear, currentMonth, APP_CONSTANTS.MONTHS);
+    };
+
+    $scope.openReport = function (businessUnitId, year, month, businessUnit) {
+      $state.go('report.keymetric', {businessUnitId: businessUnitId, year:year, month:month, businessUnit: businessUnit});
+    };
+
+    $scope.isAuthenticated = function () {
+      return $auth.isAuthenticated();
+    };
+
+    $scope.logout = function() {
+      $auth.logout();
+      delete $window.localStorage.currentUser;
+    };
+
+    BusinessUnits.query({})
+      .then(
+        function(response) {
+          $scope.businessUnits = response;
+        }
+      );
+
+    $scope.refresh();
+
   }
 })();

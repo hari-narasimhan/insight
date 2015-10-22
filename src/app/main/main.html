@@ -1,3 +1,49 @@
-<div class="container">
+<div class="container" ng-if="isAuthenticated()">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="row">
+            <div class="col col-sm-8"><h5>{{'DASHBOARD' | translate}}</h5></div>
+            <div class="col col-sm-4 text-right">
+                <form class="form-horizontal" name="newInitiativeForm" novalidate>
+                    <div class="form-group">
+                        <label class="col-lg-6 control-label">{{'YEAR' | translate}}</label>
+                        <div class="col-lg-6">
+                            <select class="form-control" ng-model="year" ng-options="y for y in years" ng-change="refresh()">
+                                <option></option>
+                            </select>
+                        </div>
+                    </div>
+                </form> 
+            </div>    
+        </div>
+      </div>
+      <div class="panel-body">
+            <accordion close-others="oneAtATime">
+                <accordion-group ng-repeat="month in months" heading = "{{month.name}}, {{year}}" 
+                is-open="status.isFirstOpen">
+                    <div class="row well">
+                        <div class="col col-sm-6 col-lg-4 col-xs-6" ng-repeat="businessUnit in businessUnits">
+                            <div class="info-box">
+                                <span class="info-box-icon bg-aqua"><i class="fa fa-envelope-o"></i></span>
+                                <div class="info-box-content">
+                                    <a ng-click="openReport(businessUnit._id, year, month.value, businessUnit)" <span class="info-box-title">{{businessUnit.name}}</span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </accordion-group>        
+            </accordion>
+        </div>
+    </div>
+</div>
 
+<div class="container" ng-if="!isAuthenticated()">
+    <div class="jumbotron">
+      <h2><i class="ion-grid"></i> Insight </h2>
+      To continue, please log in with your account or create a new email account.</p>
+      <p>
+        <a class="btn btn-lg btn-success" href="#/login"><i class="ion-log-in"></i> Log in</a>
+        <a class="btn btn-lg btn-primary" href="#/signup"><i class="ion-person-add"></i> Create account</a>
+      </p>
+    </div>
 </div>

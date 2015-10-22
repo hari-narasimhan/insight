@@ -36,7 +36,7 @@
       });
       
       $scope.save = function() {
-        Initiatives.update($scope.initiative)
+        Initiatives.update(id, $scope.initiative)
         .then(
                 function(response) {
                     toastr.info($scope.successMessage);

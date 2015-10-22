@@ -16,7 +16,8 @@
             <div class="form-group">
                 <label for="period" class="col-lg-2 control-label">{{'MONTH' | translate}}</label>
                 <div class="col-lg-10">
-                    <select class="form-control" ng-model="newSalesUpdate.month" ng-options="m for m in months">
+                    <select class="form-control" ng-model="newSalesUpdate.month"
+                        ng-options="month.value as month.name for month in months">
                         <option></option>
                     </select>
                 </div>

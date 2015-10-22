@@ -41,8 +41,10 @@
     this.query = function ( options ) {
       
         service.query(options).then( function ( response ) {
-            $scope.items = response.data;
-            $scope.totalItems =   response.cursor.totalRecords;
+            $scope.items = response;
+            if(response.cursor) {
+              $scope.totalItems =   response.cursor.totalRecords || 0 ;
+            }
         }, function ( error ) {
             // TODO handle error
         });      

@@ -6,7 +6,7 @@
     .controller('EditSalesUpdateController', EditSalesUpdateController);
 
   /** @ngInject */
-  function EditSalesUpdateController ( $scope, $state, $stateParams, $modal, SalesUpdates ) {
+  function EditSalesUpdateController ( $scope, $state, $stateParams, $modal, $translate, toastr, SalesUpdates ) {
 
     $scope.salesUpdate = undefined;
     
@@ -42,8 +42,27 @@
       });
     };
     
+
+    $translate('SALES_UPDATE_UPDATED_SUCCESSFULLY').then(function(val){
+      $scope.successMessage = val || 'SUCCESS';
+    });
+      
+      $translate('ERROR_UPDATING_SALES_UPDATE').then(function(val){
+          $scope.errorMessage = val || 'ERROR';
+      });
+
     $scope.save = function() {
-      // TODO Save the sales update here
+      SalesUpdates.update(id, $scope.salesUpdate)
+        .then (
+          function(response) {
+              toastr.info($scope.successMessage);
+              $state.go('salesUpdates');
+          }, function (error) {
+              //TODO handle error
+              toastr.error($scope.errorMessage);
+          }        
+        );
+
     };
 
     $scope.cancel = function() {

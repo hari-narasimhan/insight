@@ -27,9 +27,9 @@
                     <td></td>
                     <td>{{item.businessUnit}}</td>
                     <td>{{item.year}}</td>
-                    <td>{{item.month}}</td>
-                    <td>{{item.lastUpdated}}</>
-                <td><a class="btn btn-link" ng-click="edit(item.id)">{{'EDIT' | translate}}</a></td>
+                    <td>{{item.month | monthName}}</td>
+                    <td>{{item.updatedAt |appDate}}</_td>
+                    <td><a class="btn btn-link" ng-click="edit(item._id)">{{'EDIT' | translate}}</a></td>
                 </tr>
             </tbody>
         </table>
