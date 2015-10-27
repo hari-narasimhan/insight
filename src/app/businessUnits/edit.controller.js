@@ -57,7 +57,8 @@
         BusinessUnits.update(id, $scope.businessUnit)
         .then(
                 function(response) {
-                    $scope.originalData = $scope.businessUnit = JSON.stringify(response);
+                    $scope.businessUnit = response;
+                    $scope.originalData = JSON.stringify(response);
                     toastr.info($scope.successMessage);
                     $state.go('businessUnits');
                 }, function (error) {

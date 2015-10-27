@@ -42,7 +42,7 @@
 
     $scope.refresh = function () {
       //fetch the key metrics
-      KeyMetrics.query(_this.createQuery($scope.businessUnitid, _this.startPeriod, _this.endPeriod))
+      KeyMetrics.query(_this.createQuery($scope.businessUnitId, _this.startPeriod, _this.endPeriod))
         .then(function(response) {
             $scope.keyMetrics = Common.normalizeKeyMetrics($scope.businessUnit, $scope.range, response);
             }, function (error) {
