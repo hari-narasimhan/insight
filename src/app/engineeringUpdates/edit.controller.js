@@ -9,7 +9,6 @@
   function EditEngineeringUpdateController ( $scope, $state, $stateParams, $modal, $translate, EngineeringUpdates ) {
 
     $scope.engineeringUpdate = undefined;
-    
     var id = $stateParams.id;
 
     $scope.openFocusAreaModal = function (size) {
@@ -104,6 +103,7 @@
         .then(
             function(response){
                 $scope.engineeringUpdate = response;
+                $scope.items = angular.copy($scope.engineeringUpdate.focusAreas);
             },
             function(error){
                 // TODO handle error

@@ -15,18 +15,7 @@
                     </button>
                   </div>
                 </div>
-                <div class="row">
-                  <div class="list-group">
-                    <a ng-repeat="focusArea in engineeringUpdate.focusAreas" class="list-group-item">
-                      <h4 class="list-group-item-heading">{{focusArea.staff}}</h4>
-                      <p class="list-group-item-text" ng-bind-html="focusArea.activityHtml"></p>
-                      <p class="list-group-item-test">
-                        <span ng-repeat="area in focusArea.areas" class="label label-success">{{area.text}}
-                        </span>
-                      </p>
-                    </a>
-                  </div>
-                </div> 
+                <focus-areas items="engineeringUpdate.focusAreas"></focusAreas>
               </div>  
             </div>
           </tab>

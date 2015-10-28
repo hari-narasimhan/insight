@@ -1,0 +1,15 @@
+<div class="row">
+  {{items}}
+  <div class="list-group">
+    <div ng-repeat="item in vm.items">
+      <blockquote>
+        <p ng-bind-html="item.activityHtml"></p>
+        <small>{{item.staff}}</small>
+      </blockquote>
+      <p>
+        <span ng-repeat="area in item.areas" class="label label-success">{{area.text}}
+        </span>
+      </p>
+    </div>
+  </div>
+</div>
