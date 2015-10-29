@@ -116,7 +116,7 @@
     $translateProvider.useSanitizeValueStrategy('sanitize');
 
     // Configure auth provider
-    $authProvider.loginUrl = 'http://localhost:3030/auth/login'; //'https://insight-services.herokuapp.com/auth/login';
+    $authProvider.loginUrl = 'https://insight-services.herokuapp.com/auth/login';
     $authProvider.signupUrl = 'https://insight-services.herokuapp.com/auth/signup';
 
     // Set theme for ui-select

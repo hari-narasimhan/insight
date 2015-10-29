@@ -69,6 +69,6 @@
     .constant('ENVIRONMENT', 'PRODUCTION')
     .constant('BASE_DEV_URL', "http://localhost:3030")
     // Set BASE_URL value for production
-    .constant('BASE_URL', 'http://localhost:3030/api/v1' /*'https://insight-services.herokuapp.com/api/v1'*/); 
+    .constant('BASE_URL', 'https://insight-services.herokuapp.com/api/v1'); 
 
 })();
