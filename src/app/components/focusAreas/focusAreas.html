@@ -1,15 +1,29 @@
-<div class="row">
-  {{items}}
-  <div class="list-group">
-    <div ng-repeat="item in vm.items">
-      <blockquote>
-        <p ng-bind-html="item.activityHtml"></p>
-        <small>{{item.staff}}</small>
-      </blockquote>
-      <p>
-        <span ng-repeat="area in item.areas" class="label label-success">{{area.text}}
-        </span>
-      </p>
+<div class="bs-component">
+  <div ng-repeat="item in vm.items track by $index">
+    <div class="list-group">
+      <div class="list-group-item clearfix">
+        <div class="row">
+          <div class="col col-md-10">
+            <blockquote>
+              <p ng-bind-html="item.activityHtml"></p>
+              <small>{{item.staff}}</small>
+            </blockquote>
+            <p>
+              <span ng-repeat="area in item.areas" class="label label-success tags">
+                {{area.text}} 
+              </span>
+            </p>            
+          </div>
+          <div ng-if="vm.canDelete()" class="col col-md-2">
+            <span class="pull-right">
+              <button class="btn btn-xs btn-link" ng-click="vm.onDelete({index:$index})">
+                <span class="glyphicon glyphicon-trash text-muted"></span>
+              </button>
+            </span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+

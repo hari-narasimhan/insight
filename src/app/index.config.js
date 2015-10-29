@@ -3,10 +3,13 @@
 
   angular
     .module('insight')
-    .config(config);
+    .config(config)
+    .factory('ServerErrorInterceptor', ServerErrorInterceptor);
 
   /** @ngInject */
-  function config($logProvider, $translateProvider, $authProvider, toastr) {
+  function config($logProvider, 
+    $translateProvider, $authProvider, $httpProvider, uiSelectConfig, toastr) {
+    
     // Enable log
     $logProvider.debugEnabled(true);
 
@@ -28,7 +31,7 @@
        PERCENT_COMPLETE: '% Complete',
        LAST_UPDATED: 'Last Updated',
        ADD_NEW: 'Add New',
-       CREATE_NEW_SALES_UPDATE: 'Create New Sales Update',
+       CREATE_SALES_UPDATE: 'Add Sales Update',
        MONTH: 'Month',
        YEAR: 'Year',
        SELECT_BUSINESS_UNIT: 'Select Business Unit',
@@ -102,7 +105,8 @@
        PASSWORD: "Password",
        SIGN_UP: "Sign Up",
        DASHBOARD: "Dashboard",
-       ADD_KEY_PARAMETER: "Add Key Parameter"
+       ADD_KEY_PARAMETER: "Add Key Parameter",
+       CONFIRM_DELETE: "Are you sure you want to delete?"
     });
     
     // Set the preferred language to enter
@@ -112,8 +116,41 @@
     $translateProvider.useSanitizeValueStrategy('sanitize');
 
     // Configure auth provider
-    $authProvider.loginUrl = 'https://insight-services.herokuapp.com/auth/login';
+    $authProvider.loginUrl = 'http://localhost:3030/auth/login'; //'https://insight-services.herokuapp.com/auth/login';
     $authProvider.signupUrl = 'https://insight-services.herokuapp.com/auth/signup';
+
+    // Set theme for ui-select
+    uiSelectConfig.theme = 'bootstrap';
+
+    // Register a server error interceptor
+    //$httpProvider.interceptors.push(ServerErrorInterceptor);
   }
+
+    /** @ngInject */
+    function ServerErrorInterceptor ( $rootScope, $q, APP_CONSTANTS, Logger ) {
+        
+        var service = {
+            responseError: responseError
+        };
+
+        return service;
+
+        /**
+        * A response error handler for the http interceptor
+        */
+        function responseError (response) {
+          
+          $rootScope.$broadcast({
+            401: APP_CONSTANTS.SERVER_ERRORS.NOT_AUTHENTICATED,
+            403: APP_CONSTANTS.SERVER_ERRORS.NOT_AUTHORIZED,
+            400: APP_CONSTANTS.SERVER_ERRORS.VALIDATION_ERROR,
+            500: APP_CONSTANTS.SERVER_ERRORS.INTERNAL_ERROR
+          }[response.status], response);
+          
+          Logger.error('Error Occured' + JSON.stringify(response));
+          
+          $q.reject(response); 
+        }
+    }
 
 })();

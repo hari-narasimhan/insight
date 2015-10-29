@@ -21,6 +21,12 @@
     .constant('APP_CONSTANTS', {
         EDIT_MONTHS_BEFORE : 2,
         KEY_PARAM_MONTHS_RANGE: 6,
+        SERVER_ERRORS: {
+            NOT_AUTHENTICATED: 'NOT_AUTHENTICATED',
+            NOT_AUTHORIZED: 'NOT_AUTHORIZED',
+            VALIDATION_ERROR: 'VALIDATION_ERROR',
+            INTERNAL_ERROR: 'INTERNAL_ERROR'
+        },
         REPORT_SECTIONS: [{name:'KEY_METRIC', state: 'report.keymetric'}, 
                             {name: 'MARKETING', state: 'report.marketing'}, 
                             {name: 'SALES', state:'report.sales'}, 
@@ -63,6 +69,6 @@
     .constant('ENVIRONMENT', 'PRODUCTION')
     .constant('BASE_DEV_URL', "http://localhost:3030")
     // Set BASE_URL value for production
-    .constant('BASE_URL', 'https://insight-services.herokuapp.com/api/v1'); 
+    .constant('BASE_URL', 'http://localhost:3030/api/v1' /*'https://insight-services.herokuapp.com/api/v1'*/); 
 
 })();

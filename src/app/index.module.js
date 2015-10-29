@@ -12,10 +12,12 @@
                         'ui.bootstrap', 
                         'angular-storage',
                         'angularUtils.directives.dirPagination',
+                        'angular-confirm',
                         'textAngular',
                         'ngTagsInput',
                         'pascalprecht.translate',
                         'satellizer',
+                        'ui.select',
                         'xeditable']
             );
 

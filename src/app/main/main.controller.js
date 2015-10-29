@@ -6,7 +6,7 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController($scope, $state, $auth, $window, APP_CONSTANTS, BusinessUnits, Common, toastr) {
+  function MainController($scope, $rootScope, $state, $auth, $window, APP_CONSTANTS, BusinessUnits, Common, toastr) {
     var  _this = this;
 
     _this.getMonths = function (selectedYear, currentYear, currentMonth, months) {
@@ -58,6 +58,5 @@
       );
 
     $scope.refresh();
-
   }
 })();

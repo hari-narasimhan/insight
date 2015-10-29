@@ -6,37 +6,22 @@
     .controller('EngineeringUpdatesController', EngineeringUpdatesController);
 
   /** @ngInject */
-  function EngineeringUpdatesController ( $scope, $state, $controller, $modal, EngineeringUpdates ) {
+  function EngineeringUpdatesController ( $scope, $state, $controller, $modal, Common, BusinessUnits, EngineeringUpdates ) {
     
     var _this = this;
-    var baseCtrl = $controller('BaseController', {$scope:$scope, service: EngineeringUpdates});
     
-
-    _this.openCreateModal = function (size) {
-      var modalInstance = $modal.open({
-        animation: $scope.animationsEnabled,
-        templateUrl: 'app/engineeringUpdates/create.modal.html',
-        controller : 'NewEngineeringUpdateModalController',
-        size: size
-      });
-      
-      modalInstance.result.then(function (id) {
-        _this.edit(id);
-      }, function () {
-          // DO NOTHING
-      });
-    };
-    
-    _this.edit = function (id) {
-      $state.go('editEngineeringUpdate', {id:id});
-    };
+    var baseCtrl = $controller('BaseController', 
+        { $scope:$scope, 
+          $state: $state, 
+          $modal: $modal, 
+          service: EngineeringUpdates, 
+          editRoute: 'editEngineeringUpdate', 
+          modalTitle: 'CREATE_ENGINEERING_UPDATE'}
+    );
 
     // Mixin BaseController
     angular.extend(this, baseCtrl);
-
-    $scope.openCreateModal          = _this.openCreateModal;
-    $scope.edit    = _this.edit;
-    
+  
     // query the service for records
     _this.query({page:1});
   }

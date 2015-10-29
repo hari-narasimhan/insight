@@ -9,7 +9,7 @@
   function BusinessUnitsController ( $scope, $state, $controller, $modal, BusinessUnits ) {
     
     var _this = this;
-    var baseCtrl = $controller('BaseController', {$scope:$scope, service: BusinessUnits});
+    var baseCtrl = $controller('BaseController', {$scope:$scope, service: BusinessUnits, editRoute:'editBusinessUnit', modalTitle:'CREATE_BUSINESS_UNIT'});
 
     _this.openCreateModal = function (size) {
       var modalInstance = $modal.open({
@@ -39,7 +39,7 @@
     $scope.edit  = _this.edit;
 
     // query the service for records
-    _this.query({page:1});
+    _this.query({page:1, query:{}});
 
   }
 })();

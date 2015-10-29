@@ -15,7 +15,11 @@
                     </button>
                   </div>
                 </div>
-                <focus-areas items="engineeringUpdate.focusAreas"></focusAreas>
+                <focus-areas 
+                  items="engineeringUpdate.focusAreas" 
+                  options="{itemDelete:true}" 
+                  on-delete="onDeleteFocusArea(index)">
+                </focus-areas>
               </div>  
             </div>
           </tab>

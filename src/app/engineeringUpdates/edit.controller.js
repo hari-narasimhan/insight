@@ -6,7 +6,8 @@
     .controller('EditEngineeringUpdateController', EditEngineeringUpdateController);
 
   /** @ngInject */
-  function EditEngineeringUpdateController ( $scope, $state, $stateParams, $modal, $translate, EngineeringUpdates ) {
+  function EditEngineeringUpdateController ( $scope, $state, $stateParams, 
+    $modal, $confirm, $translate, EngineeringUpdates ) {
 
     $scope.engineeringUpdate = undefined;
     var id = $stateParams.id;
@@ -81,6 +82,10 @@
         $scope.errorMessage = val || 'ERROR';
     });
 
+    $translate('CONFIRM_DELETE').then(function(val){
+      $scope.confirmDelete = val || 'DELETE?';
+    });
+
     $scope.save = function() {
       EngineeringUpdates.update(id, $scope.engineeringUpdate)
         .then (
@@ -99,11 +104,17 @@
       $state.go('engineeringUpdates');
     };
 
+    $scope.onDeleteFocusArea = function (index) {
+      $confirm({text: $scope.confirmDelete})
+        .then(function(){
+          $scope.engineeringUpdate.focusAreas.splice(index, 1);
+      });
+    };
+
     EngineeringUpdates.get(id)
         .then(
             function(response){
                 $scope.engineeringUpdate = response;
-                $scope.items = angular.copy($scope.engineeringUpdate.focusAreas);
             },
             function(error){
                 // TODO handle error

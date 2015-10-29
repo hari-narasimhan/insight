@@ -11,7 +11,9 @@
       restrict: 'E',
       templateUrl: 'app/components/focusAreas/focusAreas.html',
       scope: {
-          items: '='
+          items: '=',
+          options: '=',
+          onDelete: '&'
       },
       controller: FocusAreasController,
       controllerAs: 'vm',
@@ -23,6 +25,10 @@
     /** @ngInject */
     function FocusAreasController($scope) {
       var vm = this;
+
+      vm.canDelete = function() {
+        return vm.options && vm.options.itemDelete;
+      };
     }
   }
 

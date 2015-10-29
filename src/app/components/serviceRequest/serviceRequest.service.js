@@ -34,13 +34,12 @@
             throw new Error(' No url found in the option sent to ServiceRequest.create method');
           }
 
-          var method =  options.method || defaultMethod,
-              headers = options.headers || getDefaultHeader();
-
+          var method =  options.method || defaultMethod;
+          var headers = options.headers || [];
+          
           var req = {
             method: method,
-            url : options.url,
-            headers: headers
+            url : options.url
           };
 
           // Add the data if available
@@ -74,6 +73,7 @@
 
         /**
         * A helper method to generate a default header
+        * DEPRECATED - using satellizer
         */
         function getDefaultHeader() {
             return {'Authorization': APP_CONSTANTS.STRATAGIES.BEARER + ' ' + AppStorage.getJwtToken()};

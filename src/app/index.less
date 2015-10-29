@@ -10,17 +10,70 @@
  *  The list of variables are listed here bower_components/bootstrap/less/variables.less
  */
 
-@navbar-inverse-link-color: #5AADBB;
+@navbar-inverse-link-color: #262973;
 @icon-font-path: '../../bower_components/bootstrap/fonts/';
 @default-background-color: #d8d8d8;
+
 
 body {
     background-color : @default-background-color !important;
 }
 
+.navbar-brand {
+  padding: 10px 15px !important;
+}
+
+a {
+  color: #3f729b;
+}
+
+a:hover {
+  color: #1c5380;
+}
+
+.text-muted {
+  color: #90939a;
+}
+
+.navbar {
+  min-height: 50px;
+  border: 0;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
+}
+
+.navbar-header {
+  float: left;
+  padding-left: 15px;
+}
+
+.navbar-brand {
+  height: 50px;
+  padding: 0 15px;
+  font-size: inherit;
+  line-height: 50px;
+}
+
 .logo-img {
-  padding-top: 0px;
-  padding-bottom: 0px;
+  max-height:30px;
+}
+
+.navbar-nav {
+  float: left;
+  margin: 0;
+}
+
+.navbar-nav > li {
+  float: left;
+}
+
+.navbar-nav > li > a {
+  padding: 0 15px;
+  line-height: 50px;
+}
+
+.navbar-text {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .tab-content {
@@ -122,6 +175,32 @@ body {
   font-weight: bold;
   font-size: 1.2em
 }
+
+.tags {
+  margin-left : 5px;
+}
+
+/**
+* Main style classes
+*/
+
+.content {
+  .panel {
+    min-height: 250px;
+    border-radius: 3px;
+    border-top: 3px solid @navbar-inverse-link-color;
+  }
+
+  .panel-heading {
+    background-color:#fff;
+    border-bottom: #efefef 1px solid;
+  }
+}
+
+.tool-box {
+  margin-right: 15px;
+}
+
 /**
  *  Do not remove this comments bellow. It's the markers used by gulp-inject to inject
  *  all your less files automatically

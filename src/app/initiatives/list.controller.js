@@ -9,7 +9,8 @@
   function InitiativesController ( $scope, $state, $controller, $modal, Initiatives) {
     
     var _this = this;
-    var baseCtrl = $controller('BaseController', {$scope:$scope, service: Initiatives});
+    var baseCtrl = $controller('BaseController', {$scope:$scope, service: Initiatives, editRoute: 'editInitiative', 
+          modalTitle: 'CREATE_INITIATIVES'});
 
     _this.openCreateModal = function (size) {
       var modalInstance = $modal.open({
@@ -20,21 +21,16 @@
       });
       
       modalInstance.result.then(function (id) {
-        _this.edit(id);
+        $scope.edit(id);
       }, function () {
           // DO NOTHING
       });
     };
     
-    _this.edit = function (id) {
-      $state.go('editInitiative', {id:id});
-    };
-
     // Mixin BaseController
     angular.extend(this, baseCtrl);
 
     $scope.openCreateModal  = _this.openCreateModal;
-    $scope.edit  = _this.edit;
 
     // query the service for records
     _this.query({page:1});

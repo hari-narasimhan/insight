@@ -6,12 +6,9 @@
     .controller('NavController', NavController);
 
   /** @ngInject */
-  function NavController($scope) {
-    var vm = this;
-    $scope.items = [
-        "The first choice!",
-        "And another choice for you.",
-        "but wait! A third!"
-    ];
+  function NavController ( $scope, $state, $rootScope, APP_CONSTANTS, toastr ) {
+    $rootScope.$on( APP_CONSTANTS.SERVER_ERRORS.NOT_AUTHENTICATED, function(){
+      $state.go('login');
+    });
   }
 })();
