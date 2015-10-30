@@ -6,26 +6,19 @@
     .controller('EditSalesUpdateController', EditSalesUpdateController);
 
   /** @ngInject */
-  function EditSalesUpdateController ( $scope, $state, $stateParams, $modal, $translate, toastr, SalesUpdates ) {
+  function EditSalesUpdateController ( $scope, $state, $controller, $stateParams, $modal, $translate, $confirm, toastr, SalesUpdates ) {
 
-    $scope.salesUpdate = undefined;
-    
-    var id = $stateParams.id;
+    var baseEditCtrl = $controller('BaseEditController', 
+        { $scope:$scope, 
+          $state: $state,
+          $translate: $translate, 
+          service: SalesUpdates, 
+          listRoute: 'salesUpdates'
+        }
+    );
 
-    $scope.openFocusAreaModal = function (size) {
-      var modalInstance = $modal.open({
-        animation: $scope.animationsEnabled,
-        templateUrl: 'app/components/modals/focusarea.modal.html',
-        controller : 'FocusAreaModalController',
-        size: size
-      });
-      
-      modalInstance.result.then(function (focusArea) {
-        $scope.salesUpdate.focusAreas.push(focusArea);
-      }, function () {
-          // DO NOTHING
-      });
-    };
+    // Mixin BaseController
+    angular.extend(this, baseEditCtrl);
 
     $scope.openActivityModal = function (size) {
       var modalInstance = $modal.open({
@@ -36,47 +29,28 @@
       });
       
       modalInstance.result.then(function (engineeringActivity) {
-        $scope.salesUpdate.activities.push(engineeringActivity);
+        $scope.update.activities.push(engineeringActivity);
       }, function () {
           // DO NOTHING
       });
     };
     
-
-    $translate('SALES_UPDATE_UPDATED_SUCCESSFULLY').then(function(val){
-      $scope.successMessage = val || 'SUCCESS';
-    });
-      
-      $translate('ERROR_UPDATING_SALES_UPDATE').then(function(val){
-          $scope.errorMessage = val || 'ERROR';
+    $scope.onDeleteFocusArea = function (index) {
+      $confirm({text: $scope.confirmDelete})
+        .then(function(){
+          $scope.update.focusAreas.splice(index, 1);
       });
-
-    $scope.save = function() {
-      SalesUpdates.update(id, $scope.salesUpdate)
-        .then (
-          function(response) {
-              toastr.info($scope.successMessage);
-              $state.go('salesUpdates');
-          }, function (error) {
-              //TODO handle error
-              toastr.error($scope.errorMessage);
-          }        
-        );
-
     };
 
-    $scope.cancel = function() {
-      $state.go('salesUpdates');
+    $scope.onAddFocusArea = function (focusArea) {
+      $scope.update.focusAreas.push(focusArea);
     };
 
-    SalesUpdates.get(id)
-        .then(
-            function(response){
-                $scope.salesUpdate = response;
-            },
-            function(error){
-                // TODO handle error
-            }
-        );
+    $scope.onEditFocusArea = function(index, focusArea) {
+      // DO NOTHING
+    };
+
+    var id = $stateParams.id;
+    $scope.get(id);
   }
 })();

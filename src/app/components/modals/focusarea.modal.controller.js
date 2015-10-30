@@ -6,11 +6,18 @@
     .controller('FocusAreaModalController', FocusAreaModalController);
 
   /** @ngInject */
-  function FocusAreaModalController ( $scope, $modalInstance, Users) {
+  function FocusAreaModalController ( $scope, $modalInstance, Users, options, focusArea) {
     
     var _this = this;
 
     _this.focusArea = {staff: undefined, activity: undefined, areas: []};
+    _this.title = 'ADD_FOCUS_AREA';
+
+    if(_.has(options, 'edit') && options.edit === true) {
+      _this.title = 'EDIT_FOCUS_AREA';
+      _this.focusArea = focusArea;
+    }
+    
     
     _this.ok = function () {
       $modalInstance.close(_this.focusArea);
@@ -29,6 +36,7 @@
         });
     };
 
+    $scope.title = _this.title;
     $scope.focusArea = _this.focusArea;
     $scope.refreshStaff = _this.refreshStaff;
     $scope.ok = _this.ok;

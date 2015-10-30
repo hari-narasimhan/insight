@@ -43,6 +43,7 @@
         vm.businessUnit = {};
         vm.month = currentMonth;
         vm.year = currentYear;
+        vm.onChange({search: {businessUnit: vm.businessUnit.selected, year: vm.year, month: vm.month}});
       };
 
       vm.apply = function () {
