@@ -19,7 +19,7 @@
         size: size
       });
       
-      modalInstance.result.then(function (id) {
+      modalInstance.result.then(function () {
           // DO NOTHING
           _this.query({page:1});
       }, function () {

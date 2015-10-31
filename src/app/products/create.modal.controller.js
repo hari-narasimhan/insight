@@ -12,48 +12,40 @@
     _this.createdId = undefined;
 
  
+    _this.getProduct = function () {
+      return {
+        name : $scope.newProduct.name,
+        description : $scope.newProduct.description,
+        businessUnitId : $scope.businessUnit.selected._id,
+        businessUnit :  $scope.businessUnit.selected.name
+      }
+    };
+
     _this.ok = function () {
-
-        Products.create($scope.newProduct).then(
-            function(response) {
-                $modalInstance.close(response.id);
-            },
-            function (error) {
-                // TODO Handle the error gracefully
-            }
-        );
-
+      $modalInstance.close(_this.getProduct());
     };
 
     _this.cancel = function () {
       $modalInstance.dismiss('cancel');
     };
 
+    _this.refreshBusinessUnits = function (businessUnit) {
+
+      return BusinessUnits.query({query:{name: '~' + businessUnit}})
+      .then(function (response) {
+        $scope.businessUnits = response;
+      });
+    }      
+
     // Business Unit picker
-    $scope.selectedBusinessUnit = undefined;  
-    $scope.refreshBusinessUnits = function ( businessUnit ) {
-      return BusinessUnits.query({q:{name:businessUnit}})
-        .then(function (response) {
-          return response.map(function(item){
-            return item;
-          });
-        });
-    };
-
-    // Handle typeahead selection
-    $scope.setSelectedBusinessUnit = function (businessUnit) {
-      $scope.newProduct.businessUnitId = businessUnit._id;
-      $scope.newProduct.businessUnit = businessUnit.name;
-    };
-
+    $scope.businessUnit = {};
+    $scope.refreshBusinessUnits = _this.refreshBusinessUnits;
 
     $scope.ok = _this.ok;
     $scope.cancel = _this.cancel;
     
     $scope.newProduct = {
         name: undefined,
-        businessUnitId: undefined,
-        businessUnit: undefined,
         description: undefined
     };
   }

@@ -13,14 +13,10 @@
             getCurrentMonth: getCurrentMonth,
             getCurrentMonthName: getCurrentMonthName,
             hasValidBusinessUnit: hasValidBusinessUnit,
-            refreshBusinessUnits: refreshBusinessUnits,
-            refreshStaff: refreshStaff,
-            refreshProduct: refreshProduct,
             padLeftZ: padLeftZ,
             getPeriod: getPeriod,
             normalizeKeyMetrics: normalizeKeyMetrics,
             getRange: getRange
-
         };
 
         return service;
@@ -52,33 +48,6 @@
         return true;
     }
 
-    function refreshBusinessUnits ( businessUnit ) {
-      return BusinessUnits.query({query:{name: '~' + businessUnit}})
-        .then(function (response) {
-          return response.map(function(item){
-            return item;
-          });
-        });
-    }
-
-    function refreshStaff ( staff ) {
-      return Users.query({query:{fullname:'~' + staff}})
-        .then(function (response) {
-          return response.map(function(item){
-            return item;
-          });
-        });
-    }
-
-    function refreshProduct ( product ) {
-       return Products.query({query:{name: '~' + product}})
-         .then(function (response) {
-           return response.map(function(item){
-             return item;
-           });
-         });
-    }
-
      // String Functions -- TODO replace this with lodash version
     function padLeftZ(value, padding) {
       var zeroes = "0";
@@ -86,7 +55,7 @@
       for (var i = 0; i < padding; i++) { zeroes += "0"; }
     
       return (zeroes + value).slice(padding * -1);
-  }
+    }
 
     // Key Metrics Related
     function normalizeKeyMetrics (businessUnit, range, keyMetrics){

@@ -13,6 +13,7 @@
           modalTitle: 'CREATE_INITIATIVES'});
 
     _this.openCreateModal = function (size) {
+      
       var modalInstance = $modal.open({
         animation: $scope.animationsEnabled,
         templateUrl: 'app/initiatives/create.modal.html',
@@ -20,10 +21,12 @@
         size: size
       });
       
-      modalInstance.result.then(function (id) {
-        $scope.edit(id);
-      }, function () {
-          // DO NOTHING
+      modalInstance.result.then(function (initiative) {
+        Initiatives.create (initiative)
+          .then(
+              function (response) {
+                $scope.edit(response._id);
+            } );
       });
     };
     

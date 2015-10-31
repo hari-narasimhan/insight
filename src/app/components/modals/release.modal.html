@@ -4,21 +4,26 @@
         <h4 class="modal-title">{{'CREATE_NEW_RELEASE_UPDATE' | translate }}</h4>
     </div>
     <div class="modal-body">
+        {{release | json}}
         <form class="form-horizontal" name="releaseForm" novalidate>        
             <div class="form-group has-feedback" ng-class="{ 'has-error': releaseForm.product.$invalid && releaseForm.product.$dirty }">
                 <label class="col-lg-2 control-label">{{'PRODUCT' | translate}}</label>
                 <div class="col-lg-10">
-                    <input type="text" 
-                    name="product"
-                    ng-model="release.product" 
-                    placeholder="{{'SELECT_PRODUCT' | translate}}" 
-                    typeahead="product.name for product in refreshProduct($viewValue)" 
-                    typeahead-loading="loadingProducts" 
-                    typeahead-no-results="noResults"
-                    class="form-control"
-                    required>
-                    <i ng-show="loadingProducts" class="glyphicon glyphicon-refresh">
-                    </i>
+                <ui-select ng-model="release.product.selected"
+                    theme="bootstrap"
+                    name="staff"
+                    ng-disabled="disabled"
+                    reset-search-input="true"
+                    style="width:100%"
+                    title="Choose Staff">
+                    <ui-select-match placeholder="Enter Name...">{{$select.selected.name}}</ui-select-match>
+                    <ui-select-choices repeat="product in products"
+                        refresh="refreshProducts($select.search)"
+                        refresh-delay="0">
+                        <div ng-bind-html="product.name | highlight: $select.search"></div>
+                    </ui-select-choices>
+                </ui-select>
+
                     <div ng-show="noResults">
                         <i class="glyphicon glyphiconremove"></i> {{'NO_RESULTS_FOUND' | translate}}
                     </div>
@@ -67,6 +72,6 @@
     <br>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancel()">{{'CLOSE' | translate}}</button>
-        <button type="button" class="btn btn-primary" ng-click="ok()">{{'CREATE' | translate}}</button>
+        <button type="button" class="btn btn-primary" ng-click="ok()">{{'DONE' | translate}}</button>
     </div>
 </div>

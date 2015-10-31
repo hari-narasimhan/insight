@@ -27,6 +27,7 @@
 
 
     /*Scope Level data and methods */
+    $scope.template = {url: 'app/components/templates/commonEdit.html'};
 
     $translate('CONFIRM_DELETE').then(function(val){
       $scope.confirmDelete = val || 'DELETE?';
@@ -42,12 +43,12 @@
     });
 
 
-    $scope.save = function() {
+    $scope.save = function(id) {
       service.update(id, $scope.update)
         .then (
           function(response) {
               toastr.info('UPDATED', $scope.successMessage);
-              $state.go('salesUpdates');
+              $state.go(listRoute);
           }        
         );
     };

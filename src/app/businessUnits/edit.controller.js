@@ -56,15 +56,12 @@
       $scope.save = function() {
         BusinessUnits.update(id, $scope.businessUnit)
         .then(
-                function(response) {
-                    $scope.businessUnit = response;
-                    $scope.originalData = JSON.stringify(response);
-                    toastr.info($scope.successMessage);
-                    $state.go('businessUnits');
-                }, function (error) {
-                    //TODO handle error
-                    toastr.error($scope.errorMessage);
-                }        
+          function(response) {
+              $scope.businessUnit = response;
+              $scope.originalData = JSON.stringify(response);
+              toastr.info($scope.successMessage);
+              $state.go('businessUnits');
+          }        
         );
       };
       

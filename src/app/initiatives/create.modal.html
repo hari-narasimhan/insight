@@ -29,17 +29,19 @@
                          ng-class="{ 'has-error': newInitiativeForm.businessUnit.$invalid && newInitiativeForm.businessUnit.$dirty }">
                         <label class="col-lg-2 control-label">{{'BUSINESS_UNIT' | translate}}</label>
                         <div class="col-lg-10">
-                            <input type="text"
-                            name="businessUnit"
-                            ng-model="newInitiative.businessUnit" 
-                            placeholder="{{'SELECT_BUSINESS_UNIT' | translate}}" 
-                            typeahead="businessUnit.name for businessUnit in refreshBusinessUnits($viewValue)" 
-                            typeahead-loading="loadingBusinessUnits" 
-                            typeahead-no-results="noResults"
-                            typeahead-on-select="setSelectedBusinessUnit($item)"
-                            typeahead-editable=false
-                            class="form-control"
-                            required>
+                            <ui-select ng-model="newInitiative.businessUnit.selected"
+                                theme="bootstrap"
+                                ng-disabled="disabled"
+                                reset-search-input="true"
+                                style="width:300px"
+                                title="Choose a Business Unit">
+                                <ui-select-match placeholder="Enter Name...">{{$select.selected.name}}</ui-select-match>
+                                <ui-select-choices repeat="businessUnit in businessUnits"
+                                    refresh="refreshBusinessUnits($select.search)"
+                                    refresh-delay="0">
+                                    <div ng-bind-html="businessUnit.name | highlight: $select.search"></div>
+                                </ui-select-choices>
+                            </ui-select>
                             <i ng-show="loadingBusinessUnits" class="glyphicon glyphicon-refresh">
                             </i>
                             <div ng-show="noResults">

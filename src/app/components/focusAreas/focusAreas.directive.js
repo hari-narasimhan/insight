@@ -58,15 +58,15 @@
 
       vm.canEdit = function() {
         return vm.options && vm.options.edit;
-      }
+      };
 
       vm.edit = function(index, focusArea) {
         openFocusAreaModal('lg', {edit:true}, index, focusArea);
-      }
+      };
 
       vm.add = function() {
         openFocusAreaModal('lg', {add:true}); 
-      }
+      };
     }
   }
 

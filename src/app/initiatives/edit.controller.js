@@ -12,16 +12,12 @@
       _this.getData = function(id) {
           Initiatives.get(id)
             .then(
-                function(response) {
-                    $scope.initiative = response;
-                }, function (error) {
-                    //TODO handle error
-                }
+              function(response) {
+                  $scope.update = response;
+              }
             );
       };
       
-      $scope.initiative = undefined;  
-      var id = $stateParams.id;
       
       $scope.cancel = function() {
         $state.go('initiatives');
@@ -34,22 +30,22 @@
       $translate('ERROR_UPDATING_INITIATIVE').then(function(val){
           $scope.errorMessage = val || 'ERROR';
       });
-      
-      $scope.save = function() {
-        Initiatives.update(id, $scope.initiative)
+
+
+      $scope.update = undefined;  
+      var id = $stateParams.id;      
+      $scope.id = id;
+      $scope.save = function(id) {
+        Initiatives.update(id, $scope.update)
         .then(
                 function(response) {
                     toastr.info($scope.successMessage);
                     $state.go('initiatives');
-                }, function (error) {
-                    //TODO handle error
-                    toastr.error($scope.errorMessage);
                 }        
         );
       };
       
      // Fetch the data from the server
-      _this.getData(id);
-      
+      _this.getData(id);   
   }
 })();

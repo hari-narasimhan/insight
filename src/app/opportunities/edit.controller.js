@@ -6,46 +6,39 @@
     .controller('EditOpportunityController', EditOpportunityController);
 
   /** @ngInject */
-  function EditOpportunityController ( $scope, $state, $stateParams, toastr, PROSPECT_STATUS, $translate, Opportunities ) {
+  function EditOpportunityController ( $scope, $state, $stateParams, toastr, PROSPECT_STATUS, $controller, $translate, Opportunities ) {
       var _this = this;
       
-      _this.getData = function(id) {
-          Opportunities.get(id)
-            .then(
-                function(response) {
-                    $scope.opportunity = response;
-                }, function (error) {
-                    //TODO handle error
-                }
-            );
-      };
+    var baseEditCtrl = $controller('BaseEditController', 
+        { $scope:$scope, 
+          $state: $state,
+          $translate: $translate, 
+          service: Opportunities, 
+          listRoute: 'opportunities'
+        }
+    );
+
+    // Mixin BaseController
+    angular.extend(this, baseEditCtrl);
+    
       
       $scope.statuses = PROSPECT_STATUS;
       $scope.newStatus = undefined;
       $scope.remarks = undefined;
       $scope.opportunity = undefined;  
-      var id = $stateParams.id;
       
-      $scope.cancel = function() {
-        $state.go('opportunities');
-      };
+      $scope.id = $stateParams.id;
+      $scope.get($scope.id);
+      $scope.title = 'OPPORTUNITIES';
       
-      $translate('OPPORTUNITY_UPDATED_SUCCESSFULLY').then(function(val){
-          $scope.successMessage = val || 'SUCCESS';
-      });
-      
-      $translate('ERROR_UPDATING_OPPORTUNITY').then(function(val){
-          $scope.errorMessage = val || 'ERROR';
-      });
-      
-      $scope.save = function() {
+      $scope.save = function(id) {
         
-        if(!$scope.opportunity.statusUpdates) {
-          $scope.opportunity.statusUpdates = [];
+        if(!$scope.update.statusUpdates) {
+          $scope.update.statusUpdates = [];
         }
 
-        $scope.opportunity.statusUpdates.push({updatedAt: new Date(), status: $scope.newStatus, remarks: $scope.remarks});
-        Opportunities.update(id, $scope.opportunity)
+        $scope.update.statusUpdates.push({updatedAt: new Date(), status: $scope.newStatus, remarks: $scope.remarks});
+        Opportunities.update(id, $scope.update)
         .then(
                 function(response) {
                     toastr.info($scope.successMessage);
@@ -56,9 +49,5 @@
                 }        
         );
       };
-      
-     // Fetch the data from the server
-      _this.getData(id);
-      
   }
 })();

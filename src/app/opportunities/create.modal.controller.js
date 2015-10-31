@@ -9,24 +9,25 @@
   function NewOpportunityModalController ( $scope, $modalInstance, PROSPECT_STATUS, APP_CONSTANTS, Common, BusinessUnits, Products, Opportunities, Users) {
     
     var _this = this;
-    
-    _this.ok = function () {
-        // Check if we have a valid business id
-        if(!Common.hasValidBusinessUnit($scope.newOpportunity)) {
-            $scope.newOpportunityForm.businessUnit.$setValidity('validity', false);
-            return;
-        }
 
-        Opportunities.create($scope.newOpportunity).then(
-            function(response) {
-                $modalInstance.close(response._id);
-            },
-            function (error) {
-                // TODO Handle the error gracefully
-            }
-        );
 
+    _this.getOpportunity = function () {
+
+        return {
+            businessUnitId: $scope.opportunity.product.selected.businessUnitId,
+            businessUnit: $scope.opportunity.product.selected.businessUnit,
+            product: $scope.opportunity.product.selected.name,
+            year: $scope.opportunity.year,
+            month : $scope.opportunity.month,
+            status : $scope.opportunity.status,
+            staff: $scope.opportunity.staff.selected.fullname
+        };
     };
+
+    _this.ok = function () {
+        $modalInstance.close(_this.getOpportunity());
+    };
+
 
     _this.cancel = function () {
       $modalInstance.dismiss('cancel');
@@ -67,32 +68,36 @@
     $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
     $scope.format = $scope.formats[1];
 
-  
+    _this.refreshStaff = function ( staff ) {
+      return Users.query({query:{fullname:'~' + staff}})
+        .then(function (response) {
+            $scope.staffs = response;
+        });
+    };
+
+    _this.refreshProducts = function ( product ) {
+       return Products.query({query:{name: '~' + product}})
+         .then(function (response) {
+            $scope.products = response;
+         });
+    }
+
     // END DATE CONTROL RELATED
 
-    // Business Unit picker
-    //$scope.selectedBusinessUnit = undefined;  
-    $scope.refreshBusinessUnits = Common.refreshBusinessUnits;
-    $scope.refreshStaff = Common.refreshStaff;
-    $scope.refreshProduct = Common.refreshProduct;
+    $scope.refreshStaff = _this.refreshStaff;
+    $scope.refreshProducts = _this.refreshProducts;
 
-    // Handle typeahead selection
-    $scope.setSelectedBusinessUnit = function (businessUnit) {
-      $scope.newOpportunity.businessUnitId = businessUnit._id;
-      $scope.newOpportunity.businessUnit = businessUnit.name;
-    };
 
     $scope.ok = _this.ok;
     $scope.cancel = _this.cancel;
     $scope.statuses = PROSPECT_STATUS;
     
-    $scope.newOpportunity = {
-        businessUnit: undefined,
-        businessUnitId: undefined,
+    $scope.opportunity = {
+        product: {},
         year: year,
         month : month,
         status : $scope.statuses[0],
-        staff: undefined
+        staff: {}
     };
   }
 })();

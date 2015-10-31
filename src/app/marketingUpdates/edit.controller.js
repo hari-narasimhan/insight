@@ -6,76 +6,54 @@
     .controller('EditMarketingUpdateController', EditMarketingUpdateController);
 
   /** @ngInject */
-  function EditMarketingUpdateController ( $scope, $state, $stateParams, $modal, $translate, MarketingUpdates ) {
+  function EditMarketingUpdateController ( $scope, 
+    $state, $controller, $stateParams, $modal, $translate, $confirm, toastr, MarketingUpdates ) {
 
-    $scope.marketingUpdate = undefined;
+    var baseEditCtrl = $controller('BaseEditController', 
+        { $scope:$scope, 
+          $state: $state,
+          $translate: $translate, 
+          service: MarketingUpdates, 
+          listRoute: 'marketingUpdates'
+        }
+    );
+
+    // Mixin BaseController
+    angular.extend(this, baseEditCtrl);
     
-    var id = $stateParams.id;
-
-    $scope.openFocusAreaModal = function (size) {
-      var modalInstance = $modal.open({
-        animation: $scope.animationsEnabled,
-        templateUrl: 'app/components/modals/focusarea.modal.html',
-        controller : 'FocusAreaModalController',
-        size: size
-      });
-      
-      modalInstance.result.then(function (focusArea) {
-        $scope.marketingUpdate.focusAreas.push(focusArea);
-      }, function () {
-          // DO NOTHING
+    $scope.onDeleteFocusArea = function (index) {
+      $confirm({text: $scope.confirmDelete})
+        .then(function(){
+          $scope.update.focusAreas.splice(index, 1);
       });
     };
 
-    $scope.openActivityModal = function (size) {
-      var modalInstance = $modal.open({
-        animation: $scope.animationsEnabled,
-        templateUrl: 'app/components/modals/activity.modal.html',
-        controller : 'ActivityModalController',
-        size: size
+    $scope.onAddFocusArea = function (focusArea) {
+      $scope.update.focusAreas.push(focusArea);
+    };
+
+    $scope.onEditFocusArea = function(index, focusArea) {
+      $scope.update.focusAreas[index] = focusArea;
+    };
+
+
+    $scope.onDeleteActivity = function (index) {
+      $confirm({text: $scope.confirmDelete})
+        .then(function(){
+          $scope.update.activities.splice(index, 1);
       });
-      
-      modalInstance.result.then(function (marketingActivity) {
-        $scope.marketingUpdate.activities.push(marketingActivity);
-      }, function () {
-          // DO NOTHING
-      });
-    };
-    
-    $translate('MARKETING_UPDATE_UPDATED_SUCCESSFULLY').then(function(val){
-      $scope.successMessage = val || 'SUCCESS';
-    });
-      
-    $translate('ERROR_UPDATING_MARKETING_UPDATE').then(function(val){
-        $scope.errorMessage = val || 'ERROR';
-    });
-
-    $scope.save = function() {
-      MarketingUpdates.update(id, $scope.marketingUpdate)
-        .then (
-          function(response) {
-              toastr.info($scope.successMessage);
-              $state.go('marketingUpdates');
-          }, function (error) {
-              //TODO handle error
-              toastr.error($scope.errorMessage);
-          }        
-        );
-
     };
 
-    $scope.cancel = function() {
-      $state.go('marketingUpdates');
+    $scope.onAddActivity = function (activity) {
+      $scope.update.activities.push(activity);
     };
 
-    MarketingUpdates.get(id)
-        .then(
-            function(response){
-                $scope.marketingUpdate = response;
-            },
-            function(error){
-                // TODO handle error
-            }
-        );
+    $scope.onEditActivity = function(index, activity) {
+      $scope.update.activities[index] = activity;
+    };
+
+    $scope.id = $stateParams.id;
+    $scope.get($scope.id);
+    $scope.title = 'MARKETING_UPDATES';
   }
 })();

@@ -7,18 +7,20 @@
     <div class="form-group">
         <label class="col-lg-2 control-label">{{'STAFF' | translate}}</label>
         <div class="col-lg-10">
-            <input type="text" 
-            ng-model="focusArea.staff" 
-            placeholder="{{'SELECT_STAFF' | translate}}" 
-            typeahead="staff.fullname for staff in refreshStaff($viewValue)" 
-            typeahead-loading="loadingSalesPerson" 
-            typeahead-no-results="noResults"
-            class="form-control">
-            <i ng-show="loadingSalesPersons" class="glyphicon glyphicon-refresh">
-            </i>
-            <div ng-show="noResults">
-                <i class="glyphicon glyphicon-remove"></i> {{'NO_RESULTS_FOUND' | translate}}
-            </div>
+            <ui-select ng-model="focusArea.staff.selected"
+                theme="bootstrap"
+                name="staff"
+                ng-disabled="disabled"
+                reset-search-input="true"
+                style="width:100%"
+                title="Choose Staff">
+                <ui-select-match placeholder="Enter Name...">{{$select.selected.fullname}}</ui-select-match>
+                <ui-select-choices repeat="staff in staffs"
+                    refresh="refreshStaff($select.search)"
+                    refresh-delay="0">
+                    <div ng-bind-html="staff.fullname | highlight: $select.search"></div>
+                </ui-select-choices>
+            </ui-select>
         </div>
     </div>
     <div class="form-group">

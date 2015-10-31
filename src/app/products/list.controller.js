@@ -9,7 +9,7 @@
   function ProductsController ( $scope, $state, $controller, $modal, Products ) {
     
     var _this = this;
-    var baseCtrl = $controller('BaseController', {$scope:$scope, service: Products});
+    var baseCtrl = $controller('BaseController', {$scope:$scope, service: Products, editRoute:'editProduct', modalTitle:'CREATE_PRODUCT'});
 
     _this.openCreateModal = function (size) {
       var modalInstance = $modal.open({
@@ -19,11 +19,12 @@
         size: size
       });
       
-      modalInstance.result.then(function (id) {
-          // DO NOTHING
-          _this.query({page:1});
-      }, function () {
-          // DO NOTHING
+      modalInstance.result.then(function (product) {
+          
+          Products.create(product)
+            .then (function(response) {
+              _this.query({page:1, query:{}});              
+            });
       });
     };
     
@@ -39,7 +40,8 @@
     $scope.edit  = _this.edit;
 
     // query the service for records
-    _this.query({page:1});
+    _this.query({page:1, query:{}});
+
 
   }
 })();

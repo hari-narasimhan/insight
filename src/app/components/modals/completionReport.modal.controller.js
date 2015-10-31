@@ -6,10 +6,13 @@
     .controller('CompletionReportModalController', CompletionReportModalController);
 
   /** @ngInject */
-  function CompletionReportModalController ( $scope, $modalInstance, Products) {
+  function CompletionReportModalController ( $scope, $modalInstance, Products, options, report) {
     
     var _this = this;
-    _this.createdId = undefined;
+
+    _this.isEditMode = function () {
+      return _.has(options, 'edit') && options.edit === true;
+    }
 
     _this.getCurrentYear = function() {
       return moment().year();
@@ -23,18 +26,9 @@
       return moment.monthsShort(_this.getCurrentMonth());
     };
 
-    
-    _this.hasValidBusinessId = function (newSalesUpdate) {
         
-        // We need a business id to continue
-        if(!newSalesUpdate.businessUnitId || !newSalesUpdate.businessUnit) {
-            return false;
-        }
-        return true;
-    };
-    
     _this.ok = function () {
-        $modalInstance.close($scope.completionReport);
+        $modalInstance.close(_this.getReport());
     };
 
     _this.cancel = function () {
@@ -79,22 +73,40 @@
   
     // END DATE CONTROL RELATED
 
-     $scope.refreshProduct = function ( product ) {
-       return Products.query({q:{name:product}})
+     _this.refreshProducts = function ( product ) {
+       return Products.query({query:{name: '~' + product}})
          .then(function (response) {
-           return response.map(function(item){
-             return item;
-           });
+            $scope.products = response;
          });
      };
 
-    
-    $scope.ok = _this.ok;
-    $scope.cancel = _this.cancel;
-    
-    $scope.completionReport = {
-        product: undefined,
+     _this.getReport = function () {
+        return {
+          product: _this.report.product.selected.name,
+          remarks : _this.report.remarks
+        };
+     }
+      
+    _this.report = {
+        product: {},
         remarks: undefined
     };
+
+    this.title = "ADD_REPORT";
+
+    if(_this.isEditMode()) {
+      _this.title = 'EDIT_REPORT';
+      // Make a copy
+      _this.report.product.selected = {name: report.product};
+      _this.report.remarks = report.remarks;
+    }
+
+
+    $scope.ok = _this.ok;
+    $scope.cancel = _this.cancel;
+    $scope.refreshProducts = _this.refreshProducts;
+    $scope.report = _this.report;
+    _this.originalReport = report;    
+
   }
 })();

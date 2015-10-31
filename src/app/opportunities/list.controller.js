@@ -20,12 +20,17 @@
         size: size
       });
       
-      modalInstance.result.then(function (id) {
-        $scope.edit(id);
-      }, function () {
-          // DO NOTHING
+      modalInstance.result.then(function (opportunity) {
+        
+        Opportunities.create (opportunity)
+          .then(
+              function (response) {
+                $state.go('opportunities');
+              }
+          );
       });
     };
+
     // Mixin BaseController
     angular.extend(this, baseCtrl);
 

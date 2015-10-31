@@ -14,6 +14,10 @@
     "inject": false,
     "module": false,
     "moment": false,
-    "_": false
+    "_": false,
+    "malarkey": false,
+    "toastr": false,
+    "chance":false,
+    "window": false
   }
 }

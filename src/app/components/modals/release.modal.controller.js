@@ -6,10 +6,13 @@
     .controller('ReleaseModalController', ReleaseModalController);
 
   /** @ngInject */
-  function ReleaseModalController ( $scope, $modalInstance, ENGINEERING_STATUS, Products) {
+  function ReleaseModalController ( $scope, $modalInstance, ENGINEERING_STATUS, Products, options, release) {
     
     var _this = this;
-    _this.createdId = undefined;
+
+    _this.isEditMode = function () {
+      return _.has(options, 'edit') && options.edit === true;
+    };
 
     _this.getCurrentYear = function() {
       return moment().year();
@@ -22,19 +25,9 @@
     _this.getCurrentMonthName = function () {
       return moment.monthsShort(_this.getCurrentMonth());
     };
-
-    
-    _this.hasValidBusinessId = function (newSalesUpdate) {
-        
-        // We need a business id to continue
-        if(!newSalesUpdate.businessUnitId || !newSalesUpdate.businessUnit) {
-            return false;
-        }
-        return true;
-    };
     
     _this.ok = function () {
-        $modalInstance.close($scope.release);
+        $modalInstance.close(_this.getRelease());
     };
 
     _this.cancel = function () {
@@ -79,26 +72,55 @@
   
     // END DATE CONTROL RELATED
 
-     $scope.refreshProduct = function ( product ) {
-       return Products.query({q:{name:product}})
+     _this.refreshProducts = function ( product ) {
+       return Products.query({q:{name: '~' + product}})
          .then(function (response) {
-           return response.map(function(item){
-             return item;
-           });
-         });
+            $scope.products = response;
+          });
      };
 
+     _this.getRelease = function () {
+        return {
+          product: _this.release.product.selected.name,
+          milestoneTask: _this.release.milestoneTask,
+          status : _this.release.status,
+          targetDate : _this.release.targetDate,
+          remarks : _this.release.remarks
+        }
+     };
     
-    $scope.ok = _this.ok;
-    $scope.cancel = _this.cancel;
+
     $scope.statuses = ENGINEERING_STATUS;
-    
-    $scope.release = {
-        product: undefined,
+
+    _this.release = {
+        product: {},
         milestoneTask: undefined,
         status : $scope.statuses[0],
         targetDate: undefined,
         remarks: undefined
     };
+
+    
+    this.title = "ADD_RELEASE";
+
+    if(_this.isEditMode()) {
+      _this.title = 'EDIT_RELEASE';
+      // Make a copy
+      _this.release.product.selected = {name: release.product};
+      _this.release.milestoneTask = release.milestoneTask;
+      _this.release.status = release.status;
+      _this.release.targetDate = release.targetDate;
+      _this.release.remarks = release.remarks;
+    }
+
+    $scope.title = _this.title;
+    $scope.release = _this.release;
+    $scope.ok = _this.ok;
+    $scope.cancel = _this.cancel;
+    
+    $scope.refreshProducts = _this.refreshProducts;
+
+    _this.originalRelease = release;
+
   }
 })();

@@ -1,0 +1,40 @@
+<div class="panel panel-default tab-panels">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col col-sm-2 pull-right text-right">
+                <button class="btn btn-link btn-sm" ng-click="vm.add()">
+                    {{'ADD' | translate}}
+                </button>
+            </div>
+        </div>    
+    </div>
+    <div class="panel-body">
+        <div class="bs-component">
+                <div class="col col-sm-12">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>{{'SALES_PERSON' | translate}}</th>
+                                <th>{{'ACTIVITY' | translate}}</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in vm.items">
+                                <td>{{item.staff}}</td>
+                                <td>{{item.activity}}</td>
+                                <td>
+                                    <div class="btn-toolbar">
+                                        <div class="btn-group">
+                                            <a ng-if="vm.canEdit()" ng-click="vm.edit($index, item)"class="btn btn-default"><i class="glyphicon glyphicon-pencil text-muted"></i></a>
+                                            <a ng-if="vm.canDelete()" ng-click="vm.onDelete({index:$index})" class="btn btn-default"><i class="glyphicon glyphicon-trash text-muted"></i></a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+        </div>
+    </div>
+</div>

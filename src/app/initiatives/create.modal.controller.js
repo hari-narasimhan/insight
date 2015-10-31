@@ -10,22 +10,18 @@
     
     var _this = this;
     
+    _this.getInitiative = function () {
+        return {
+            businessUnitId: $scope.newInitiative.businessUnit.selected._id,
+            businessUnit: $scope.newInitiative.businessUnit.selected.name,
+            year: $scope.newInitiative.year,
+            month : $scope.newInitiative.month,
+            initiatives: $scope.newInitiative.initiatives
+        };
+    };
+
     _this.ok = function () {
-        // Check if we have a valid business id
-        if(!Common.hasValidBusinessUnit($scope.newInitiative)) {
-            $scope.newInitiativeForm.businessUnit.$setValidity('validity', false);
-            return;
-        }
-
-        Initiatives.create($scope.newInitiative).then(
-            function(response) {
-                $modalInstance.close(response._id);
-            },
-            function (error) {
-                // TODO Handle the error gracefully
-            }
-        );
-
+        $modalInstance.close(_this.getInitiative());
     };
 
     _this.cancel = function () {
@@ -43,22 +39,24 @@
     // Month
     $scope.months = APP_CONSTANTS.MONTHS;    
 
-    // Business Unit picker
-    $scope.selectedBusinessUnit = undefined;  
-    $scope.refreshBusinessUnits = Common.refreshBusinessUnits;
+    _this.refreshBusinessUnits = function (businessUnit) {
 
-    // Handle typeahead selection
-    $scope.setSelectedBusinessUnit = function (businessUnit) {
-      $scope.newInitiative.businessUnitId = businessUnit._id;
-      $scope.newInitiative.businessUnit = businessUnit.name;
-    };
+       return BusinessUnits.query({query:{name: '~' + businessUnit}})
+         .then(function (response) {
+            $scope.businessUnits = response;
+         });
+    }      
+
+    // Business Unit picker
+    $scope.businessUnit = {};
+    $scope.refreshBusinessUnits = _this.refreshBusinessUnits;
+
 
     $scope.ok = _this.ok;
     $scope.cancel = _this.cancel;
     
     $scope.newInitiative = {
-        businessUnit: undefined,
-        businessUnitId: undefined,
+        businessUnit: {},
         year: year,
         month : month,
         initiatives: new Array(10)

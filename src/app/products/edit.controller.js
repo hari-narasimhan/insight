@@ -14,6 +14,7 @@
             .then(
                 function(response) {
                     $scope.product = response;
+                    $scope.businessUnit.selected = {name: response.businessUnit, _id:response.businessUnitId};
                 }, function (error) {
                     //TODO handle error
                 }
@@ -35,24 +36,29 @@
       });
       
       // Business Unit picker
-    $scope.selectedBusinessUnit = undefined;  
-    $scope.refreshBusinessUnits = function ( businessUnit ) {
-      return BusinessUnits.query({q:{name:businessUnit}})
-        .then(function (response) {
-          return response.map(function(item){
-            return item;
-          });
-        });
-    };
+    _this.refreshBusinessUnits = function (businessUnit) {
 
-    // Handle typeahead selection
-    $scope.setSelectedBusinessUnit = function (businessUnit) {
-      $scope.product.businessUnitId = businessUnit._id;
-      $scope.product.businessUnit = businessUnit.name;
+      return BusinessUnits.query({query:{name: '~' + businessUnit}})
+      .then(function (response) {
+        $scope.businessUnits = response;
+      });
+    }      
+
+    _this.getProduct = function () {
+      return {
+        name: $scope.product.name,
+        description: $scope.product.description,
+        businessUnit: $scope.businessUnit.selected.name,
+        businessUnitId : $scope.businessUnit.selected.id,
+      };
     };
+    // Business Unit picker
+    $scope.businessUnit = {};
+    $scope.refreshBusinessUnits = _this.refreshBusinessUnits;
+
 
       $scope.save = function() {
-        Products.update(id, $scope.product)
+        Products.update(id, _this.getProduct())
         .then(
                 function(response) {
                     toastr.info($scope.successMessage);

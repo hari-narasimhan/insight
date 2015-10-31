@@ -19,21 +19,6 @@
 
     // Mixin BaseController
     angular.extend(this, baseEditCtrl);
-
-    $scope.openActivityModal = function (size) {
-      var modalInstance = $modal.open({
-        animation: $scope.animationsEnabled,
-        templateUrl: 'app/components/modals/activity.modal.html',
-        controller : 'ActivityModalController',
-        size: size
-      });
-      
-      modalInstance.result.then(function (engineeringActivity) {
-        $scope.update.activities.push(engineeringActivity);
-      }, function () {
-          // DO NOTHING
-      });
-    };
     
     $scope.onDeleteFocusArea = function (index) {
       $confirm({text: $scope.confirmDelete})
@@ -47,10 +32,27 @@
     };
 
     $scope.onEditFocusArea = function(index, focusArea) {
-      // DO NOTHING
+      $scope.update.focusAreas[index] = focusArea;
     };
 
-    var id = $stateParams.id;
-    $scope.get(id);
+
+    $scope.onDeleteActivity = function (index) {
+      $confirm({text: $scope.confirmDelete})
+        .then(function(){
+          $scope.update.activities.splice(index, 1);
+      });
+    };
+
+    $scope.onAddActivity = function (activity) {
+      $scope.update.activities.push(activity);
+    };
+
+    $scope.onEditActivity = function(index, activity) {
+      $scope.update.activities[index] = activity;
+    };
+
+    $scope.id = $stateParams.id;
+    $scope.get($scope.id);
+    $scope.title = 'SALES_UPDATES';
   }
 })();

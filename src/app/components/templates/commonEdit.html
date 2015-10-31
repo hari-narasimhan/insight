@@ -24,32 +24,15 @@
               on-delete="onDeleteFocusArea(index)">
             </focus-areas> 
           </tab>
-          <tab heading="{{'KEY_INITIATIVES' | translate}}">
+          <tab heading="{{'ACTIVITIES' | translate}}">
             <activities
               items="update.activities"
               options="{delete:true, edit:true}"
               on-add="onAddActivity(activity)"
               on-edit="onEditActivity(index, activity)"
-              on-delete="onDeleteActivity(index)"> 
+              on-delete="onDeleteActivity(index)"
+            > 
             </activities>
-          </tab>
-          <tab heading="{{'PRODUCT_RELEASES' | translate}}"> 
-            <product-releases
-              items="update.releases"
-              options="{delete:true, edit:true}"
-              on-add="onAddRelease(release)"
-              on-edit="onEditRelease(index, release)"
-              on-delete="onDeleteRelease(index)">
-            </product-releases>
-          </tab>
-          <tab heading="{{'COMPLETION_REPORTS' | translate}}">
-            <completion-reports 
-              items="update.completionReports"
-              options="{delete:true, edit:true}"
-              on-add="onAddReport(report)"
-              on-edit="onEditReport(index, report)"
-              on-delete="onDeleteReport(index)">
-            </completion-reports>
           </tab>
         </tabset>          
       </div>

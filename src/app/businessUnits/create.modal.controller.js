@@ -17,9 +17,6 @@
         BusinessUnits.create($scope.newBusinessUnit).then(
             function(response) {
                 $modalInstance.close(response.id);
-            },
-            function (error) {
-                // TODO Handle the error gracefully
             }
         );
 

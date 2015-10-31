@@ -57,20 +57,27 @@
     $scope.range        = Common.getRange(_this.startDate, _this.endDate);
     $scope.monthName    = _this.monthName;
     $scope.canEdit      = _this.canEdit;
-    
+
+    _this.refreshBusinessUnits = function (businessUnit) {
+
+       return BusinessUnits.query({query:{name: '~' + businessUnit}})
+         .then(function (response) {
+            $scope.businessUnits = response;
+         });
+    }      
+
     // Business Unit picker
-    $scope.selectedBusinessUnit = undefined;
-    $scope.refreshBusinessUnits = Common.refreshBusinessUnits;
+    $scope.businessUnit = {};
+    $scope.refreshBusinessUnits = _this.refreshBusinessUnits;
 
 
     // Handle typeahead selection
-    $scope.setSelectedBusinessUnit = function (businessUnit) {
-      $scope.businessUnit = businessUnit;
+    $scope.onBusinessUnitSelect = function (businessUnit) {
 
       //fetch the key metrics
       KeyMetrics.query(_this.createQuery(businessUnit._id, _this.startPeriod, _this.endPeriod))
         .then(function(response){
-            $scope.keyMetrics = Common.normalizeKeyMetrics($scope.businessUnit, $scope.range, response);
+            $scope.keyMetrics = Common.normalizeKeyMetrics(businessUnit, $scope.range, response);
             $scope.setOriginalData($scope.keyMetrics);
             }, function (error) {
             //  TODO Handle Error

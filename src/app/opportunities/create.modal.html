@@ -4,11 +4,11 @@
         <h4 class="modal-title">{{'CREATE_NEW_OPPORTUNITY' | translate }}</h4>
     </div>
     <div class="modal-body">
-        <form class="form-horizontal" name="newOpportunityForm" novalidate>        
+        <form class="form-horizontal" name="opportunityForm" novalidate>        
             <div class="form-group">
                 <label class="col-lg-2 control-label">{{'YEAR' | translate}}</label>
                 <div class="col-lg-10">
-                    <select class="form-control" ng-model="newOpportunity.year" ng-options="y for y in years">
+                    <select class="form-control" ng-model="opportunity.year" ng-options="y for y in years">
                         <option></option>
                     </select>
                 </div>
@@ -16,81 +16,62 @@
             <div class="form-group">
                 <label class="col-lg-2 control-label">{{'MONTH' | translate}}</label>
                 <div class="col-lg-10">
-                    <select class="form-control" ng-model="newOpportunity.month" 
+                    <select class="form-control" ng-model="opportunity.month" 
                      ng-options="month.value as month.name for month in months">
                         <option></option>
                     </select>
                 </div>
             </div>
-            <div class="form-group has-feedback" ng-class="{ 'has-error': newOpportunityForm.staff.$invalid && newOpportunityForm.staff.$dirty }">
+            <div class="form-group has-feedback" ng-class="{ 'has-error': opportunityForm.staff.$invalid && opportunityForm.staff.$dirty }">
                 <label class="col-lg-2 control-label">{{'SALES_PERSON' | translate}}</label>
                 <div class="col-lg-10">
-                    <input type="text" 
+                <ui-select ng-model="opportunity.staff.selected"
+                    theme="bootstrap"
                     name="staff"
-                    ng-model="newOpportunity.staff" 
-                    placeholder="{{'SELECT_STAFF' | translate}}" 
-                    typeahead="staff.fullname for staff in refreshStaff($viewValue)" 
-                    typeahead-loading="loadingStaff" 
-                    typeahead-no-results="noResults"
-                    class="form-control"
-                    required>
-                    <i ng-show="loadingStaffs" class="glyphicon glyphicon-refresh">
-                    </i>
+                    ng-disabled="disabled"
+                    reset-search-input="true"
+                    style="width:100%"
+                    title="Choose Staff">
+                    <ui-select-match placeholder="Enter Name...">{{$select.selected.fullname}}</ui-select-match>
+                    <ui-select-choices repeat="staff in staffs"
+                        refresh="refreshStaff($select.search)"
+                        refresh-delay="0">
+                        <div ng-bind-html="staff.fullname | highlight: $select.search"></div>
+                    </ui-select-choices>
+                </ui-select>
                     <div ng-show="noResults">
                         <i class="glyphicon glyphicon-remove"></i> {{'NO_RESULTS_FOUND' | translate}}
                     </div>
                     <div class="help-block" 
-                        ng-messages="newOpportunityForm.staff.$error">
+                        ng-messages="opportunityForm.staff.$error">
                         <div ng-message="required">{{'STAFF_REQUIRED' | translate}}</div>
                     </div>
                 </div>
             </div>
-            <div class="form-group has-feedback" 
-                 ng-class="{ 'has-error': newOpportunityForm.businessUnit.$invalid && newOpportunityForm.businessUnit.$dirty }">
-                <label class="col-lg-2 control-label">{{'BUSINESS_UNIT' | translate}}</label>
-                <div class="col-lg-10">
-                    <input type="text"
-                    name="businessUnit"
-                    ng-model="newOpportunity.businessUnit" 
-                    placeholder="{{'SELECT_BUSINESS_UNIT' | translate}}" 
-                    typeahead="businessUnit.name for businessUnit in refreshBusinessUnits($viewValue)" 
-                    typeahead-loading="loadingBusinessUnits" 
-                    typeahead-no-results="noResults"
-                    typeahead-on-select="setSelectedBusinessUnit($item)"
-                    typeahead-editable=false
-                    class="form-control"
-                    required>
-                    <i ng-show="loadingBusinessUnits" class="glyphicon glyphicon-refresh">
-                    </i>
-                    <div ng-show="noResults">
-                        <i class="glyphicon glyphicon-remove"></i> {{'NO_RESULTS_FOUND' | translate}}
-                    </div>
-                    <div class="help-block" 
-                        ng-messages="newOpportunityForm.businessUnit.$error">
-                        <div ng-message="required">{{'BUSINESS_UNIT_REQUIRED' | translate}}</div>
-                        <div ng-message="validity">{{'SELECT_VALID_BUSINESS_UNIT' | translate}}</div>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group has-feedback" ng-class="{ 'has-error': newOpportunityForm.product.$invalid && newOpportunityForm.product.$dirty }">
+            <div class="form-group has-feedback" ng-class="{ 'has-error': opportunityForm.product.$invalid && opportunityForm.product.$dirty }">
                 <label class="col-lg-2 control-label">{{'PRODUCT' | translate}}</label>
                 <div class="col-lg-10">
-                    <input type="text" 
-                    name="product"
-                    ng-model="newOpportunity.product" 
-                    placeholder="{{'SELECT_PRODUCT' | translate}}" 
-                    typeahead="product.name for product in refreshProduct($viewValue)" 
-                    typeahead-loading="loadingProducts" 
-                    typeahead-no-results="noResults"
-                    class="form-control"
-                    required>
+                <ui-select ng-model="opportunity.product.selected"
+                    theme="bootstrap"
+                    name="staff"
+                    ng-disabled="disabled"
+                    reset-search-input="true"
+                    style="width:100%"
+                    title="Choose Staff">
+                    <ui-select-match placeholder="Enter Name...">{{$select.selected.name}}</ui-select-match>
+                    <ui-select-choices repeat="product in products"
+                        refresh="refreshProducts($select.search)"
+                        refresh-delay="0">
+                        <div ng-bind-html="product.name | highlight: $select.search"></div>
+                    </ui-select-choices>
+                </ui-select>
                     <i ng-show="loadingProducts" class="glyphicon glyphicon-refresh">
                     </i>
                     <div ng-show="noResults">
                         <i class="glyphicon glyphiconremove"></i> {{'NO_RESULTS_FOUND' | translate}}
                     </div>
                     <div class="help-block" 
-                        ng-messages="newOpportunityForm.product.$error">
+                        ng-messages="opportunityForm.product.$error">
                         <div ng-message="required">{{'PRODUCT_REQUIRED' | translate}}</div>
                     </div>
                 </div>
@@ -98,9 +79,9 @@
             <div class="form-group">
                 <label  class="col-lg-2 control-label">{{'PROSPECT' | translate}}</label>
                 <div class="col-lg-10">
-                    <input type="text" name="prospect" placeholder="{{'ENTER_PROSPECT' | translate}}" class="form-control" ng-model="newOpportunity.prospect" required>
+                    <input type="text" name="prospect" placeholder="{{'ENTER_PROSPECT' | translate}}" class="form-control" ng-model="opportunity.prospect" required>
                     <div class="help-block" 
-                        ng-messages="newOpportunityForm.prospect.$error">
+                        ng-messages="opportunityForm.prospect.$error">
                         <div ng-message="required">{{'PROSPECT_REQUIRED' | translate}}</div>
                     </div>
                 </div>
@@ -108,9 +89,9 @@
             <div class="form-group">
                 <label class="col-lg-2 control-label">{{'POTENTIAL' | translate}}</label>
                 <div class="col-lg-10">
-                    <input type="number" placeholder="{{'ENTER_POTENTIAL' | translate}}" name="potential" class="form-control" ng-model="newOpportunity.potential" required>
+                    <input type="number" placeholder="{{'ENTER_POTENTIAL' | translate}}" name="potential" class="form-control" ng-model="opportunity.potential" required>
                     <div class="help-block" 
-                        ng-messages="newOpportunityForm.potential.$error">
+                        ng-messages="opportunityForm.potential.$error">
                         <div ng-message="required">{{'POTENTIAL_REQUIRED' | translate}}</div>
                     </div>
                 </div>
@@ -118,7 +99,7 @@
             <div class="form-group">
                 <label class="col-lg-2 control-label">{{'STATUS' | translate}}</label>
                 <div class="col-lg-10">
-                    <select class="form-control" placeholder="{{'SELECT_STATUS' | translate}}" ng-model="newOpportunity.status" ng-options="s for s in statuses">
+                    <select class="form-control" placeholder="{{'SELECT_STATUS' | translate}}" ng-model="opportunity.status" ng-options="s for s in statuses">
                     </select>
                 </div>
             </div>   
@@ -126,7 +107,7 @@
                 <label class="col-lg-2 control-label">{{'TARGET_CLOSURE_DATE' | translate}}</label>
                 <div class="col-lg-10">
                     <p class="input-group">
-                      <input type="text" name="targetDate" ng-model="newOpportunity.targetDate" placeholder="{{'ENTER_TARGET_DATE' | translate}}" class="form-control" datepicker-popup="{{format}}" ng-model="newOpportunity.targetDate" is-open="targetDateCtrl.status.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="{{'CLOSE' | translate}}" />
+                      <input type="text" name="targetDate" ng-model="opportunity.targetDate" placeholder="{{'ENTER_TARGET_DATE' | translate}}" class="form-control" datepicker-popup="{{format}}" ng-model="opportunity.targetDate" is-open="targetDateCtrl.status.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="{{'CLOSE' | translate}}" />
                       <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="targetDateOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                       </span>

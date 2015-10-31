@@ -1,4 +1,112 @@
 <div class="container">
+  <div class="content-wrapper">
+    <div class="content-header">
+      <div class="row">
+        <div class="col col-sm-8"><h5>{{title | translate}} 
+          <strong>{{update.businessUnit}} - {{update.month | monthName}}, {{update.year}}</strong></h5></div>
+      </div>
+    </div>
+    <div class="content">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="alert alert-dismissible alert-warning" ng-if="hasChanged()">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <h4>{{'DATA_HAS_CHANGED' | translate}}</h4>
+            <a ng-click="reset()" class="alert-link">Wish to RESET?</a>
+          </div>
+                   <div class="row">
+          <div class="col-lg-6">
+            <div class="bs-component">
+                    <div class="row">
+                        <div class="col-sm-4"><strong>{{'SALES_PERSON' | translate}}</strong></div>
+                        <div class="col-sm-8">{{update.staff}}</div>
+                    </div>
+                    <div class="row">  
+                        <div class="col-sm-4"><strong>{{'BUSINESS_UNIT' | translate}}</strong></div>
+                        <div class="col-sm-8">{{update.businessUnit}}</div>
+                    </div>
+                    <div class="row">          
+                        <div class="col-sm-4"><strong>{{'YEAR' | translate}}</strong></div>
+                        <div class="col-sm-8">{{update.year}}</div>
+                    </div>
+                    <div class="row">          
+                        <div class="col-sm-4"><strong>{{'MONTH' | translate}}</strong></div>
+                        <div class="col-sm-8">{{update.month | monthName}}</div>
+                    </div>
+                    <div class="row">          
+                        <div class="col-sm-4"><strong>{{'PROSPECT' | translate}}</strong></div>
+                        <div class="col-sm-8">{{update.prospect}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4"><strong>{{'PRODUCT' | translate}}</strong></div>
+                        <div class="col-sm-8">{{update.product}}</div>
+                    </div>
+                    <div class="row">          
+                        <div class="col-sm-4"><strong>{{'POTENTIAL' | translate}}</strong></div>
+                        <div class="col-sm-8">{{update.potential}}</div>
+                    </div>          
+                    <div class="row">
+                        <div class="col-sm-4"><strong>{{'STATUS' | translate}}</strong></div>
+                        <div class="col-sm-8">{{update.status}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4"><strong>{{'TARGET_CLOSURE_DATE' | translate}}</strong></div>
+                        <div class="col-sm-8">{{update.targetDate | appDate}}</div>
+                    </div>
+                    <div class-"row">
+                        <h5>{{'STATUS_UPDATES' | translate}}</h5>
+                        <div ng-repeat="statusUpdate in update.statusUpdates">
+                            <div class="col-sm-4">{{statusUpdate.updatedAt | appDate}}</div>
+                            <div class="col-sm-2">{{statusUpdate.status}}</div>
+                            <div class="col-sm-6">{{statusUpdate.remarks}}</div>
+                        </div>
+                    </div>
+           </div>
+          </div>
+          <div class="col-lg-6">
+              <form class="form-horizontal well bs-component">
+                <fieldset>
+                  <legend>{{'UPDATE_OPPORTUNITY_STATUS' | translate}}</legend>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">{{'NEW_STATUS' | translate}}</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" 
+                                placeholder="{{'SELECT_STATUS' | translate}}" 
+                                ng-model="newStatus" ng-options="s for s in statuses">
+                                    <option></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">{{'REMARKS' | translate}}</label>
+                            <div class="col-sm-10">
+                                <textarea rows=4 class="form-control" 
+                                placeholder="{{'ADD_REMARKS' | translate}}" 
+                                ng-model="remarks"></textarea>
+                            </div>
+                        </div>
+                </fieldset>
+              </form>
+          </div>
+        </div>  
+      </div>
+      <div class="panel-footer">
+        <div class="row">
+          <div class="col text-right">
+            <div class="form-group">
+              <div class="col-lg-10 col-lg-offset-2">
+                <button type="reset" class="btn btn-default" ng-click="cancel()">{{'CANCEL'|translate}}</button>
+                <button type="submit" class="btn btn-primary" ng-click="save(id)">{{'SAVE' | translate}}</button>
+              </div>
+            </div>
+          </div>
+        </div>          
+      </div>
+    </div>      
+  </div>
+</div>
+</div>
+<!--<div class="container">
     <div class="panel panel-default">
         <div class="panel-heading">
         <h5>{{'UPDATE_OPPORTUNITY' | translate}}</h5>
@@ -9,43 +117,43 @@
             <div class="bs-component">
                     <div class="row">
                         <div class="col-sm-4"><strong>{{'SALES_PERSON' | translate}}</strong></div>
-                        <div class="col-sm-8">{{opportunity.staff}}</div>
+                        <div class="col-sm-8">{{update.staff}}</div>
                     </div>
                     <div class="row">  
                         <div class="col-sm-4"><strong>{{'BUSINESS_UNIT' | translate}}</strong></div>
-                        <div class="col-sm-8">{{opportunity.businessUnit}}</div>
+                        <div class="col-sm-8">{{update.businessUnit}}</div>
                     </div>
                     <div class="row">          
                         <div class="col-sm-4"><strong>{{'YEAR' | translate}}</strong></div>
-                        <div class="col-sm-8">{{opportunity.year}}</div>
+                        <div class="col-sm-8">{{update.year}}</div>
                     </div>
                     <div class="row">          
                         <div class="col-sm-4"><strong>{{'MONTH' | translate}}</strong></div>
-                        <div class="col-sm-8">{{opportunity.month | monthName}}</div>
+                        <div class="col-sm-8">{{update.month | monthName}}</div>
                     </div>
                     <div class="row">          
                         <div class="col-sm-4"><strong>{{'PROSPECT' | translate}}</strong></div>
-                        <div class="col-sm-8">{{opportunity.prospect}}</div>
+                        <div class="col-sm-8">{{update.prospect}}</div>
                     </div>
                     <div class="row">
                         <div class="col-sm-4"><strong>{{'PRODUCT' | translate}}</strong></div>
-                        <div class="col-sm-8">{{opportunity.product}}</div>
+                        <div class="col-sm-8">{{update.product}}</div>
                     </div>
                     <div class="row">          
                         <div class="col-sm-4"><strong>{{'POTENTIAL' | translate}}</strong></div>
-                        <div class="col-sm-8">{{opportunity.potential}}</div>
+                        <div class="col-sm-8">{{update.potential}}</div>
                     </div>          
                     <div class="row">
                         <div class="col-sm-4"><strong>{{'STATUS' | translate}}</strong></div>
-                        <div class="col-sm-8">{{opportunity.status}}</div>
+                        <div class="col-sm-8">{{update.status}}</div>
                     </div>
                     <div class="row">
                         <div class="col-sm-4"><strong>{{'TARGET_CLOSURE_DATE' | translate}}</strong></div>
-                        <div class="col-sm-8">{{opportunity.targetDate | appDate}}</div>
+                        <div class="col-sm-8">{{update.targetDate | appDate}}</div>
                     </div>
                     <div class-"row">
                         <h5>{{'STATUS_UPDATES' | translate}}</h5>
-                        <div ng-repeat="statusUpdate in opportunity.statusUpdates">
+                        <div ng-repeat="statusUpdate in update.statusUpdates">
                             <div class="col-sm-4">{{statusUpdate.updatedAt | appDate}}</div>
                             <div class="col-sm-2">{{statusUpdate.status}}</div>
                             <div class="col-sm-6">{{statusUpdate.remarks}}</div>
@@ -94,3 +202,4 @@
         </div>
     </div>
 </div>
+-->
