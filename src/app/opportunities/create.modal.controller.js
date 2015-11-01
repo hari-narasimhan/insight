@@ -17,6 +17,7 @@
             businessUnitId: $scope.opportunity.product.selected.businessUnitId,
             businessUnit: $scope.opportunity.product.selected.businessUnit,
             product: $scope.opportunity.product.selected.name,
+            prospect: $scope.opportunity.prospect,
             year: $scope.opportunity.year,
             month : $scope.opportunity.month,
             status : $scope.opportunity.status,
