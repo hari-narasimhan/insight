@@ -21,6 +21,12 @@
             };
     };
 
+    $scope.template = {
+      base: 'app/components/templates/reports.html',
+      body: 'app/main/report.engineering.part.html'
+    };
+
+
     console.log($stateParams);
     $scope.businessUnitId = $stateParams.businessUnitId;
     $scope.year = parseInt($stateParams.year);

@@ -18,7 +18,7 @@
             <tab heading="{{'FOCUS_AREA' | translate}}">
               <focus-areas 
               items="update.focusAreas" 
-              options="{delete:true, edit:true}"
+              options="{delete:true, edit:true, add:true}"
               on-add="onAddFocusArea(focusArea)"
               on-edit="onEditFocusArea(index, focusArea)"
               on-delete="onDeleteFocusArea(index)">
@@ -27,7 +27,7 @@
           <tab heading="{{'ACTIVITIES' | translate}}">
             <activities
               items="update.activities"
-              options="{delete:true, edit:true}"
+              options="{delete:true, edit:true, add:true}"
               on-add="onAddActivity(activity)"
               on-edit="onEditActivity(index, activity)"
               on-delete="onDeleteActivity(index)"

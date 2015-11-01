@@ -1,0 +1,37 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    {{'INITIATIVES' | translate}}
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="bs-component">
+          <div class="row">  
+            <div class="col-sm-4"><strong>{{'BUSINESS_UNIT' | translate}}</strong></div>
+            <div class="col-sm-8">{{initiative.businessUnit}}</div>
+          </div>
+          <div class="row">          
+            <div class="col-sm-4"><strong>{{'YEAR' | translate}}</strong></div>
+            <div class="col-sm-8">{{initiative.year}}</div>
+          </div>
+          <div class="row">          
+            <div class="col-sm-4"><strong>{{'MONTH' | translate}}</strong></div>
+            <div class="col-sm-8">{{initiative.month | monthName}}</div>
+          </div>
+        </div>
+        <div class="bs-component">
+          <form class="form-horizontal well bs-component">
+            <div class="form-group" ng-repeat="i in initiative.initiatives track by $index">
+              <div class="col col-lg-2">
+                {{$index + 1}}
+              </div>
+              <div class="col-lg-10">
+                {{i}}
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

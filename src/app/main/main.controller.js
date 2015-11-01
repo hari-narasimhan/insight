@@ -6,7 +6,9 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController($scope, $rootScope, $state, $auth, $window, APP_CONSTANTS, BusinessUnits, Common, toastr) {
+  function MainController($scope, $rootScope, $state, $auth, $window, APP_CONSTANTS, 
+          BusinessUnits, Opportunities, Common, toastr) {
+    
     var  _this = this;
 
     _this.getMonths = function (selectedYear, currentYear, currentMonth, months) {
@@ -31,14 +33,30 @@
 
     // Select Year
     $scope.years = [currentYear - 1, currentYear, currentYear + 1];
+    $scope.months = APP_CONSTANTS.MONTHS;
+    
     $scope.year = currentYear;
+    $scope.month = currentMonth;
+
 
     $scope.refresh = function () {
+      console.log("ng-change");
+
       $scope.months = _this.getMonths($scope.year, currentYear, currentMonth, APP_CONSTANTS.MONTHS);
+      var updatedDate = new Date($scope.year, $scope.month, 1);
+      var updatedAt = moment(updatedAt).subtract(3, 'months').toISOString();
+      var query = {query: {updatedAt: {"$gt": updatedAt}}};
+
+      Opportunities.query(query)
+        .then(function(response){
+          $scope.opportunities = response;
+        });
+
     };
 
     $scope.openReport = function (businessUnitId, year, month, businessUnit) {
-      $state.go('report.keymetric', {businessUnitId: businessUnitId, year:year, month:month, businessUnit: businessUnit});
+      $state.go('report.keymetric', {businessUnitId: businessUnitId, 
+                                    year:year, month:month, businessUnit: businessUnit});
     };
 
     $scope.isAuthenticated = function () {
@@ -48,6 +66,7 @@
     $scope.logout = function() {
       $auth.logout();
       delete $window.localStorage.currentUser;
+      $state.go('home');
     };
 
     BusinessUnits.query({})

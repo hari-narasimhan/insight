@@ -10,6 +10,7 @@
     KeyMetrics, Common, toastr) {
     var  _this = this;
 
+
     _this.createQuery = function (businessUnitId, startPeriod, endPeriod) {
         
         return {
@@ -20,14 +21,16 @@
             };
     };
 
+    _this.paramYear = parseInt($stateParams.year);
+    _this.paramMonth = parseInt($stateParams.month);
 
-    _this.startDate   = moment().subtract(APP_CONSTANTS.KEY_PARAM_MONTHS_RANGE, 'months');
+    _this.dateParam   = moment([_this.paramYear, _this.paramMonth, 1]);
+    _this.startDate   = moment(_this.dateParam).subtract(APP_CONSTANTS.KEY_PARAM_MONTHS_RANGE, 'months');
     _this.startPeriod = parseInt(_this.startDate.format("YYYYMM"));
-    _this.endDate     = moment().add(APP_CONSTANTS.KEY_PARAM_MONTHS_RANGE,'months');
+    _this.endDate     = moment(_this.dateParam).add(APP_CONSTANTS.KEY_PARAM_MONTHS_RANGE,'months');
     _this.endPeriod   = parseInt(_this.endDate.format("YYYYMM"));
 
     $scope.range        = Common.getRange(_this.startDate, _this.endDate);
-
     $scope.businessUnitId = $stateParams.businessUnitId;
     $scope.year = parseInt($stateParams.year);
     $scope.month = parseInt($stateParams.month);
@@ -36,6 +39,11 @@
     $scope.currentReport = APP_CONSTANTS.REPORT_SECTIONS[0];
     $scope.reportSections = APP_CONSTANTS.REPORT_SECTIONS;
 
+    $scope.template = {
+      base: 'app/components/templates/reports.html',
+      body: 'app/main/report.keymetric.part.html'
+    };
+    
     $scope.isCurrentReport = function (report) {
       return report.state === $scope.currentReport.state;
     };

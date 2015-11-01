@@ -25,7 +25,7 @@
         Opportunities.create (opportunity)
           .then(
               function (response) {
-                $state.go('opportunities');
+                _this.query({page:1, query:{}});
               }
           );
       });
@@ -37,6 +37,6 @@
     $scope.openCreateModal  = _this.openCreateModal;
 
     // query the service for records
-    _this.query({page:1});
+    _this.query({page:1, query:{}});
   }
 })();

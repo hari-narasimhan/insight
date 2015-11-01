@@ -52,6 +52,10 @@
         });
       };
 
+      vm.canAdd = function () {
+        return vm.options && vm.options.add;
+      };
+
       vm.canDelete = function() {
         return vm.options && vm.options.delete;
       };

@@ -1,0 +1,25 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    {{'KEY_PARAMETERS' | translate}}
+  </div>
+  <div class="panel-body">
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>{{'PARAMETER' | translate}}</th>
+          <th class="center" ng-repeat="item in range">
+            {{item.month | monthName}}-{{item.year}}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="param in keyMetrics">
+          <td> {{param.name}}</td>
+          <td class="center" ng-repeat="value in param.values">
+            <span class="text-positive">{{value.value || '-'}}</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

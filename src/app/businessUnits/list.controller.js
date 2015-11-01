@@ -21,7 +21,7 @@
       
       modalInstance.result.then(function () {
           // DO NOTHING
-          _this.query({page:1});
+          _this.query({page:1, query:{}});
       }, function () {
           // DO NOTHING
       });

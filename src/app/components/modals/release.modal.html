@@ -4,7 +4,6 @@
         <h4 class="modal-title">{{'CREATE_NEW_RELEASE_UPDATE' | translate }}</h4>
     </div>
     <div class="modal-body">
-        {{release | json}}
         <form class="form-horizontal" name="releaseForm" novalidate>        
             <div class="form-group has-feedback" ng-class="{ 'has-error': releaseForm.product.$invalid && releaseForm.product.$dirty }">
                 <label class="col-lg-2 control-label">{{'PRODUCT' | translate}}</label>

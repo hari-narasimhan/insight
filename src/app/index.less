@@ -12,7 +12,7 @@
 
 @navbar-inverse-link-color: #262973;
 @icon-font-path: '../../bower_components/bootstrap/fonts/';
-@default-background-color: #d8d8d8;
+@default-background-color: #ecf0f5;
 
 
 body {
@@ -185,8 +185,11 @@ a:hover {
 */
 
 .content {
+  background-color:transparent;
+  height: 100%;
   .panel {
     min-height: 250px;
+    height: 100%;
     border-radius: 3px;
     border-top: 3px solid @navbar-inverse-link-color;
   }
@@ -194,6 +197,11 @@ a:hover {
   .panel-heading {
     background-color:#fff;
     border-bottom: #efefef 1px solid;
+
+    h5 {
+      margin-top: 2px;
+      margin-bottom: 2px;
+    }
   }
 
   .tab-panels {

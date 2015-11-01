@@ -45,16 +45,16 @@
        ADD_FOCUS_AREA: 'Add Focus Area',
        ENTER_SALES_ACTIVITY_HELP_TEXT: 'Please enter activity details here.',
        PROSPECT: 'Prospect',
-       ENTER_PROSPECT: 'Enter Prospect Name',
+       ENTER_PROSPECT: 'Enter prospect name',
        POTENTIAL: 'Potential $m',
        OPPORTUNITIES: 'Opportunities',
        TARGET_CLOSURE_DATE: 'Target Closure Date',
        SALES_PERSON_REQUIRED: 'Sales Person is required',
        SELECT_PRODUCT: 'Select Product',
        PRODUCT_REQUIRED: 'Product is required',
-       ENTER_POTENTIAL: 'Enter Potential in USD millions',
+       ENTER_POTENTIAL: 'Enter potential in USD millions',
        PROSPECT_REQUIRED: 'Prospect is required',
-       ENTER_TARGET_DATE: 'Enter Target Closure Date',
+       ENTER_TARGET_DATE: 'Enter target closure date',
        POTENTIAL_REQUIRED: 'Potential is required',
        CREATE_NEW_OPPORTUNITY: 'Create New Sales Opportunity',
        STATUS: 'Status',
@@ -106,7 +106,16 @@
        SIGN_UP: "Sign Up",
        DASHBOARD: "Dashboard",
        ADD_KEY_PARAMETER: "Add Key Parameter",
-       CONFIRM_DELETE: "Are you sure you want to delete?"
+       CONFIRM_DELETE: "Are you sure you want to delete?",
+       KEY_PARAMETERS: "Key Parameters",
+       FOCUS_AREAS: "Focus Areas",
+       ACTIVITIES: "Activities",
+       DATA_HAS_CHANGED: "Data has changed!",
+       RESET: "Reset",
+       ENTER_MILESTONE_TASK: "Enter the milestone details",
+       MILESTONE_TASK_REQUIRED: "Milestone task is required",
+       CREATE_NEW_RELEASE_UPDATE : "New product release"
+
     });
     
     // Set the preferred language to enter

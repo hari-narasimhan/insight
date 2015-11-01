@@ -21,6 +21,12 @@
             };
     };
 
+    $scope.template = {
+      base: 'app/components/templates/reports.html',
+      body: 'app/main/report.initiative.part.html'
+    };
+
+
     $scope.businessUnitId = $stateParams.businessUnitId;
     $scope.year = parseInt($stateParams.year);
     $scope.month = parseInt($stateParams.month);

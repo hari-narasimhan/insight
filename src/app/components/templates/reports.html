@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="content-wrapper">
+    <div class="content-header">
+      <div class="row">
+        <div class="col col-sm-8"><h5><strong>{{businessUnit.name}}</strong> - {{ currentReport.name | translate}} {{month | monthName}}, {{year}}</h5></div>
+        <div class="col col-sm-4 text-right">
+          <a class="btn btn-link btn-sm" ui-sref="home"> {{'BACK' | translate}} </a>
+        </div>
+      </div>
+      <div>
+        <div class="row">
+            <div class="col col-sm-12 ">
+                <ul class="pager">
+                  <li ng-repeat="section in reportSections"
+                  ng-class="{true:'disabled', false: 'text-muted'}[isCurrentReport(section)]">
+                  <a ng-click="transition(section)">{{section.name | translate}}</a></li>
+                </ul>
+            </div>
+        </div>        
+      </div>
+    </div>
+    <div class="content">
+        <ng-include src="template.body"></ng-include>
+    </div>
+  </div>
+</div>

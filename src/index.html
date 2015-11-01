@@ -59,6 +59,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" ng-class="!navCollapsed && 'in'" ng-click="navCollapsed = true">
                 <ul class="nav navbar-nav navbar-right">    
+                    <li ng-if="isAuthenticated()"><a href="#/home">Home</a></li>
                     <li class="dropdown" dropdown ng-if="isAuthenticated()">
                         <a href="#" class="dropdown-toggle" dropdown-toggle aria-expanded="false">Updates<span class="caret"></span></a>
                         <ul class="dropdown-menu" dropdown-menu>
