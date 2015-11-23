@@ -18,7 +18,8 @@
                         'pascalprecht.translate',
                         'satellizer',
                         'ui.select',
-                        'xeditable']
+                        'xeditable',
+                        'nvd3']
             );
 
 })();

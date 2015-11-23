@@ -26,7 +26,8 @@
     "satellizer": "~0.12.5",
     "angular-xeditable": "~0.1.9",
     "angular-confirm-modal": "~1.1.2",
-    "ui-select": "angular-ui-select#~0.13.2"
+    "ui-select": "angular-ui-select#~0.13.2",
+    "angular-nvd3": "~1.0.3"
   },
   "devDependencies": {
     "angular-mocks": "~1.4.0"
