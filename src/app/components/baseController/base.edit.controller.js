@@ -23,9 +23,6 @@
   /** @ngInject */
   function BaseEditController ( $scope, $state, $translate, service, toastr, listRoute ) {
     
-    var _this = this;
-
-
     /*Scope Level data and methods */
     $scope.template = {url: 'app/components/templates/commonEdit.html'};
 
@@ -46,7 +43,7 @@
     $scope.save = function(id) {
       service.update(id, $scope.update)
         .then (
-          function(response) {
+          function() {
               toastr.info('UPDATED', $scope.successMessage);
               $state.go(listRoute);
           }        
@@ -75,6 +72,6 @@
                   $scope.update = response;
               }
       );
-    }
+    };
   }
 })();

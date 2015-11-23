@@ -22,8 +22,8 @@
       modalInstance.result.then(function (product) {
           
           Products.create(product)
-            .then (function(response) {
-              _this.query({page:1, query:{}});              
+            .then (function() {
+              _this.query({page:1, query:{}});
             });
       });
     };

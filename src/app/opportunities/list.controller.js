@@ -24,8 +24,8 @@
         
         Opportunities.create (opportunity)
           .then(
-              function (response) {
-                _this.query({page:1, query:{}});
+              function () {
+                _this.query({page:1});
               }
           );
       });

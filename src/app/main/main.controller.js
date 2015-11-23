@@ -7,11 +7,11 @@
 
   /** @ngInject */
   function MainController($scope, $rootScope, $state, $auth, $window, APP_CONSTANTS, 
-          BusinessUnits, Opportunities, Common, toastr) {
+          BusinessUnits, Opportunities, Common ) {
     
     var  _this = this;
 
-    _this.getMonths = function (selectedYear, currentYear, currentMonth, months) {
+    _this.getMonths = function ( selectedYear, currentYear, currentMonth, months ) {
         
       if(selectedYear !== currentYear) {
         return months;
@@ -30,7 +30,6 @@
     var currentMonth = Common.getCurrentMonth();
     
 
-
     // Select Year
     $scope.years = [currentYear - 1, currentYear, currentYear + 1];
     $scope.months = APP_CONSTANTS.MONTHS;
@@ -40,16 +39,20 @@
 
 
     $scope.refresh = function () {
-      console.log("ng-change");
 
       $scope.months = _this.getMonths($scope.year, currentYear, currentMonth, APP_CONSTANTS.MONTHS);
       var updatedDate = new Date($scope.year, $scope.month, 1);
-      var updatedAt = moment(updatedAt).subtract(3, 'months').toISOString();
+      var updatedAt = moment(updatedDate).subtract(3, 'months').toISOString();
       var query = {query: {updatedAt: {"$gt": updatedAt}}};
 
       Opportunities.query(query)
         .then(function(response){
           $scope.opportunities = response;
+        });
+
+      BusinessUnits.query({})
+        .then ( function(businessUnits)  {
+          $scope.businessUnits = businessUnits;
         });
 
     };

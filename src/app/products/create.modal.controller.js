@@ -18,7 +18,7 @@
         description : $scope.newProduct.description,
         businessUnitId : $scope.businessUnit.selected._id,
         businessUnit :  $scope.businessUnit.selected.name
-      }
+      };
     };
 
     _this.ok = function () {
@@ -35,7 +35,7 @@
       .then(function (response) {
         $scope.businessUnits = response;
       });
-    }      
+    };   
 
     // Business Unit picker
     $scope.businessUnit = {};

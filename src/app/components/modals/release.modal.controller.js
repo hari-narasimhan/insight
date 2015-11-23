@@ -62,7 +62,7 @@
     $scope.toggleMin();
     $scope.maxDate = new Date(2020, 31, 12);
 
-    $scope.targetDateOpen = function($event) {
+    $scope.targetDateOpen = function() {
         $scope.targetDateCtrl.status.opened = true;
     };
 
@@ -86,7 +86,7 @@
           status : _this.release.status,
           targetDate : _this.release.targetDate,
           remarks : _this.release.remarks
-        }
+        };
      };
     
 

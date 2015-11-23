@@ -7,7 +7,6 @@
 
   /** @ngInject */
   function EditOpportunityController ( $scope, $state, $stateParams, toastr, PROSPECT_STATUS, $controller, $translate, Opportunities ) {
-      var _this = this;
       
     var baseEditCtrl = $controller('BaseEditController', 
         { $scope:$scope, 
@@ -40,14 +39,10 @@
         $scope.update.statusUpdates.push({updatedAt: new Date(), status: $scope.newStatus, remarks: $scope.remarks});
         Opportunities.update(id, $scope.update)
         .then(
-                function(response) {
-                    toastr.info($scope.successMessage);
-                    $state.go('opportunities');
-                }, function (error) {
-                    //TODO handle error
-                    toastr.error($scope.errorMessage);
-                }        
-        );
+          function() {
+              toastr.info($scope.successMessage);
+              $state.go('opportunities');
+          });
       };
   }
 })();

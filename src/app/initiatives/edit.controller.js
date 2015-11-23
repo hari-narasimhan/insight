@@ -38,10 +38,10 @@
       $scope.save = function(id) {
         Initiatives.update(id, $scope.update)
         .then(
-                function(response) {
-                    toastr.info($scope.successMessage);
-                    $state.go('initiatives');
-                }        
+          function() {
+              toastr.info($scope.successMessage);
+              $state.go('initiatives');
+          }        
         );
       };
       

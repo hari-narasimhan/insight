@@ -12,7 +12,7 @@
     
     _this.isEditMode = function () {
       return _.has(options, 'edit') && options.edit === true;
-    }
+    };
 
     _this.ok = function () {
       $modalInstance.close(_this.getActivity());

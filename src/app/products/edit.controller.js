@@ -15,10 +15,7 @@
                 function(response) {
                     $scope.product = response;
                     $scope.businessUnit.selected = {name: response.businessUnit, _id:response.businessUnitId};
-                }, function (error) {
-                    //TODO handle error
-                }
-            );
+                });
       };
       
       var id = $stateParams.id;
@@ -42,7 +39,7 @@
       .then(function (response) {
         $scope.businessUnits = response;
       });
-    }      
+    };
 
     _this.getProduct = function () {
       return {
@@ -60,14 +57,10 @@
       $scope.save = function() {
         Products.update(id, _this.getProduct())
         .then(
-                function(response) {
-                    toastr.info($scope.successMessage);
-                    $state.go('products');
-                }, function (error) {
-                    //TODO handle error
-                    toastr.error($scope.errorMessage);
-                }        
-        );
+          function() {
+              toastr.info($scope.successMessage);
+              $state.go('products');
+          });
       };
       
      // Fetch the data from the server

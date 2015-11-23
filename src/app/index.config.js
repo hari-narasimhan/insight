@@ -115,7 +115,9 @@
        ENTER_MILESTONE_TASK: "Enter the milestone details",
        MILESTONE_TASK_REQUIRED: "Milestone task is required",
        CREATE_NEW_RELEASE_UPDATE : "New product release",
-       DETAILED_REPORTS: "Detailed Reports"
+       DETAILED_REPORTS: "Detailed Reports",
+       NO_RECORDS: "No Records!",
+       NO_RECORDS_MESSAGE: "There are no records for this period !"
 
     });
     

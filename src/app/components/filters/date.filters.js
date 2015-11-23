@@ -8,7 +8,7 @@
     .filter('fromNow', fromNow);
 
     /** @ngInject */
-    function appDate ($filter, moment, _) {
+    function appDate ($filter) {
 
         return function(input) {
             if(input === null) {
@@ -19,7 +19,7 @@
         };
     }
 
-    function fromNow ($filter, moment, _) {
+    function fromNow ($filter, moment) {
 
         return function(input) {
             if(input === null) {
@@ -30,7 +30,7 @@
         };
     }
 
-    function monthName($filter) {
+    function monthName($filter, moment, _) {
         return function (input) {
             if(_.isNull(input) || _.isUndefined(input)) {
                 return "";

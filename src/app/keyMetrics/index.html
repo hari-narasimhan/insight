@@ -8,6 +8,7 @@
     <div class="content">
         <div class="panel panel-default">
         <div class="panel-body">
+        <ng-include src="template.noRecords"></ng-include>        
         <form novalidate>
             <div class="form-group has-feedback" 
                  ng-class="{ 'has-error': keyMetricsForm.businessUnit.$invalid && newOpportunityForm.businessUnit.$dirty }">
@@ -50,7 +51,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="param in keyMetrics">
+                <tr ng-repeat="param in items" ng-if="items.length > 0">
                     <td> {{param.name}}</td>
                     
                     <td class="center" ng-repeat="value in param.values">
@@ -69,14 +70,3 @@
     </div>
   </div>
 </div>
-
-<!--<div class="container">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-            <h5>{{'KEY_METRICS' | translate}}</h5>
-      </div>
-      <div class="panel-body">
-
-      </div>    
-    </div>
-</div>-->

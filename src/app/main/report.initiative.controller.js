@@ -7,7 +7,7 @@
 
   /** @ngInject */
   function ReportInitiativeController($scope, $state, $stateParams, APP_CONSTANTS, BusinessUnits, 
-    Initiatives, Opportunities, Common, toastr) {
+    Initiatives) {
     var  _this = this;
 
     _this.createQuery = function (businessUnitId, year, month) {
@@ -44,8 +44,6 @@
         .then (
           function(response) {
             $scope.initiative = response[0];
-        }, function (error){
-            // Handle Error
         });
     };
     
@@ -60,5 +58,5 @@
         });
     };
     
-  };
+  }
 })();

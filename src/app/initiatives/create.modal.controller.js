@@ -6,7 +6,7 @@
     .controller('NewInitiativeModalController', NewInitiativeModalController);
 
   /** @ngInject */
-  function NewInitiativeModalController ( $scope, $modalInstance, APP_CONSTANTS, Common, BusinessUnits, Initiatives, Users) {
+  function NewInitiativeModalController ( $scope, $modalInstance, APP_CONSTANTS, Common, BusinessUnits) {
     
     var _this = this;
     
@@ -45,7 +45,7 @@
          .then(function (response) {
             $scope.businessUnits = response;
          });
-    }      
+    }; 
 
     // Business Unit picker
     $scope.businessUnit = {};

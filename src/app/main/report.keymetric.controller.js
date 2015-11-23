@@ -7,7 +7,7 @@
 
   /** @ngInject */
   function ReportKeyMetricController($scope, $state, $stateParams, APP_CONSTANTS, BusinessUnits, 
-    KeyMetrics, Common, toastr) {
+    KeyMetrics, Common) {
     var  _this = this;
 
 
@@ -53,9 +53,7 @@
       KeyMetrics.query(_this.createQuery($scope.businessUnitId, _this.startPeriod, _this.endPeriod))
         .then(function(response) {
             $scope.keyMetrics = Common.normalizeKeyMetrics($scope.businessUnit, $scope.range, response);
-            }, function (error) {
-            //  TODO Handle Error
-        });
+            });
     };
     
     $scope.transition = function (link) {
@@ -68,5 +66,5 @@
     };
 
     $scope.refresh();
-  };
+  }
 })();

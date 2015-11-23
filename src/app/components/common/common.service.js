@@ -6,7 +6,7 @@
     .factory('Common', Common);
 
     /** @ngInject */
-    function Common (moment, BusinessUnits, Users, Products) {
+    function Common (moment) {
 
         var service = {
             getCurrentYear : getCurrentYear,

@@ -24,25 +24,6 @@
         var date = moment([year, month, 1]);
         return date.isAfter(_this.editStart);
     };
-
-
-    _this.getRecords = function (businessUnit, keyMetrics) {
-        var ret = [];
-        _.forEach(keyMetrics, function(param){
-            _.forEach(param.values, function (value){ 
-            console.log(value);  
-                ret.push ({_id: value._id, 
-                            businessUnitId: businessUnit._id, 
-                            businessUnit: businessUnit.name,
-                            period: value.period,
-                            param: param.name,
-                            value: value.value
-                        });
-            });
-        });
-        console.log(ret);
-        return ret;
-    };
     
     _this.createQuery = function (businessUnitId, startPeriod, endPeriod) {
         
@@ -57,6 +38,7 @@
     $scope.range        = Common.getRange(_this.startDate, _this.endDate);
     $scope.monthName    = _this.monthName;
     $scope.canEdit      = _this.canEdit;
+    $scope.template     = {noRecords: 'app/components/templates/noRecords.html'};
 
     _this.refreshBusinessUnits = function (businessUnit) {
 
@@ -64,7 +46,7 @@
          .then(function (response) {
             $scope.businessUnits = response;
          });
-    }      
+    };
 
     // Business Unit picker
     $scope.businessUnit = {};
@@ -77,14 +59,12 @@
       //fetch the key metrics
       KeyMetrics.query(_this.createQuery(businessUnit._id, _this.startPeriod, _this.endPeriod))
         .then(function(response){
-            $scope.keyMetrics = Common.normalizeKeyMetrics(businessUnit, $scope.range, response);
-            $scope.setOriginalData($scope.keyMetrics);
-            }, function (error) {
-            //  TODO Handle Error
+            $scope.items = Common.normalizeKeyMetrics(businessUnit, $scope.range, response);
+            $scope.setOriginalData($scope.items);
         });
     };
     
-    $scope.keyMetrics = [];
+    $scope.items = [];
     
     $scope.setOriginalData = function(data) {
         $scope.originalData = JSON.stringify(data);
@@ -118,7 +98,7 @@
         } else {
             KeyMetrics.update(value._id, record)
                 .then(
-                    function(result) {
+                    function() {
                         // Do nothing
                     }, function (error) {
                         toastr.error(error.message);

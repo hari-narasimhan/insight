@@ -6,9 +6,8 @@
     .controller('LoginController', LoginController);
 
   /** @ngInject */
-  function LoginController( $scope, $state, $rootScope, $auth, $window, $location ) {
-    var _this = this;
-
+  function LoginController( $scope, $state, $rootScope, $auth, $window ) {
+    
     $scope.emailLogin = function() {
       $auth.login({ email: $scope.email, password: $scope.password })
         .then(function(response) {

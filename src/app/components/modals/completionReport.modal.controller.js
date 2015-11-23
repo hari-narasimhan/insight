@@ -12,7 +12,7 @@
 
     _this.isEditMode = function () {
       return _.has(options, 'edit') && options.edit === true;
-    }
+    };
 
     _this.getCurrentYear = function() {
       return moment().year();
@@ -63,7 +63,7 @@
     $scope.toggleMin();
     $scope.maxDate = new Date(2020, 31, 12);
 
-    $scope.targetDateOpen = function($event) {
+    $scope.targetDateOpen = function() {
         $scope.targetDateCtrl.status.opened = true;
     };
 
@@ -85,7 +85,7 @@
           product: _this.report.product.selected.name,
           remarks : _this.report.remarks
         };
-     }
+     };
       
     _this.report = {
         product: {},

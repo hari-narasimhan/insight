@@ -60,14 +60,15 @@
             if(response.cursor) {
               $scope.totalItems =   response.cursor.totalRecords || 0 ;
             }
-        }, function ( error ) {
-            // TODO handle error
-        });      
+        });
     };
 
     /*Scope Level data and methods */
 
-    $scope.template = {url: 'app/components/templates/updateList.html'};
+    $scope.template = {
+      url: 'app/components/templates/updateList.html',
+      noRecords: 'app/components/templates/noRecords.html'
+    };
 
     $scope.pageChanged = function (newPage) {
       _this.query({page:newPage});
@@ -93,8 +94,6 @@
       });
       
       modalInstance.result.then(function (updateCriteria) {
-        console.log(updateCriteria);
-
         service.create({
           businessUnit: updateCriteria.businessUnit.selected.name,
           businessUnitId: updateCriteria.businessUnit.selected._id,
@@ -103,9 +102,6 @@
         }).then(function(response){
           $scope.edit(response._id);
         });
-
-      }, function () {
-          // DO NOTHING
       });
     };
 

@@ -6,8 +6,8 @@
     .controller('ReportSalesController', ReportSalesController);
 
   /** @ngInject */
-  function ReportSalesController($scope, $state, $stateParams, APP_CONSTANTS, BusinessUnits, 
-    SalesUpdates, Opportunities, Common, toastr) {
+  function ReportSalesController ( $scope, $state, $stateParams, APP_CONSTANTS, BusinessUnits, 
+    SalesUpdates, Opportunities ) {
     var  _this = this;
 
     _this.createQuery = function (businessUnitId, year, month) {
@@ -44,16 +44,12 @@
         .then (
           function(response) {
             $scope.salesUpdate = response[0];
-        }, function (error){
-            // Handle Error
         });
 
       Opportunities.query(_this.createQuery($scope.businessUnitId, $scope.year, $scope.month))
         .then (
           function(response) {
             $scope.opportunities = response;
-        }, function (error){
-            // Handle Error
         });
     };
     
@@ -67,5 +63,5 @@
             businessUnit: $scope.businessUnit}
       );
     };
-  };
+  }
 })();

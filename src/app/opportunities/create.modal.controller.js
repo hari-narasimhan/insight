@@ -62,7 +62,7 @@
     $scope.toggleMin();
     $scope.maxDate = new Date(2020, 31, 12);
 
-    $scope.targetDateOpen = function($event) {
+    $scope.targetDateOpen = function() {
         $scope.targetDateCtrl.status.opened = true;
     };
 
@@ -81,7 +81,7 @@
          .then(function (response) {
             $scope.products = response;
          });
-    }
+    };
 
     // END DATE CONTROL RELATED
 

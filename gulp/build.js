@@ -34,7 +34,7 @@ gulp.task('html', ['inject', 'partials'], function () {
   };
 
   var htmlFilter = $.filter('*.html');
-  var jsFilter = $.filter('**/*.js');
+  var jsFilter = $.filter(['**/*.js', '!**/*.mock.js']);
   var cssFilter = $.filter('**/*.css');
   var assets;
 

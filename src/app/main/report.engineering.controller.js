@@ -7,7 +7,7 @@
 
   /** @ngInject */
   function ReportEngineeringController($scope, $state, $stateParams, APP_CONSTANTS, BusinessUnits, 
-    EngineeringUpdates, Opportunities, Common, toastr) {
+    EngineeringUpdates) {
     var  _this = this;
 
     _this.createQuery = function (businessUnitId, year, month) {
@@ -26,8 +26,6 @@
       body: 'app/main/report.engineering.part.html'
     };
 
-
-    console.log($stateParams);
     $scope.businessUnitId = $stateParams.businessUnitId;
     $scope.year = parseInt($stateParams.year);
     $scope.month = parseInt($stateParams.month);
@@ -45,8 +43,6 @@
         .then (
           function(response) {
             $scope.engineeringUpdate = response[0];
-        }, function (error){
-            // Handle Error
         });
     };
     
@@ -60,5 +56,5 @@
     };
 
     $scope.refresh();
-  };
+  }
 })();

@@ -69,15 +69,5 @@
 
      // Fetch the data from the server
       _this.getData(id);
-      
-      var $locationChangeStartUnbind = $scope.$on('$stateChangeStart', 
-        function (event, toState, toParams, fromState, fromParams) {
-        if ($scope.originalData !== JSON.stringify($scope.businessUnit)) {
-            toastr.error("Please save changes");
-            event.preventDefault();
-        } else {
-            //DO NOTHING THERE IS NO CHANGES IN THE FORM
-        }
-      });
   }
 })();

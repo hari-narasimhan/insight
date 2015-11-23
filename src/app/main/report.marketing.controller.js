@@ -7,7 +7,7 @@
 
   /** @ngInject */
   function ReportMarketingController($scope, $state, $stateParams, APP_CONSTANTS, BusinessUnits, 
-    MarketingUpdates, Opportunities, Common, toastr) {
+    MarketingUpdates) {
     var  _this = this;
 
     _this.createQuery = function (businessUnitId, year, month) {
@@ -43,8 +43,6 @@
         .then (
           function(response) {
             $scope.marketingUpdate = response[0];
-        }, function (error){
-            // Handle Error
         });
     };
     
@@ -58,5 +56,5 @@
     };
 
     $scope.refresh();
-  };
+  }
 })();
